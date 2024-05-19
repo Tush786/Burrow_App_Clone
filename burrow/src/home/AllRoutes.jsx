@@ -22,7 +22,9 @@ const AllRoutes = () => {
       <Route path='*' element={<ErrorPage/>} /> 
      <Route path='/Login' element={<Login/>}/>
      <Route path='/Signup' element={<Signup/>}/>
-
+     <Route path='/order' element={<Signup/>}/>
+     <Route path='/Seating/Loveseats/Sectional Sofas' element={<Productpage/>}/>
+    
     </Routes>
   )
 }
