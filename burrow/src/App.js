@@ -4,6 +4,7 @@ import AllRoutes from './home/AllRoutes'
 import AdminPage from './admin/AdminPage'
 import Productpage from './product/Productpage'
 import Navbar from './navbar/Navbar'
+import FooterComp, { Footer } from './footer/Footer'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       {/* <AdminPage /> */}
       <AllRoutes/>
       {/* <AdminPage /> */}
- 
+<FooterComp/>
     </>
   )
 }
