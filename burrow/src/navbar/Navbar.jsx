@@ -11,6 +11,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { deepPurple } from "@mui/material/colors";
 import { navigation } from "./Navigation";
 import { Avatar, Button, Menu, MenuItem } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie, loadUserFromCookies } from "../redux/User/actions";
+import Profile from "../Profile/Profile";
+import Login from "../Profile/Login";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,9 +27,13 @@ export default function Navbar() {
   const openUserMenu = Boolean(anchorEl);
   const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userPro = useSelector((state) => state.data.user);
+  console.log(userPro);
+   const Token=localStorage.getItem("Token")
 
   const handleUserClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  navigate('/Profile')
   };
 
   const handleCloseUserMenu = (event) => {
@@ -40,6 +48,7 @@ export default function Navbar() {
     setOpenAuthModal(false);
   };
 
+  const [avatarH, setAvatarH] = useState(false);
   const handleCategoryClick = (category, section, item, close) => {
     navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
@@ -252,9 +261,9 @@ export default function Navbar() {
                 {/* img link is changed with cloudinary w-auto remove added w-8 mr-2*/}
                 <span className="sr-only">Your Company</span>
                 <img
-                onClick={()=>{
-                  navigate('/')
-                }}
+                  onClick={() => {
+                    navigate("/");
+                  }}
                   className="h-8 w-8 mr-2"
                   src="https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg"
                   width="300"
@@ -401,44 +410,20 @@ export default function Navbar() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {true ? (
-                    <div>
-                      <Avatar
-                        className="text-white"
-                        onClick={handleUserClick}
-                        aria-aria-controls={open ? "basic-menu" : undefined}
-                        aria-aria-haspopup="true"
-                        aria-aria-expanded={open ? "true" : undefined}
-                        sx={{
-                          bgcolor: deepPurple[500],
-                          color: "white",
-                          cursor: "pointer",
-                        }}
-                      >
-                        R
-                      </Avatar>
-                      <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={openUserMenu}
-                        onClose={handleCloseUserMenu}
-                        MenuListProps={{ "aria-labelledby": "basic-button" }}
-                      >
-                        <MenuItem>Profile</MenuItem>
-                        <MenuItem onClick={() => navigate("/account/order")}>
-                          My Orders
-                        </MenuItem>
-                        <MenuItem>Logout</MenuItem>
-                      </Menu>
-                    </div>
-                  ) : (
-                    <Button
-                      onClick={handleOpen}
-                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      Signin
-                    </Button>
-                  )}
+                  <div>
+                    <Avatar
+                      className="text-white"
+                      onClick={handleUserClick}
+                      aria-aria-controls={open ? "basic-menu" : undefined}
+                      aria-aria-haspopup="true"
+                      aria-aria-expanded={open ? "true" : undefined}
+                      sx={{
+                        bgcolor: deepPurple[500],
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                    ></Avatar>
+                  </div>
                 </div>
 
                 {/* Search */}

@@ -23,7 +23,7 @@ import {
 import axios from 'axios'
 import { FaUserAlt, FaLock, FaRegEye, FaRegEyeSlash, FaFacebook } from "react-icons/fa";
 import { LoginUser } from "../redux/User/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -36,9 +36,10 @@ const obj={
   }
   
 
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const userPro=useSelector((state)=>state.data.user)
+  console.log(userPro)
 //   const {isautho,setIsautho}=useContext(Authcontext);
    const [form,setForm]=useState(obj)
    const toast=useToast()

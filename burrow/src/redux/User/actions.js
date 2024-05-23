@@ -2,26 +2,6 @@ import axios from "axios";
 import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_USER } from "../User/actionType";
 
 // ==========================User Action Start From here ======================>
-    export const getUser = (id) => async (dispatch) => {
-        // console.log(id)
-        try {
-          const user = await axios.get(`https://arba-backend-1-4267.onrender.com/user/${id}`);
-      
-          // // const userObj = {
-          // //   userid:user.data.user_present._id,
-          // //   username: user.data.user_present.userName,
-          // //   fullname: user.data.user_present.fullName,
-          // //   avatar:user.data.user_present.avatar
-          // // };
-          // localStorage.setItem("userdata", JSON.stringify(userObj));
-          dispatch({
-            type: GET_USER,
-            payload: user.data[0],
-          });
-        } catch (err) {
-          console.log(err);
-        }
-      };
       
       export const addUser = (user) => async (dispatch) => {
         try {
@@ -49,21 +29,18 @@ import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_U
           const res = await axios.post(`http://localhost:9090/user/login`, {
             ...user,
           });
-          // console.log(res.data);
+          console.log(res.data);
           // console.log(res.data.token);
       
           const userObj = {
-            userid:res.data.user_present._id,
-            username: res.data.user_present.userName,
-            fullname: res.data.user_present.fullName,
-            avatar:res.data.user_present.avatar
+            userid:res.data.user._id,
+            fullname: res.data.user.fullName,
+            avatar:res.data.user.avatar
           };
       
-          // console.log(userObj)
-          
           localStorage.setItem("userdata", JSON.stringify(userObj));
-      
           localStorage.setItem("Token", res.data.token);
+        
           dispatch({
             type: LOGIN_USER,
             payload: {
@@ -80,9 +57,9 @@ import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_U
         }
       };
       
-      export const setUser = (_id) => async (dispatch) => {
+      export const getUser = (_id) => async (dispatch) => {
         try {
-          const res = await axios.get(`https://arba-backend-1-4267.onrender.com/user/${_id}`);
+          const res = await axios.get(`http://localhost:9090/user/${_id}`);
           // console.log(res);
           dispatch({
             type: LOGIN_USER,

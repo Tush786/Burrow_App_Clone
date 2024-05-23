@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AllRoutes from './home/AllRoutes'
+import AllRoutes from './route/AllRoutes'
 import AdminPage from './admin/AdminPage'
 import Productpage from './product/Productpage'
 import Navbar from './navbar/Navbar'
