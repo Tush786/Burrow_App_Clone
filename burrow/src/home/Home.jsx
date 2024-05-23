@@ -10,7 +10,7 @@ import Sec7 from './Secs/Sec7'
 import Sec8 from './Secs/Sec8'
 import Sec9 from './Secs/Sec9'
 import Sec10 from './Secs/Sec10'
-import Login from '../navbar/Login'
+import Login from '../Profile/Login'
 import Navbar from '../navbar/Navbar'
 
 

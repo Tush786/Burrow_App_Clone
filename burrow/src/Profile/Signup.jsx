@@ -20,10 +20,13 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
+  useToast
 } from "@chakra-ui/react";
 import axios from 'axios'
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { LoginUser, addUser } from "../redux/User/actions";
+import { useDispatch } from "react-redux";
 
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -38,48 +41,148 @@ const obj={
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
-//   const {isautho,setIsautho}=useContext(Authcontext);
    const [form,setForm]=useState(obj)
    const provider= new GoogleAuthProvider()
-  
+  const dispatch=useDispatch()
 
-   function HandleChange(e){
-    setForm({...form,[e.target.name]:e.target.value});
-   }
+//    function HandleChange(e){
+//     setForm({...form,[e.target.name]:e.target.value});
+//    }
 
-  async function HandleSubmit(e){
+//   async function HandleSubmit(e){
 
-    console.log(obj)
-    e.preventDefault();
-    try {
-      let resp=await axios.post(`http://localhost:9999/user/login`,{...form});
-      console.log(resp)
-      // if(resp.data.operator==='admin'){
-      //   navigator('/home')
-      // }
-      // const obj={
-      //   isauth.token:resp.token,
-      //   isautho.isauth:true,
-      // }
+//     console.log(obj)
+//     e.preventDefault();
+//     try {
+//       let resp=await axios.post(`http://localhost:9999/user/login`,{...form});
+//       console.log(resp)
+//       // if(resp.data.operator==='admin'){
+//       //   navigator('/home')
+//       // }
+//       // const obj={
+//       //   isauth.token:resp.token,
+//       //   isautho.isauth:true,
+//       // }
 
-      // setIsautho(obj)
-    } catch (error) {
-      console.log(error)
-    }
+//       // setIsautho(obj)
+//     } catch (error) {
+//       console.log(error)
+//     }
       
-        console.log("Form Submitted");
-   }
-console.log(form)
+//         console.log("Form Submitted");
+//    }
+// console.log(form)
 
-const signInWithGoogle = () => {
-  signInWithPopup(auth, provider).then((result) => {
-    // navigate("/home");
-    console.log(result)
+const toast = useToast();
+
+const [user, setUser] = useState({
+  userName: "",
+  fullName: "",
+  email: "",
+  password: "",
+  cpassword: "",
+  // avatar:""
+});
+
+// console.log(user)
+
+const HandleChange = (e) => {
+  e.preventDefault();
+  // if (e.target.name === 'file') {
+  //   setUser({ ...user, [e.target.name]: e.target.files[0] });
+  // } else {
+  //   setUser({ ...user, [e.target.name]: e.target.value });
+  // }
+  setUser({ ...user, [e.target.name]: e.target.value });
+};
+console.log(user)
+
+const HandleSubmit = async (e) => {
+  e.preventDefault();
+  const { userName, fullName, email, password, cpassword,avatar} = user;
+
+  if (userName === "") {
+    return toast({
+      title: "Enter User Name",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+
+  if (fullName=== "") {
+    return toast({
+      title: "Enter full name",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+
+  if (!email.includes("@") || !email.includes(".com") || email.length < 12) {
+    return toast({
+      title: "Enter valid email",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+
+  if (password === "" || password.length < 6) {
+    return toast({
+      title: "Enter valid password",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+
+  if (password !== cpassword) {
+    return toast({
+      title: "Wrong Password",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+
+  dispatch(addUser(user));
+
+  // Clear form fields after submission
+  setUser({
+    userName: "",
+    fullName: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    avatar:""
   });
-}
+};
 
 
-  const handleShowClick = () => setShowPassword(!showPassword);
+
+
+const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(auth, provider);
+  console.log(result)
+  const { email, photoURL,displayName } = result.user;
+  let obj = {
+    email,
+    fullName:displayName,
+    profilePic: photoURL,
+    gauth: true
+  }
+  dispatch(LoginUser(obj));
+};
+
+
+
+const [show, setShow] = useState(false);
+const handleClick = () => setShow(!show);
+
+const [showc, setShowc] = useState(false);
+const handleClick_c = () => setShowc(!showc);
 
 
 
@@ -114,7 +217,7 @@ const signInWithGoogle = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" onChange={(e)=>HandleChange(e)}/>
+                  <Input type="email" placeholder="email address" name="email" onChange={(e)=>HandleChange(e)}/>
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -123,7 +226,16 @@ const signInWithGoogle = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="text" placeholder="user name" onChange={(e)=>HandleChange(e)}/>
+                  <Input type="text" placeholder="user name" name="userName" onChange={(e)=>HandleChange(e)}/>
+                </InputGroup>
+              </FormControl>
+              <FormControl>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<CFaUserAlt color="gray.300" />}
+                  />
+                  <Input type="text" placeholder="full name" name="fullName" onChange={(e)=>HandleChange(e)}/>
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -134,13 +246,14 @@ const signInWithGoogle = () => {
                     children={<CFaLock color="gray.300" />}
                   />
                   <Input
-                    type={showPassword ? "text" : "password"}
+                    type={show ? "text" : "password"}
                     placeholder="Password"
+                    name="password"
                     onChange={(e)=>HandleChange(e)}
                   />
                   <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                      {showPassword ?   <FaRegEye/>: <FaRegEyeSlash/>}
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ?   <FaRegEye/>: <FaRegEyeSlash/>}
                     </Button>
                   </InputRightElement>
                 </InputGroup>
@@ -154,12 +267,14 @@ const signInWithGoogle = () => {
                     children={<CFaLock color="gray.300" />}
                   />
                   <Input
-                    type={showPassword ? "text" : "password"}
+                    type={showc ? "text" : "password"}
                     placeholder="Confirm Password"
+                    name="cpassword"
+                    onChange={(e)=>HandleChange(e)}
                   />
                   <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                      {showPassword ? <FaRegEye/>: <FaRegEyeSlash/>}
+                    <Button h="1.75rem" size="sm" onClick={handleClick_c}>
+                      {showc ? <FaRegEye/>: <FaRegEyeSlash/>}
                     </Button>
                   </InputRightElement>
                 </InputGroup>

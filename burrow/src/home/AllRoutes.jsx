@@ -5,8 +5,8 @@ import ProductDetails from '../product/ProductDetails'
 import Shimmer from '../Shimmer'
 import ErrorPage from '../admin/ErrorPage'
 import AdminRoute from '../admin/AdminRoute'
-import Login from '../navbar/Login'
-import Signup from '../navbar/Signup'
+import Login from '../Profile/Login'
+import Signup from '../Profile/Signup'
 
 
 const Productpage = lazy(() => import("../product/Productpage"))

@@ -1,36 +1,56 @@
-import React, { useState } from 'react'
-import {Link} from "react-router-dom"
-// import HoverImage from 'react-hover-image/build'
-
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import {
   Box,
-  Center,
-  useColorModeValue,
-  Heading,
   Text,
-  Stack,
   Image,
-} from '@chakra-ui/react'
+  Button,
+} from '@chakra-ui/react';
 
-function Productcard({elem}) {
+function Productcard({ elem }) {
   const [isHovered, setIsHovered] = useState(false);
-  console.log(isHovered)
-  return (
- <div>
- <Link to={`/product/${elem._id}`}>
- <div>
-    <img  src={elem. imagePath1} hoverSrc={elem.hoverImge} />
-  </div>
- </Link>
- 
-  <div>
-    <p>{elem.productName}</p>
-    <p>${elem.sellingPrice}</p>
-    
-  </div>
- </div>
 
-  )
+  return (
+    <Box  borderRadius="lg" overflow="hidden" className='flex flex-col gap-2'>
+      <Link to={`/product/${elem._id}`}>
+        <Box
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          width="100%"
+        >
+          <Image
+            src={isHovered ? elem.imagesurl[1] : elem.imagesurl[0]}
+            alt={elem.productName}
+            height="300px"
+            objectFit="cover"
+            width="100%"
+          />
+        </Box>
+      </Link>
+      <Box display="flex" mt="4" gap={1}>
+          {elem.colorShema.map((color, index) => (
+            <Button
+              key={index}
+              backgroundColor={color}
+              borderRadius="full"
+              height="20px"
+              width="20px"
+              
+              _hover={{ opacity: 0.8 }}
+            />
+          ))}
+        </Box>
+      <Box >
+        <Text  fontSize="xl">
+          {elem.productName}
+        </Text>
+        <Text fontSize="lg" color="gray.600">
+          ${elem.sellingPrice}
+        </Text>
+        
+      </Box>
+    </Box>
+  );
 }
 
-export default Productcard
+export default Productcard;

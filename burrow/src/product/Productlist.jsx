@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Productcard from './Productcard'
 import { Box ,Button, Select} from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getproducts } from '../redux/User/actions';
 
 function Productlist() {
+   const dispatch=useDispatch();
+   const products=useSelector((state)=>state.data.products)
+
   var Prodarr = [
     {
       _id: "1",
@@ -132,6 +137,12 @@ function Productlist() {
     },
   ];
 
+  useEffect(()=>{
+     dispatch(getproducts());
+  },[])
+
+  // console.log(products);
+
   return (
     <div className="">
     <div className="flex justify-between w-[95%] m-auto">
@@ -178,7 +189,7 @@ function Productlist() {
         gap={6}
       >
       
-        {Prodarr?.map((elem, idx) => {
+        {products?.map((elem, idx) => {
           return <Productcard key={idx} elem={elem} />;
         })}
       </Box>

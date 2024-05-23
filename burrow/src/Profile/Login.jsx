@@ -17,10 +17,13 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
+  useToast
 } from "@chakra-ui/react";
 import axios from 'axios'
 import { FaUserAlt, FaLock, FaRegEye, FaRegEyeSlash, FaFacebook } from "react-icons/fa";
+import { LoginUser } from "../redux/User/actions";
+import { useDispatch } from "react-redux";
 
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -28,51 +31,62 @@ const CFaLock = chakra(FaLock);
 
 const obj={
     email:"",
-      password:""
+      password:"",
+      gauth: false,
   }
   
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 //   const {isautho,setIsautho}=useContext(Authcontext);
    const [form,setForm]=useState(obj)
-   const provider= new GoogleAuthProvider()
-  
+   const toast=useToast()
+   const dispatch=useDispatch()
 
    function HandleChange(e){
     setForm({...form,[e.target.name]:e.target.value});
    }
 
-  async function HandleSubmit(e){
+   const HandleSubmit = async () => {
+    const { email, password } = form;
 
-    console.log(obj)
-    e.preventDefault();
-    try {
-      let resp=await axios.post(`http://localhost:9999/user/login`,{...form});
-      console.log(resp)
-      // if(resp.data.operator==='admin'){
-      //   navigator('/home')
-      // }
-      // const obj={
-      //   isauth.token:resp.token,
-      //   isautho.isauth:true,
-      // }
-
-      // setIsautho(obj)
-    } catch (error) {
-      console.log(error)
+    if (!email.includes("@") || !email.includes(".com")) {
+      toast({
+        title: "Enter valid email",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
     }
-      
-        console.log("Form Submitted");
-   }
+
+    if (password === "" || password.length < 10) {
+      toast({
+        title: "Enter valid password",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    dispatch(LoginUser(form));
+  };
 console.log(form)
 
-const signInWithGoogle = () => {
-  signInWithPopup(auth, provider).then((result) => {
-    // navigate("/home");
-    console.log(result)
-  });
-}
+
+const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(auth, provider);
+  const { displayName, email, photoURL } = result.user;
+  let obj = {
+    email,
+    username: displayName,
+    profilePic: photoURL,
+    gauth: true,
+  };
+  dispatch(LoginUser(obj));
+};
 
 
   const handleShowClick = () => setShowPassword(!showPassword);
