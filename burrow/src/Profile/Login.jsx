@@ -18,7 +18,9 @@ import {
   FormControl,
   FormHelperText,
   InputRightElement,
-  useToast
+  useToast,
+  Image,
+  Text
 } from "@chakra-ui/react";
 import axios from 'axios'
 import { FaUserAlt, FaLock, FaRegEye, FaRegEyeSlash, FaFacebook } from "react-icons/fa";
@@ -79,10 +81,11 @@ console.log(form)
 const signInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   const result = await signInWithPopup(auth, provider);
+  console.log(result)
   const { displayName, email, photoURL } = result.user;
   let obj = {
     email,
-    username: displayName,
+    fullName: displayName,
     profilePic: photoURL,
     gauth: true,
   };
@@ -95,22 +98,31 @@ const signInWithGoogle = async () => {
 
 
   return (
-    <Flex
+   <div className="flex justify-center items-center gap-8 w-[90%] m-auto">
+      <div>
+        <Image src="https://media.fbot.me/c38a4643-6fb8-4035-b9c9-95bda7930900/media/d-advocate.jpg" height={550} />
+      </div>
+      <Flex
       flexDirection="column"
       width="100wh"
       height="100vh"
-      backgroundColor="gray.200"
+      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
+      <Text className="text-[48px] font-[600]">Burrow</Text>
+      {/* <Text className="text-[36px] text-justify w-[450px] py-4">Don't miss out on Memorial Day deals</Text> */}
+      <Text className="text-[21px] pb-4 text-justify">Sign up and save up to 60% before this offer ends.</Text>
+   
+
       <Stack
         flexDir="column"
         mb="2"
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar bg="teal.500" />
-        <Heading color="teal.400">Welcome</Heading>
+        {/* <Avatar bg="teal.500" /> */}
+        {/* <Heading color="teal.400">Welcome</Heading> */}
         <Box minW={{ base: "90%", md: "468px" }}>
           <form onSubmit={HandleSubmit}>
             <Stack
@@ -155,7 +167,8 @@ const signInWithGoogle = async () => {
                 borderRadius={0}
                 type="submit"
                 variant="solid"
-                colorScheme="teal"
+                color="white"
+                colorScheme="yellow"
                 width="full"
               >
                 Login
@@ -188,6 +201,9 @@ Signup With Facebook
       </Stack>
       
     </Flex>
+   </div>
+
+  
   );
 };
 

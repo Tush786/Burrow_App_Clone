@@ -21,7 +21,9 @@ import {
   FormControl,
   FormHelperText,
   InputRightElement,
-  useToast
+  useToast,
+  Image,
+  Text
 } from "@chakra-ui/react";
 import axios from 'axios'
 import { FaUserAlt, FaLock } from "react-icons/fa";
@@ -34,7 +36,7 @@ const CFaLock = chakra(FaLock);
 
 const obj={
     email:"",
-    username:"",
+    phonenumber:"",
       password:"",
   }
   
@@ -76,7 +78,7 @@ const Signup = () => {
 const toast = useToast();
 
 const [user, setUser] = useState({
-  userName: "",
+  phonenumber: "",
   fullName: "",
   email: "",
   password: "",
@@ -99,11 +101,11 @@ console.log(user)
 
 const HandleSubmit = async (e) => {
   e.preventDefault();
-  const { userName, fullName, email, password, cpassword,avatar} = user;
+  const { phonenumber, fullName, email, password, cpassword,avatar} = user;
 
-  if (userName === "") {
+  if (phonenumber === "") {
     return toast({
-      title: "Enter User Name",
+      title: "Enter Phone Number",
       status: "error",
       duration: 3000,
       isClosable: true,
@@ -150,7 +152,7 @@ const HandleSubmit = async (e) => {
 
   // Clear form fields after submission
   setUser({
-    userName: "",
+    phonenumber: "",
     fullName: "",
     email: "",
     password: "",
@@ -187,11 +189,15 @@ const handleClick_c = () => setShowc(!showc);
 
 
   return (
-    <Flex
+    <div className="flex justify-center items-center gap-8 w-[90%] m-auto">
+      <div>
+        <Image src="https://media.fbot.me/c38a4643-6fb8-4035-b9c9-95bda7930900/media/d-advocate.jpg" height={550} />
+      </div>
+      <Flex
       flexDirection="column"
       width="100wh"
       height="100vh"
-      backgroundColor="gray.200"
+      // backgroundColor="gray.200"
       justifyContent="center"
       alignItems="center"
     >
@@ -201,9 +207,10 @@ const handleClick_c = () => setShowc(!showc);
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar bg="teal.500" />
-        <Heading color="teal.400">Welcome</Heading>
+        {/* <Avatar bg="teal.500" /> */}
+        {/* <Heading color="teal.400">Welcome</Heading> */}
         <Box minW={{ base: "90%", md: "468px" }}>
+        <Text className="text-[48px] font-[600] text-center">Burrow</Text>
           <form onSubmit={HandleSubmit}>
             <Stack
               spacing={4}
@@ -211,6 +218,8 @@ const handleClick_c = () => setShowc(!showc);
               backgroundColor="whiteAlpha.900"
               boxShadow="md"
             >
+
+
               <FormControl>
                 <InputGroup>
                   <InputLeftElement
@@ -226,7 +235,7 @@ const handleClick_c = () => setShowc(!showc);
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="text" placeholder="user name" name="userName" onChange={(e)=>HandleChange(e)}/>
+                  <Input type="number" placeholder="user name" name="phonenumber" onChange={(e)=>HandleChange(e)}/>
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -286,10 +295,11 @@ const handleClick_c = () => setShowc(!showc);
                 borderRadius={0}
                 type="submit"
                 variant="solid"
-                colorScheme="teal"
+                color="white"
+                colorScheme="yellow"
                 width="full"
               >
-                Login
+                CREATE AN ACCOUNT
               </Button>
             </Stack>
           </form>
@@ -320,6 +330,9 @@ const handleClick_c = () => setShowc(!showc);
     
     
     </Flex>
+    </div>
+
+   
   );
 };
 

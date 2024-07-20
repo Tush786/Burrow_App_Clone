@@ -17,8 +17,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Account from "./Account";
-import Order from "./Order";
 import Inviteform from "./Inviteform";
+import Order from "./orderComp/Order";
 
 function Profile() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
@@ -70,7 +70,7 @@ function Profile() {
             <Account />
           </TabPanel>
           <TabPanel>
-            <Order />
+            <Order/>
           </TabPanel>
           <TabPanel>
            <Inviteform/>

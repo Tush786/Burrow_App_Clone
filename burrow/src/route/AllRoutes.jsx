@@ -9,8 +9,8 @@ import Login from '../Profile/Login'
 import Signup from '../Profile/Signup'
 import Profile from '../Profile/Profile'
 import PrivateRoute from './Privateroute'
-import Order from '../Profile/Order'
 import Account from '../Profile/Account'
+import Order from '../Profile/orderComp/Order'
 
 
 const Productpage = lazy(() => import("../product/Productpage"))

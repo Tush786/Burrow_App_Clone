@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Text,
-  Image,
-  Button,
-} from '@chakra-ui/react';
+import { Box, Text, Image, Button } from '@chakra-ui/react';
 
-function Productcard({ elem }) {
+const Productcard = forwardRef(({ elem }, ref) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Box  borderRadius="lg" overflow="hidden" className='flex flex-col gap-2'>
+    <Box ref={ref} borderRadius="lg" overflow="hidden" className='flex flex-col gap-2'>
       <Link to={`/product/${elem._id}`}>
         <Box
           onMouseEnter={() => setIsHovered(true)}
@@ -28,29 +23,23 @@ function Productcard({ elem }) {
         </Box>
       </Link>
       <Box display="flex" mt="4" gap={1}>
-          {elem.colorShema.map((color, index) => (
-            <Button
-              key={index}
-              backgroundColor={color}
-              borderRadius="full"
-              height="20px"
-              width="20px"
-              
-              _hover={{ opacity: 0.8 }}
-            />
-          ))}
-        </Box>
-      <Box >
-        <Text  fontSize="xl">
-          {elem.productName}
-        </Text>
-        <Text fontSize="lg" color="gray.600">
-          ${elem.sellingPrice}
-        </Text>
-        
+        {elem.colorShema.map((color, index) => (
+          <Button
+            key={index}
+            backgroundColor={color}
+            borderRadius="full"
+            height="20px"
+            width="20px"
+            _hover={{ opacity: 0.8 }}
+          />
+        ))}
+      </Box>
+      <Box>
+        <Text fontSize="xl">{elem.productName}</Text>
+        <Text fontSize="lg" color="gray.600">${elem.sellingPrice}</Text>
       </Box>
     </Box>
   );
-}
+});
 
 export default Productcard;

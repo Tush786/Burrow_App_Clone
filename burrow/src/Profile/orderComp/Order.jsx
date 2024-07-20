@@ -1,0 +1,111 @@
+import React from 'react';
+import { CiSearch } from "react-icons/ci";
+import Ordercard from './Ordercard';
+
+export default function Order() {
+  const products = [
+    {
+      name: "Product 1",
+      price: "$10.00",
+      date: "2024-07-20",
+      image: "https://via.placeholder.com/100"
+    },
+    {
+      name: "Product 2",
+      price: "$20.00",
+      date: "2024-07-18",
+      image: "https://via.placeholder.com/100"
+    },
+    {
+      name: "Product 3",
+      price: "$30.00",
+      date: "2024-07-15",
+      image: "https://via.placeholder.com/100"
+    },
+    {
+      name: "Product 4",
+      price: "$40.00",
+      date: "2024-07-10",
+      image: "https://via.placeholder.com/100"
+    },
+    {
+      name: "Product 5",
+      price: "$50.00",
+      date: "2024-07-05",
+      image: "https://via.placeholder.com/100"
+    }
+  ];
+  return (
+    <div className="p-4">
+      <div className="flex gap-6">
+        <div className="p-4 bg-white shadow-md rounded-lg pr-20">
+          <h2 className="text-2xl font-semibold mb-4">Filter</h2>
+          <div className="space-y-4 ">
+            <div>
+              <p className="text-lg font-bold mb-2">ORDER STATUS</p>
+              <div className="space-y-2">
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  On the way
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  Delivered
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  Pending
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  Cancelled
+                </label>
+              </div>
+            </div>
+            <div>
+              <p className="text-lg font-bold mb-2">ORDER TIME</p>
+              <div className="space-y-2">
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  Last 30 days
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  2023
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  2022
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  2021
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
+                  OLDER
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="p-4 w-full">
+        <div className="flex w-full items-center mb-4">
+  <input className="w-[86%] p-2 border border-gray-300 rounded-l-lg" placeholder="Search your order here" />
+  <button className="flex items-center bg-blue-500 text-white px-4 py-[10px] rounded-r-lg">
+    <CiSearch className="text-2xl mr-2" />
+    <span>Search Orders</span>
+  </button>
+</div>
+<div className='flex flex-col gap-4'>
+{
+  products.map((el,ind)=>{
+    return <Ordercard key={ind} {...el}/>
+  })
+}
+</div>
+        </div>
+      </div>
+    </div>
+  );
+}

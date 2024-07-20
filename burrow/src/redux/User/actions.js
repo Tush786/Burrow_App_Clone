@@ -105,18 +105,38 @@ import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_U
       
 
 
-export const getproducts = (sort) => async (dispatch) => {
+// export const getproducts = (sort) => async (dispatch) => {
+//   try {
+//     const products = await axios.get(
+//       `http://localhost:9090/productsapi/products?page=${page}&limit=10`
+//     );
+//     // console.log(products)
+//     dispatch({
+//       type: GET_PRODUCT,
+//       payload: products.data.products,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+
+export const getproducts = (page) => async (dispatch) => {
+  dispatch({ type: 'PRODUCTS_LOADING' });
   try {
-    const products = await axios.get(
-      `http://localhost:9090/productsapi/products`
-    );
-    // console.log(products)
+    const response = await fetch(`http://localhost:9090/productsapi/products?page=${page}&limit=6`);
+    const data = await response.json();
+    console.log(data)
     dispatch({
       type: GET_PRODUCT,
-      payload: products.data.products,
+      payload: {
+        products: data.products,
+        currentPage: data.currentPage,
+        totalPages: data.totalPages,
+      },
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    dispatch({ type: 'PRODUCTS_ERROR', error });
   }
 };
 
