@@ -24,8 +24,8 @@ function Profile() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const OverlayOne = () => (
     <ModalOverlay
-      bg='blackAlpha.300'
-      backdropFilter='blur(10px) hue-rotate(90deg)'
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
     />
   );
 
@@ -34,22 +34,24 @@ function Profile() {
 
   return (
     <div className="lg:w-[80%] sm:w-[98%] md:w-[98%]  m-auto mt-4 ">
-      <Tabs isFitted variant="enclosed" index={selectedTabIndex} onChange={(index) => setSelectedTabIndex(index)}>
+      <Tabs
+        isFitted
+        variant="enclosed"
+        index={selectedTabIndex}
+        onChange={(index) => setSelectedTabIndex(index)}
+      >
         <TabList mb="1em" className="md:w-[96%] lg:w-[97%] sm:w-[98%] m-auto">
-          <Tab
-            bg='blue.100'
-            _selected={{ color: "blue.500", bg: "green.100" }}
-          >
+          <Tab bg="blue.100" _selected={{ color: "blue.500", bg: "green.100" }}>
             ACCOUNT
           </Tab>
           <Tab
-            bg='blue.100'
+            bg="blue.100"
             _selected={{ color: "green.500", bg: "green.100" }}
           >
             ORDER HISTORY
           </Tab>
           <Tab
-            bg='blue.100'
+            bg="blue.100"
             _selected={{ color: "green.500", bg: "green.100" }}
             onClick={() => {
               setOverlay(<OverlayOne />);
@@ -59,7 +61,7 @@ function Profile() {
             INVITE FRIENDS
           </Tab>
           <Tab
-            bg='blue.100'
+            bg="blue.100"
             _selected={{ color: "green.500", bg: "green.100" }}
           >
             LOG OUT
@@ -70,15 +72,13 @@ function Profile() {
             <Account />
           </TabPanel>
           <TabPanel>
-            <Order/>
+            <Order />
           </TabPanel>
           <TabPanel>
-           <Inviteform/>
+            <Inviteform />
           </TabPanel>
         </TabPanels>
       </Tabs>
-
-      
     </div>
   );
 }

@@ -35,12 +35,13 @@ export default function Order() {
       image: "https://via.placeholder.com/100"
     }
   ];
+  
   return (
-    <div className="p-4">
-      <div className="flex gap-6">
-        <div className="p-4 bg-white shadow-md rounded-lg pr-20">
+    <div className="p-2">
+      <div className="flex flex-col lg:flex-row gap-10">
+        <div className="p-4 bg-white rounded-lg h-[450px] w-[20%]" style={{ boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" }}>
           <h2 className="text-2xl font-semibold mb-4">Filter</h2>
-          <div className="space-y-4 ">
+          <div className="space-y-4">
             <div>
               <p className="text-lg font-bold mb-2">ORDER STATUS</p>
               <div className="space-y-2">
@@ -89,21 +90,19 @@ export default function Order() {
             </div>
           </div>
         </div>
-        <div className="p-4 w-full">
-        <div className="flex w-full items-center mb-4">
-  <input className="w-[86%] p-2 border border-gray-300 rounded-l-lg" placeholder="Search your order here" />
-  <button className="flex items-center bg-blue-500 text-white px-4 py-[10px] rounded-r-lg">
-    <CiSearch className="text-2xl mr-2" />
-    <span>Search Orders</span>
-  </button>
-</div>
-<div className='flex flex-col gap-4'>
-{
-  products.map((el,ind)=>{
-    return <Ordercard key={ind} {...el}/>
-  })
-}
-</div>
+        <div className="w-full">
+          <div className="flex items-center mb-4">
+            <input className="w-[80%] p-2 border border-gray-300 rounded-l-lg" placeholder="Search your order here" />
+            <button className="flex items-center bg-blue-500 text-white px-4 py-[10px] rounded-r-lg">
+              <CiSearch className="text-2xl mr-2" />
+              <span>Search Orders</span>
+            </button>
+          </div>
+          <div className='flex flex-col gap-4'>
+            {products.map((el, ind) => (
+              <Ordercard key={ind} {...el} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
