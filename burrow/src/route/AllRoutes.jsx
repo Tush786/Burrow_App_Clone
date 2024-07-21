@@ -9,9 +9,9 @@ import Login from '../Profile/Login'
 import Signup from '../Profile/Signup'
 import Profile from '../Profile/Profile'
 import PrivateRoute from './Privateroute'
-import Account from '../Profile/Account'
+import Account from '../Profile/account/Account'
 import Order from '../Profile/orderComp/Order'
-
+import Carts from '../cart/Carts'
 
 const Productpage = lazy(() => import("../product/Productpage"))
 
@@ -29,6 +29,7 @@ const AllRoutes = () => {
      <Route path='Profile/order' element={<Order/>}/>
      <Route path='Profile/account' element={<Account/>}/>
      <Route path='/Seating/Loveseats/Sectional Sofas' element={<Productpage/>}/>
+     <Route path='/cart' element={<Carts/>}/>
   
      <Route
           path="/Profile"
@@ -38,7 +39,6 @@ const AllRoutes = () => {
             </PrivateRoute>
           }
         />
-    
     </Routes>
   )
 }

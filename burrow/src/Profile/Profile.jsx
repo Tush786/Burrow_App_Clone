@@ -16,7 +16,7 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
-import Account from "./Account";
+import Account from "./account/Account";
 import Inviteform from "./Inviteform";
 import Order from "./orderComp/Order";
 
