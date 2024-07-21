@@ -1,132 +1,112 @@
-import React, { useRef, useState } from 'react';
+import React from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// Import required modules
+import { Pagination, Navigation } from "swiper/modules";
 
-import "../../home.css";
-
-// import required modules
-import { Pagination, Navigation } from 'swiper/modules';
-
-export default function Sec8() {
-  const [swiperRef, setSwiperRef] = useState(null);
-
+const Sec8 = () => {
+  // Array of objects containing data for each slide
+  const slidesData = [
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/h13af6npSFm5c6TIRBCs",
+      alt: "Range Fabric Sectional",
+      title: "Range Fabric Sectional",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/DfgAqQl1Ss61JvUKqTTA",
+      alt: "Kettle Side Table",
+      title: "Kettle Side Table",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/clBhY2LRSWCiQHRKwDiN",
+      alt: "Nomad Velvet Sofa",
+      title: "Nomad Velvet Sofa",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/6mS98agT3q6pFlYxeJHc",
+      alt: "Nomad Leather Sofa",
+      title: "Nomad Leather Sofa",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/WEAbwsgZQ5WjVdMP0CRK",
+      alt: "Serif Credenza",
+      title: "Serif Credenza",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/DJWCPKF2QF6Gmz941nPe",
+      alt: "Serif Side Table",
+      title: "Serif Side Table",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/IlhLkl0GRnK3kvQjZibS",
+      alt: "Range Fabric Sectional",
+      title: "Range Fabric Sectional",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/p1y243YTfWgdnyeviX52",
+      alt: "Prospect Nightstand",
+      title: "Prospect Nightstand",
+    },
+    {
+      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/mhOjruyvSuKoCU0C9RTu",
+      alt: "Nomad Leather Sectional",
+      title: "Nomad Leather Sectional",
+    },
+  ];
 
   return (
-    <div className='mt-10'>
+    <div className='2xl:pb-20 xl:pb-20 2xl:px-8 px-4 md:px-16 xs:pb-4 sm:pb-4'>
+    <div className='flex justify-center 2xl:mb-6 sm:mb-2'>
+      <h2 className='font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl py-6 2xl:text-center xl:text-center text-left '>
+          Shop these real-life spaces
+        </h2>
+      </div>
 
-   
-    <>
-      <Swiper
-        onSwiper={setSwiperRef}
-        slidesPerView={4}
-        centeredSlides={true}
-        spaceBetween={30}
-        // pagination={{
-        //   type: 'fraction',
-        // }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-            <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/h13af6npSFm5c6TIRBCs'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Range Fabric Sectional</p>
-                </div>
-            </div>
+      <div>
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={20}
+        //   pagination={{ clickable: true }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }}
+        >
+          {slidesData.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div className="flex flex-col items-center">
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="w-full h-auto object-cover rounded-lg shadow-md"
+                />
+                <p className="mt-2 font-bold text-base sm:text-lg md:text-xl 2xl:text-center xs:text-left">
+                  {slide.title}
+                </p>
+              </div>
             </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/DfgAqQl1Ss61JvUKqTTA'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Kettle Side Table</p>
-                </div>
-            </div>
-           </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/clBhY2LRSWCiQHRKwDiN'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Nomad Velvet Sofa</p>
-                </div>
-            </div>
-            </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/6mS98agT3q6pFlYxeJHc'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Nomad Leather Sofa</p>
-                </div>
-            </div>
-          </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/WEAbwsgZQ5WjVdMP0CRK'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Serif Credenza</p>
-                </div>
-            </div>
-           </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/DJWCPKF2QF6Gmz941nPe'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Serif Side Table</p>
-                </div>
-            </div>
-           </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/IlhLkl0GRnK3kvQjZibS'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Range Fabric Sectional</p>
-                </div>
-            </div>
-            </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/p1y243YTfWgdnyeviX52'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Prospect Nightstand</p>
-                </div>
-            </div>
-            </SwiperSlide>
-        <SwiperSlide>
-        <div>
-                <div>
-                <img src='https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/mhOjruyvSuKoCU0C9RTu'/>
-                </div>
-                <div className='text-left mt-2'>
-                    <p className='font-bold text-lg'>Nomad Leather Sectional</p>
-                </div>
-            </div>
-           </SwiperSlide>
-      </Swiper>
-
-   
-    </>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
-}
+};
+
+export default Sec8;

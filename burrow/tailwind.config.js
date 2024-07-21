@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'xs': '475px', // Extra small devices (portrait phones, less than 475px)
+        'xs': '425px', // Extra small devices (portrait phones, less than 475px)
         'sm': '640px', // Small devices (landscape phones, 640px and up)
         'md': '768px', // Medium devices (tablets, 768px and up)
         'lg': '1024px', // Large devices (desktops, 1024px and up)
