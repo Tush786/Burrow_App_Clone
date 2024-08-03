@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_USER } from "../User/actionType";
+import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_USER,GET_ADDRESS,ADD_ADDRESS,EDIT_ADDRESS} from "../User/actionType";
 
 // ==========================User Action Start From here ======================>
       
@@ -29,7 +29,7 @@ import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_U
           const res = await axios.post(`http://localhost:9090/user/login`, {
             ...user,
           });
-          console.log(res.data);
+          console.log(res);
           // console.log(res.data.token);
       
           const userObj = {
@@ -155,3 +155,61 @@ export const singleproduct = (id) => async (dispatch) => {
       console.log(err);
     }
   };
+
+  
+  // Address API ==============================>
+
+
+
+    export const getAddress = (ownerId) => async (dispatch) => {
+      // const ownerId= "664eefa7e26fbe0044ccd5af"
+      try {
+        const response = await axios.get(
+          `http://localhost:9090/address/get/${ownerId}`
+        );
+        console.log(response.data);
+        dispatch({
+          type: GET_ADDRESS,
+          payload: response.data.data[0].addressItems
+          
+        })
+      } catch (err) {
+        console.error("Error fetching address:", err);
+      }
+    };
+
+    // ============= Post Request ------------------>
+    export const addAddress = (user) => async (dispatch) => {
+      try {
+        const res = await axios.post(`http://localhost:9090/address/add`, {
+          ...user,
+        });
+        // console.log(res.status);
+        dispatch({
+          type: ADD_ADDRESS,
+          payload: res.status,
+        });
+      } catch (err) {
+        console.log(err);
+       
+      }
+    };
+
+    // ======================== Edit Address =========================>
+
+      export const editAddress = (owner,addressId,updatedAddressItem) => async (dispatch) => {
+        try {
+          const req = await axios.put(
+            `http://localhost:9090/address/edit/${owner}/${addressId}`,{
+              updatedAddressItem
+            }
+          );
+          console.log(req)
+          dispatch({
+            type: EDIT_ADDRESS,
+            payload: req.data,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      };

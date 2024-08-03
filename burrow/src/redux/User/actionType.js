@@ -7,3 +7,6 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const USER_LOGIN_SUCCESS="USER_LOGIN_SUCCESS"
 export const RESET_USER="RESET_USER"
+export const GET_ADDRESS="GET_ADDRESS"
+export const ADD_ADDRESS="ADD_ADDRESS"
+export const EDIT_ADDRESS="EDIT_ADDRESS"

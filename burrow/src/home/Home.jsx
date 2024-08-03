@@ -1,30 +1,48 @@
-import React from "react";
+import React, { Suspense, useState, useEffect } from "react";
+import Loader from "../errorHandling/Loader";
 
-import Sec2 from "./Secs/Sec2";
-import Sec3 from "./Secs/Sec3";
-
-import Sec5 from "./Secs/Sec5";
-import Sec0 from "./Secs/Sec0";
-
-import Sec8 from "./Secs/Sec8";
-
-import Sec10 from "./Secs/Sec10";
-import Login from "../Profile/Login";
-import Navbar from "../navbar/Navbar";
-// import Sec1 from './Secs/Sec1'
+const sections = [
+  { component: React.lazy(() => import("./Secs/Sec0")),  },
+  { component: React.lazy(() => import("./Secs/Sec2")),  },
+  { component: React.lazy(() => import("./Secs/Sec3")),  },
+  { component: React.lazy(() => import("./Secs/Sec5")), },
+  { component: React.lazy(() => import("./Secs/Sec10")),  },
+  { component: React.lazy(() => import("./Secs/Sec8")),  },
+];
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadComponents = async () => {
+      try {
+        await Promise.all(sections.map(section => section.component._ctor()));
+      } catch (error) {
+        console.error("Error loading components:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadComponents();
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div>
-      {/* <Navbar/> */}
-      <Sec0 />
-      {/* <Sec1/> */}
-      <Sec2 />
-      <Sec3 />
-
-      <Sec5 />
-      <Sec10 />
-      <Sec8 />
+      <Suspense fallback={<Loader />}>
+        {sections.map((section, index) => {
+          const Component = section.component;
+          return (
+            <div key={index}>
+              <Component />
+            </div>
+          );
+        })}
+      </Suspense>
     </div>
   );
 };

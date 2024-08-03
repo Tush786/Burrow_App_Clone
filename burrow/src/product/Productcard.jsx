@@ -1,9 +1,33 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { Link } from "react-router-dom";
-import { Box, Text, Image, Button } from '@chakra-ui/react';
+import { Box, Text, Image, Button, Skeleton, SkeletonText } from '@chakra-ui/react';
 
 const Productcard = forwardRef(({ elem }, ref) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (elem) {
+      setIsLoading(false);
+    }
+  }, [elem]);
+
+  if (isLoading) {
+    return (
+      <Box ref={ref} borderRadius="lg" overflow="hidden" className='flex flex-col gap-2'>
+        <Skeleton height="300px" width="100%" borderRadius="lg" />
+        <Box display="flex" mt="4" gap={1}>
+          <Skeleton height="20px" width="20px" borderRadius="full" />
+          <Skeleton height="20px" width="20px" borderRadius="full" />
+          <Skeleton height="20px" width="20px" borderRadius="full" />
+        </Box>
+        <Box mt="2">
+          <SkeletonText noOfLines={1} width="60%" />
+          <SkeletonText noOfLines={1} width="40%" mt="2" />
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box ref={ref} borderRadius="lg" overflow="hidden" className='flex flex-col gap-2'>
