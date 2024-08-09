@@ -25,6 +25,7 @@ import {
   addAddress,
   editAddress,
   deleteAddress,
+  activeAddress
 } from "../redux/User/actions";
 
 function AddressPageContent({ toggleSection }) {
@@ -84,7 +85,7 @@ function AddressPageContent({ toggleSection }) {
     if (!Name) {
       toast({
         title: "Error",
-        description: "Name are required.",
+        description: "Name is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -96,7 +97,7 @@ function AddressPageContent({ toggleSection }) {
     if (!PinCode) {
       toast({
         title: "Error",
-        description: "Pincode are required.",
+        description: "Pincode is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -107,7 +108,7 @@ function AddressPageContent({ toggleSection }) {
     if (!Locality) {
       toast({
         title: "Error",
-        description: "Locality are required.",
+        description: "Locality is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -118,7 +119,7 @@ function AddressPageContent({ toggleSection }) {
     if (!Address) {
       toast({
         title: "Error",
-        description: "Address are required.",
+        description: "Address is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -129,7 +130,7 @@ function AddressPageContent({ toggleSection }) {
     if (!State) {
       toast({
         title: "Error",
-        description: "State are required.",
+        description: "State is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -140,7 +141,7 @@ function AddressPageContent({ toggleSection }) {
     if (!City) {
       toast({
         title: "Error",
-        description: "City are required.",
+        description: "City is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -152,7 +153,7 @@ function AddressPageContent({ toggleSection }) {
     if (!MobileNumber) {
       toast({
         title: "Error",
-        description: "Mobile Number are required.",
+        description: "Mobile Number is required.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -194,13 +195,6 @@ function AddressPageContent({ toggleSection }) {
     //   onClose();
   };
 
-  const handleDelete = (id, onClose) => {
-    dispatch(deleteAddress(ownerId, id)).then(() => {
-      dispatch(getAddress(ownerId));
-    });
-    onClose();
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAddobj((prevState) => ({
@@ -210,6 +204,12 @@ function AddressPageContent({ toggleSection }) {
     if (name === "AddressType") {
       setValue(value);
     }
+  };
+
+  const ActiveAddressStatus = (id) => {
+    dispatch(activeAddress(ownerId, id)).then(() => {
+      dispatch(getAddress(ownerId));
+    });
   };
 
   return (
@@ -317,31 +317,33 @@ function AddressPageContent({ toggleSection }) {
               </RadioGroup>
             </div>
 
-            <div className="flex items-center gap-4 py-4">
-              <button
-                className="bg-indigo-600 text-white text-lg font-semibold py-2 px-8 rounded-sm"
+            <div className="py-4 flex gap-4">
+              <Button
+                colorScheme="blue"
+                className="w-1/2"
                 onClick={handleSaveClick}
               >
                 Save
-              </button>
-              <button
-                className="bg-indigo-600 text-white text-lg font-semibold py-2 px-8 rounded-sm"
+              </Button>
+              <Button
+                variant="outline"
+                className="w-1/2"
                 onClick={handleCancelClick}
               >
                 Cancel
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       )}
-
-      <div className="flex flex-col gap-2">
-        {addressArr.map((address) => (
+      {addressArr &&
+        addressArr.map((address) => (
           <div
             className={`border border-gray-200 px-4 py-6 ${
               editCardId === address._id ? "hidden" : ""
             } ${address.ActiveAddress === true ? "bg-gray-100" : ""}`}
             key={address._id}
+            onClick={() => ActiveAddressStatus(address._id)}  // Corrected line
           >
             <div>
               <div className="flex gap-6 items-center">
@@ -352,7 +354,7 @@ function AddressPageContent({ toggleSection }) {
                   isChecked={address.ActiveAddress} // This will check the radio if ActiveAddress is true
                 ></Radio>
                 <div className="w-[100%]">
-                  <div className="flex  justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-2">
                     <div>
                       <p className="flex text-[16px] font-[600] gap-10 py-2 items-center">
                         <span>{address.Name}</span>
@@ -364,7 +366,9 @@ function AddressPageContent({ toggleSection }) {
                     </div>
 
                     <p
-                      className={`p-2 font-semibold text-blue-600 cursor-pointer rounded-[5px] ${address.ActiveAddress === true ? "visible" : "hidden"}`}
+                      className={`p-2 font-semibold text-blue-600 cursor-pointer rounded-[5px] ${
+                        address.ActiveAddress === true ? "visible" : "hidden"
+                      }`}
                       onClick={() => handleEdit(address._id)}
                     >
                       EDIT
@@ -388,7 +392,6 @@ function AddressPageContent({ toggleSection }) {
             </div>
           </div>
         ))}
-      </div>
     </div>
   );
 }
