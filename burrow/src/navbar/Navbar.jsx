@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookie, loadUserFromCookies } from "../redux/User/actions";
 import Profile from "../Profile/Profile";
 import Login from "../Profile/Login";
+import { CgProfile } from "react-icons/cg";
+import { TiShoppingCart } from "react-icons/ti";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -30,10 +32,11 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const userPro = useSelector((state) => state.data.user);
   console.log(userPro);
-   const Token=localStorage.getItem("Token")
+  const Token = localStorage.getItem("Token");
+  const CartQty = useSelector((state) => state.data.cartTotalQty);
 
   const handleUserClick = (event) => {
-  navigate('/Profile')
+    navigate("/Profile");
   };
 
   const handleCloseUserMenu = (event) => {
@@ -206,11 +209,6 @@ export default function Navbar() {
                       Sign in
                     </a>
                   </div>
-                  {/* <div className="flow-root">
-                                        <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                                            Create account
-                                        </a>
-                                    </div> */}
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
@@ -249,16 +247,12 @@ export default function Navbar() {
                 className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
                 onClick={() => setOpen(true)}
               >
-                {/* he commented */}
-                {/* <span className="absolute -inset-0.5" /> */}
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                {/* <Link href="/"> */}
-                {/* img link is changed with cloudinary w-auto remove added w-8 mr-2*/}
                 <span className="sr-only">Your Company</span>
                 <img
                   onClick={() => {
@@ -272,8 +266,6 @@ export default function Navbar() {
                 {/* </Link> */}
               </div>
 
-              {/* Flyout menus */}
-              {/* added z-10 */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
@@ -303,7 +295,6 @@ export default function Navbar() {
                             leaveTo="opacity-0"
                           >
                             <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div
                                 className="absolute inset-0 top-1/2 bg-white shadow"
                                 aria-hidden="true"
@@ -364,9 +355,6 @@ export default function Navbar() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                {/* <a href={item.href} className="hover:text-gray-800">
-                                                                                                    {item.name}
-                                                                                                </a> */}
                                                 <p
                                                   onClick={() =>
                                                     handleCategoryClick(
@@ -411,18 +399,10 @@ export default function Navbar() {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   <div>
-                    <Avatar
-                      className="text-white"
+                    <CgProfile
+                      className="text-blue-600 text-[30px] cursor-pointer"
                       onClick={handleUserClick}
-                      aria-aria-controls={open ? "basic-menu" : undefined}
-                      aria-aria-haspopup="true"
-                      aria-aria-expanded={open ? "true" : undefined}
-                      sx={{
-                        bgcolor: deepPurple[500],
-                        color: "white",
-                        cursor: "pointer",
-                      }}
-                    ></Avatar>
+                    />
                   </div>
                 </div>
 
@@ -438,19 +418,19 @@ export default function Navbar() {
                 </div>
 
                 {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6" onClick={(()=>{
-                  navigate('/cart')
-                })}>
-                  <Button className="group -m-2 flex items-center p-2">
-                    <ShoppingBagIcon
-                      className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                      aria-hidden="true"
-                    />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      2
+                <div
+                  className="ml-4 flow-root lg:ml-6"
+                  onClick={() => {
+                    navigate("/cart");
+                  }}
+                >
+                  <button className="group -m-2 flex items-center p-2">
+                    <TiShoppingCart className="text-blue-600 text-[30px]" />
+                    <span className="ml-[2px] text-[16px] font-medium text-gray-700 group-hover:text-gray-800">
+                      {CartQty}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

@@ -22,7 +22,7 @@ export const navigation = {
                     id: 'Loveseats',
                     name: 'Sofas',
                     items: [
-                        { name: 'Sectional Sofas', id: "Sectional Sofas", href: `{women/clothing/tops}` },
+                        { name: 'Sectional Sofas', id: "Sectional-Sofas", href: `#` },
                         { name: 'Sleeper Sofas', id: "women_dress", href: '#' },
                         { name: 'Sleep Kit', id: 'women_jeans' },
                         { name: 'Accent Chairs', id: 'lengha_choli' }

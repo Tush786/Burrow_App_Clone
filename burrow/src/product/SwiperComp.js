@@ -8,18 +8,19 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-// import required modules
+// Import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
-export default function SwiperComp() {
+export default function SwiperComp({imagesurl}) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [images,setImages]=useState(imagesurl)
 
   return (
-    <>
+    <div className="max-w-2xl mx-auto p-4">
       <Swiper
         style={{
-          '--swiper-navigation-color': '#fff',
-          '--swiper-pagination-color': '#fff',
+          '--swiper-navigation-color': '#000',
+          '--swiper-pagination-color': '#000',
         }}
         loop={true}
         spaceBetween={10}
@@ -28,21 +29,15 @@ export default function SwiperComp() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" alt="nature 1" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" alt="nature 2" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" alt="nature 3" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" alt="nature 4" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" alt="nature 5" />
-        </SwiperSlide>
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={image}
+              alt={`nature ${index + 1}`}
+              className="rounded-lg transition-transform duration-300 ease-in-out hover:scale-105"
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <Swiper
@@ -53,24 +48,18 @@ export default function SwiperComp() {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
+        className="mySwiper mt-4"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" alt="nature 1" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" alt="nature 2" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" alt="nature 3" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" alt="nature 4" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" alt="nature 5" />
-        </SwiperSlide>
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={image}
+              alt={`nature ${index + 1}`}
+              className="rounded-md transition-transform duration-300 ease-in-out hover:scale-110 opacity-80 hover:opacity-100"
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
-    </>
+    </div>
   );
 }

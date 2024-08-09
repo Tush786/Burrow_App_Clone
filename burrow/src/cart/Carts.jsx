@@ -1,105 +1,65 @@
 import { Button, Image } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
 
 function Carts() {
-  const [listData, setListData] = useState([]);
+  const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const navigate = useNavigate();
-
-  const cartData = [
-    {
-      category_id: 1,
-      title: "Stylish Backpack",
-      brand: "Brand A",
-      price: 45.99,
-      rating: 4.5,
-      category: "Bags",
-      description: "A stylish backpack suitable for everyday use.",
-      thumbnail: "https://via.placeholder.com/150"
-    },
-    {
-      category_id: 2,
-      title: "Running Shoes",
-      brand: "Brand B",
-      price: 89.99,
-      rating: 4.8,
-      category: "Footwear",
-      description: "Comfortable and durable running shoes.",
-      thumbnail: "https://via.placeholder.com/150"
-    },
-    {
-      category_id: 3,
-      title: "Casual T-Shirt",
-      brand: "Brand C",
-      price: 19.99,
-      rating: 4.2,
-      category: "Clothing",
-      description: "A casual t-shirt made of soft cotton.",
-      thumbnail: "https://via.placeholder.com/150"
-    },
-    {
-      category_id: 4,
-      title: "Wrist Watch",
-      brand: "Brand D",
-      price: 129.99,
-      rating: 4.7,
-      category: "Accessories",
-      description: "An elegant wristwatch with a leather strap.",
-      thumbnail: "https://via.placeholder.com/150"
-    },
-    {
-      category_id: 5,
-      title: "Sunglasses",
-      brand: "Brand E",
-      price: 59.99,
-      rating: 4.3,
-      category: "Accessories",
-      description: "Stylish sunglasses with UV protection.",
-      thumbnail: "https://via.placeholder.com/150"
-    }
-  ];
-
-  const deleteData = async (id) => {
-    // Uncomment and use the following when integrating with actual API
-    // const apiUrl = `http://localhost:9090/cartpage/${id}`;
-    // try {
-    //   await axios.delete(apiUrl);
-    //   fetchData1();
-    // } catch (error) {
-    //   console.error("Error deleting data:", error);
-    // }
-  };
-
+  const dispatch = useDispatch();
+  const cartData1 = useSelector((state) => state.data.cart);
   const [val, setVal] = useState(1);
   const [condi, setCondi] = useState(false);
   const [name, setName] = useState("");
   const [pr, setPr] = useState(null);
 
-  let totalPrice = Math.ceil(cartData.reduce((acc, item) => acc + item.price, 0));
+  useEffect(() => {
+    dispatch(getCart(ownerId));
+  }, [dispatch, ownerId]);
 
-  const dataValue = (el) => {
-    setPr(el.price * val);
-    setName(el.title);
-    setCondi(true);
-  };
+  const totalPrice = useMemo(() => 
+    Math.ceil(cartData1.reduce((acc, item) => acc + item.product.sellingPrice * item.quantity, 0)), 
+    [cartData1]
+  );
 
-  const handleValue = () => {
+  const handleValue = useCallback(() => {
     if (condi) {
       localStorage.setItem("price", pr + 65);
     } else {
       localStorage.setItem("price", totalPrice + 65);
     }
-  };
+  }, [condi, pr, totalPrice]);
 
-  const removeData = (el) => {
-    deleteData(el.category_id);
-  };
+  const dataValue = useCallback((el) => {
+    setPr(el.product.price * val);
+    setName(el.product.title);
+    setCondi(true);
+  }, [val]);
 
-  useEffect(() => {
-    // Uncomment and use the following when integrating with actual API
-    // fetchData1();
-  }, []);
+  const removeData = useCallback((id) => {
+    dispatch(deleteCartItem(ownerId, id)).then(() => {
+      dispatch(getCart(ownerId));
+    });
+  }, [dispatch, ownerId]);
+
+  const addQty = useCallback((el) => {
+    const { product, quantity } = el;
+    const newQty = quantity + 1;
+    dispatch(addTocart(product, newQty, ownerId)).then(() => {
+      dispatch(getCart(ownerId));
+    });
+  }, [dispatch, ownerId]);
+
+  const removeQty = useCallback((el) => {
+    const { product, quantity } = el;
+    const newQty = quantity - 1;
+    if (newQty > 0) {
+      dispatch(addTocart(product, newQty, ownerId)).then(() => {
+        dispatch(getCart(ownerId));
+      });
+    }
+  }, [dispatch, ownerId]);
 
   return (
     <div className="h-full bg-gray-100 min-h-screen">
@@ -130,65 +90,61 @@ function Carts() {
         <div className="flex flex-col md:flex-col 2xl:flex-row xl:flex-row lg:flex-row mt-8 gap-8">
           <div
             className=" w-full bg-white p-6 "
-            style={{ boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" }}
+            style={{
+              boxShadow:
+                "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+            }}
           >
-            {cartData.length === 0 ? (
+            {cartData1.length === 0 ? (
               <div className="flex flex-col items-center py-4">
-              <p className="text-[34px] font-[600] pb-4">Cart Empty</p>
+                <p className="text-[34px] font-[600] pb-4">Cart Empty</p>
                 <Image src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" />
-                <div onClick={(()=>{
-                   navigate('/product')
-                })}>
-            
-                  <button className="bg-indigo-600 px-16 py-4 text-[#fff] text-[16px]">Shop Now</button>
-              
+                <div
+                  onClick={() => {
+                    navigate("/product");
+                  }}
+                >
+                  <button className="bg-indigo-600 px-16 py-4 text-[#fff] text-[16px]">
+                    Shop Now
+                  </button>
                 </div>
-                
               </div>
             ) : (
-              cartData.map((el) => (
+              cartData1.map((el) => (
                 <div
-                  key={el.category_id}
+                  key={el._id}
                   className="flex items-center justify-between border-b border-gray-200 py-4"
                   onClick={() => dataValue(el)}
                 >
                   <div className="w-1/4 h-24">
                     <img
-                      src={el.thumbnail}
-                      alt={el.title}
+                      src={el.product.image}
+                      alt={el.product.productName}
                       className="w-full h-full object-center object-cover rounded-md"
                     />
                   </div>
                   <div className="w-3/4 pl-4">
-                    <p className="text-sm font-medium text-gray-800">
-                      {el.brand}
-                    </p>
                     <p className="text-lg font-semibold text-gray-900">
-                      {el.title}
+                      {el.product.title}
                     </p>
-                    <p className="text-sm text-gray-600">Rating: {el.rating}</p>
-                    <p className="text-sm text-gray-600">{el.category}</p>
-                    <p className="text-sm text-gray-600">{el.description}</p>
+                    <p className="text-[20px] text-gray-600 pb-4">{el.product.productName}</p>
+                    <p className="text-sm text-gray-600">{el.product.category}</p>
                     <div className="flex items-center justify-between pt-2">
-                      <select
-                        className="py-1 px-2 border border-gray-300 "
-                        value={val}
-                        onChange={(e) => setVal(e.target.value)}
-                      >
-                        {[...Array(5).keys()].map((n) => (
-                          <option key={n + 1} value={n + 1}>
-                            {n + 1}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="flex gap-2">
+                        <Button onClick={() => removeQty(el)} className="bg-indigo-600 font-bold text-[20px]">
+                          -
+                        </Button>
+                        <Button>{el.quantity}</Button>
+                        <Button onClick={() => addQty(el)} className="bg-indigo-600">+</Button>
+                      </div>
                       <button
                         className="text-red-500 hover:underline"
-                        onClick={() => removeData(el)}
+                        onClick={() => removeData(el.product._id)}
                       >
                         Remove
                       </button>
                       <p className="text-lg font-semibold text-gray-900">
-                        ${val * el.price}
+                        ${el.quantity * el.product.sellingPrice}
                       </p>
                     </div>
                   </div>
@@ -198,8 +154,11 @@ function Carts() {
           </div>
 
           <div
-            className="2xl:w-[40%] xl:w-[30%] lg:w-[50%] md:w-full sm:w-fll h-[350px]  bg-white p-6"
-            style={{ boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" }}
+            className="2xl:w-[40%] xl:w-[30%] lg:w-[50%] md:w-full sm:w-full h-[350px] bg-white p-6"
+            style={{
+              boxShadow:
+                "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+            }}
           >
             <p className="text-4xl font-black leading-9 text-gray-800">
               Summary

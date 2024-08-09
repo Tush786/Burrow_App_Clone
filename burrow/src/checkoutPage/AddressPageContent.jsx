@@ -19,10 +19,15 @@ import {
 import React, { useRef, useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
 import { SlOptionsVertical } from "react-icons/sl";
-import { useDispatch, useSelector } from 'react-redux';
-import { getAddress, addAddress, editAddress,deleteAddress } from '../redux/User/actions';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAddress,
+  addAddress,
+  editAddress,
+  deleteAddress,
+} from "../redux/User/actions";
 
-function Address() {
+function AddressPageContent({ toggleSection }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [value, setValue] = useState("1");
   const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
@@ -71,18 +76,10 @@ function Address() {
     setEditCardId(null);
   };
 
-  const toast = useToast(); // Initialize Chakra UI toast
+  const toast = useToast();
   const handleSaveClick = () => {
-    const {
-      Name,
-      MobileNumber,
-      PinCode,
-      Locality,
-      Address,
-      City,
-      State,
-    } = addobj;
-
+    const { Name, MobileNumber, PinCode, Locality, Address, City, State } =
+      addobj;
 
     if (!Name) {
       toast({
@@ -91,63 +88,63 @@ function Address() {
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
 
-    if (!PinCode ) {
+    if (!PinCode) {
       toast({
         title: "Error",
         description: "Pincode are required.",
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
-    if (!Locality ) {
+    if (!Locality) {
       toast({
         title: "Error",
         description: "Locality are required.",
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
-    if (!Address ) {
+    if (!Address) {
       toast({
         title: "Error",
         description: "Address are required.",
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
-    if (!State ) {
+    if (!State) {
       toast({
         title: "Error",
         description: "State are required.",
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
-    if (!City ) {
+    if (!City) {
       toast({
         title: "Error",
         description: "City are required.",
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
@@ -159,12 +156,10 @@ function Address() {
         status: "error",
         duration: 3000,
         isClosable: true,
-        position:"top-right"
+        position: "top-right",
       });
       return false;
     }
-  
-
 
     const addressToSave = {
       ...addobj,
@@ -172,20 +167,22 @@ function Address() {
     };
 
     if (editCardId !== null) {
-      dispatch(editAddress(ownerId, editCardId, addressToSave)).then(()=>{
+      dispatch(editAddress(ownerId, editCardId, addressToSave)).then(() => {
         dispatch(getAddress(ownerId));
-      })
+      });
     } else {
-      dispatch(addAddress({ owner: ownerId, addressItems: [addressToSave] })).then(()=>{
+      dispatch(
+        addAddress({ owner: ownerId, addressItems: [addressToSave] })
+      ).then(() => {
         dispatch(getAddress(ownerId));
-      })
+      });
     }
 
     setIsFormVisible(false);
     setEditCardId(null);
   };
 
-  const handleEdit = (id, onClose) => {
+  const handleEdit = (id) => {
     const addressToEdit = addressArr.find((address) => address._id === id);
     setAddobj({
       ...addressToEdit,
@@ -194,15 +191,15 @@ function Address() {
     setValue(addressToEdit.AddressType === "Home" ? "1" : "2");
     setIsFormVisible(true);
     setEditCardId(id);
-    onClose();
+    //   onClose();
   };
 
-  const handleDelete=(id,onClose)=>{
-    dispatch(deleteAddress(ownerId,id)).then(()=>{
+  const handleDelete = (id, onClose) => {
+    dispatch(deleteAddress(ownerId, id)).then(() => {
       dispatch(getAddress(ownerId));
-    })
+    });
     onClose();
-  }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -217,10 +214,6 @@ function Address() {
 
   return (
     <div className="flex flex-col gap-4 2xl:p-[6px] xl:p-[6px]">
-      <div className="border-b pb-4 border-gray-200">
-        <p className="text-2xl font-semibold">Manage Addresses</p>
-      </div>
-
       {!isFormVisible ? (
         <div
           className="p-4 flex gap-4 items-center border border-gray-200 text-indigo-600 cursor-pointer"
@@ -232,7 +225,7 @@ function Address() {
       ) : (
         <div className="2xl:bg-[#f5fafe] xl:bg-[#f5fafe] p-4 border border-gray-200">
           <p className="text-indigo-600 font-bold py-2">ADD A NEW ADDRESS</p>
-          <div className="w-full lg:w-2/3">
+          <div className="">
             <div className="flex flex-col md:flex-row gap-4 py-2">
               <Input
                 placeholder="Name"
@@ -311,7 +304,12 @@ function Address() {
             <div className="py-2">
               <p className="font-semibold py-2">Address Type</p>
 
-              <RadioGroup onChange={(value) => handleChange({ target: { name: 'AddressType', value } })} value={value}>
+              <RadioGroup
+                onChange={(value) =>
+                  handleChange({ target: { name: "AddressType", value } })
+                }
+                value={value}
+              >
                 <Stack direction="row">
                   <Radio value="1">Home</Radio>
                   <Radio value="2">Work</Radio>
@@ -337,58 +335,56 @@ function Address() {
         </div>
       )}
 
-      <div className="">
+      <div className="flex flex-col gap-2">
         {addressArr.map((address) => (
           <div
             className={`border border-gray-200 px-4 py-6 ${
               editCardId === address._id ? "hidden" : ""
-            }`}
+            } ${address.ActiveAddress === true ? "bg-gray-100" : ""}`}
             key={address._id}
           >
             <div>
-            <div className="flex justify-between items-center mb-4">
-              <div>
-              <p className="flex text-[16px] font-[600] gap-10 py-2 items-center">
-                <span>{address.Name}</span>
-                <p className="text-[16px] font-semibold bg-[#eed9d9] px-[8px] py-[2px] rounded-[20px]">
-                {address.AddressType}
-              </p> 
-                 <span>{address.MobileNumber}</span>
-              </p>
+              <div className="flex gap-6 items-center">
+                <Radio
+                  size="lg"
+                  name="1"
+                  colorScheme="blue"
+                  isChecked={address.ActiveAddress} // This will check the radio if ActiveAddress is true
+                ></Radio>
+                <div className="w-[100%]">
+                  <div className="flex  justify-between items-center mb-2">
+                    <div>
+                      <p className="flex text-[16px] font-[600] gap-10 py-2 items-center">
+                        <span>{address.Name}</span>
+                        <p className="text-[16px] font-semibold bg-[#eed9d9] px-[8px] py-[2px] rounded-[20px]">
+                          {address.AddressType}
+                        </p>
+                        <span>{address.MobileNumber}</span>
+                      </p>
+                    </div>
+
+                    <p
+                      className={`p-2 font-semibold text-blue-600 cursor-pointer rounded-[5px] ${address.ActiveAddress === true ? "visible" : "hidden"}`}
+                      onClick={() => handleEdit(address._id)}
+                    >
+                      EDIT
+                    </p>
+                  </div>
+
+                  <p>
+                    {address.Address}, {address.PinCode}
+                  </p>
+
+                  {address.ActiveAddress ? (
+                    <button
+                      className="bg-orange-600 text-white text-lg font-semibold py-2 px-6 mt-4 rounded-lg hover:bg-orange-700 transition"
+                      onClick={() => toggleSection("orderSummary")}
+                    >
+                      DELIVER HERE
+                    </button>
+                  ) : null}
+                </div>
               </div>
-
-
-              <Popover closeOnBlur={false} placement="left" initialFocusRef={initRef}>
-                {({ isOpen, onClose }) => (
-                  <>
-                    <PopoverTrigger>
-                      <Button>
-                        <SlOptionsVertical />
-                      </Button>
-                    </PopoverTrigger>
-                    <Portal>
-                      <PopoverContent>
-                        <PopoverHeader></PopoverHeader>
-                        <PopoverCloseButton />
-                        <PopoverBody>
-                          <p
-                            className="p-2 hover:bg-gray-300 rounded-[5px]"
-                            onClick={() => handleEdit(address._id, onClose)}
-                          >
-                            Edit
-                          </p>
-                          <p className="p-2 hover:bg-gray-300 rounded-[5px]" onClick={()=>handleDelete(address._id,onClose)}>Delete</p>
-                        </PopoverBody>
-                      </PopoverContent>
-                    </Portal>
-                  </>
-                )}
-              </Popover>
-            </div>
-           
-              <p>
-                {address.Address}, {address.PinCode}
-              </p>
             </div>
           </div>
         ))}
@@ -397,4 +393,4 @@ function Address() {
   );
 }
 
-export default Address;
+export default AddressPageContent;

@@ -5,12 +5,7 @@ import {
   TabPanel,
   TabPanels,
   Tab,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  Text,
-  ModalFooter,
+ 
   ModalCloseButton,
   ModalOverlay,
   useDisclosure,

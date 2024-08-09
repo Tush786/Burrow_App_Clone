@@ -1,23 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.mySwiper2 {
-  height: 150px; /* Adjust the height as needed */
-}
-
-.mySwiper2 img {
-  height: 100%; /* Ensure images take up the full height */
-  width: auto;  /* Maintain aspect ratio */
-  object-fit: cover; /* Ensure images cover the container without distortion */
-}
-
-.mySwiper {
-  margin-top: 10px; /* Adjust spacing between main swiper and thumbnails */
-}
-
-.mySwiper img {
-  height: 50px; /* Adjust thumbnail height as needed */
-  width: auto;  /* Maintain aspect ratio */
-  object-fit: cover; /* Ensure images cover the container without distortion */
-}

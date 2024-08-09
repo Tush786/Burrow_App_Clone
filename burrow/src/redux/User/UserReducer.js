@@ -1,14 +1,16 @@
-import { GET_PRODUCT, GET_SINGLEPRODUCT, GET_USER, LOGIN_USER,GET_ADDRESS } from "../User/actionType";
+import { GET_PRODUCT, GET_SINGLEPRODUCT, LOGIN_USER,GET_ADDRESS,GET_CART,GET_CART_LENGTH } from "../User/actionType";
 
 const initialState = {
   user: {},
   products: [],
-  singleproduct: {},
+  singleproduct: [],
   statuscode: "",
   token: "",
   currentPage: 1,
   totalPages: 0,
-  addressData:[]
+  addressData:[],
+  cart:[],
+  cartTotalQty:null
 };
 
 export const Reducer = (state = initialState, { type, payload }) => {
@@ -23,11 +25,14 @@ export const Reducer = (state = initialState, { type, payload }) => {
     case GET_SINGLEPRODUCT:
       return { ...state, singleproduct: payload };
     case LOGIN_USER:
-      console.log(payload);
       return { ...state, user: payload.currUser, statuscode: payload.statuscode, token: payload.token };
     case GET_ADDRESS:
-      console.log(payload);
       return { ...state, addressData: payload };
+    case GET_CART:
+      return { ...state, cart: payload };
+    case GET_CART_LENGTH:
+      console.log(payload);
+      return { ...state, cartTotalQty: payload };
     default:
       return state;
   }

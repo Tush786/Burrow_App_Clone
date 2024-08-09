@@ -1,10 +1,8 @@
 import React from 'react'
 
 import AllRoutes from './route/AllRoutes'
-import AdminPage from './admin/AdminPage'
-import Productpage from './product/Productpage'
 import Navbar from './navbar/Navbar'
-import FooterComp, { Footer } from './footer/Footer'
+import FooterComp from './footer/Footer'
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_USER,GET_ADDRESS,ADD_ADDRESS,EDIT_ADDRESS} from "../User/actionType";
+import { GET_PRODUCT,GET_SINGLEPRODUCT, LOGIN_USER, POST_USER, RESET_USER,GET_ADDRESS,ADD_ADDRESS,GET_CART,GET_CART_LENGTH} from "../User/actionType";
 
 // ==========================User Action Start From here ======================>
       
@@ -76,7 +76,7 @@ import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_U
       export const editUser = (user,id) => async (dispatch) => {
         console.log(user,id)
         try {
-         const resp= await axios.patch(`https://arba-backend-1-4267.onrender.com/user/editUser/${id}`, {
+        await axios.patch(`https://arba-backend-1-4267.onrender.com/user/editUser/${id}`, {
             ...user,
           });
           // console.log(resp)
@@ -92,7 +92,7 @@ import { GET_PRODUCT,GET_SINGLEPRODUCT, GET_USER, LOGIN_USER, POST_USER, RESET_U
       export const editAvatar = (avatar,id) => async (dispatch) => {
         console.log(avatar,id)
         try {
-         const resp= await axios.patch(`https://arba-backend-1-4267.onrender.com/user/avatar/${id}`, avatar);
+        await axios.patch(`https://arba-backend-1-4267.onrender.com/user/avatar/${id}`, avatar);
           // console.log(resp)
           // dispatch({
           //   type: EDIT_USER,
@@ -199,17 +199,71 @@ export const singleproduct = (id) => async (dispatch) => {
 
       export const editAddress = (owner,addressId,updatedAddressItem) => async (dispatch) => {
         try {
-          const req = await axios.put(
+          await axios.put(
             `http://localhost:9090/address/edit/${owner}/${addressId}`,{
               updatedAddressItem
             }
           );
-          console.log(req)
-          dispatch({
-            type: EDIT_ADDRESS,
-            payload: req.data,
-          });
         } catch (err) {
           console.log(err);
         }
       };
+
+      export const deleteAddress = (owner,addressId) => async (dispatch) => {
+        console.log(owner,addressId);
+        try {
+         await axios.delete(
+            `http://localhost:9090/address/delete/${owner}/${addressId}`
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      // Add to cart functionality ============>
+        export const addTocart = ( product, quantity, owner,id) => async (dispatch) => {
+          const cartitem={
+            product,
+            quantity,
+            owner,
+          }
+          try {
+         await axios.post(`http://localhost:9090/cart/create/${id}`, {
+              ...cartitem,
+            });
+          
+          } catch (err) {
+            console.log(err);
+           
+          }
+        };
+    
+        export const getCart = (owner) => async (dispatch) => {
+     
+          try {
+            const response = await axios.get(`http://localhost:9090/cart/get/${owner}`)
+            console.log(response)
+            dispatch({
+              type: GET_CART,
+              payload:  response.data[0].orderItems,
+            });
+            dispatch({
+              type: GET_CART_LENGTH,
+              payload:  response.data[0].orderItems.length,
+            });
+          } catch (error) {
+            dispatch({ type: 'PRODUCTS_ERROR', error });
+          }
+        };
+        
+        export const deleteCartItem = (owner,productId) => async (dispatch) => {
+          
+          try {
+          await axios.delete(
+              `http://localhost:9090/cart/delete/${owner}/${productId}`
+            );
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        

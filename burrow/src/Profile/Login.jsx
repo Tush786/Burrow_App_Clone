@@ -6,7 +6,6 @@ import { auth } from '../Oauth/Firebaseauth'
 import { Link } from 'react-router-dom';
 import {
   Flex,
-  Heading,
   Input,
   Button,
   InputGroup,
@@ -14,7 +13,6 @@ import {
   InputLeftElement,
   chakra,
   Box,
-  Avatar,
   FormControl,
   FormHelperText,
   InputRightElement,
@@ -22,7 +20,6 @@ import {
   Image,
   Text
 } from "@chakra-ui/react";
-import axios from 'axios'
 import { FaUserAlt, FaLock, FaRegEye, FaRegEyeSlash, FaFacebook } from "react-icons/fa";
 import { LoginUser } from "../redux/User/actions";
 import { useDispatch, useSelector } from "react-redux";
