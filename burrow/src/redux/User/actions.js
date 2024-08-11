@@ -12,6 +12,12 @@ import {
 } from "../User/actionType";
 
 // ==========================User Action Start From here ======================>
+const token = localStorage.getItem("Token");
+const config = {
+  headers: {
+    authorization: "Bearer " + token,
+  },
+};
 
 export const addUser = (user) => async (dispatch) => {
   try {
@@ -172,11 +178,11 @@ export const singleproduct = (id) => async (dispatch) => {
 
 // Address API ==============================>
 
-export const getAddress = (ownerId) => async (dispatch) => {
-  // const ownerId= "664eefa7e26fbe0044ccd5af"
+export const getAddress = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://localhost:9090/address/get/${ownerId}`
+      `http://localhost:9090/address/get`,
+      config
     );
     console.log(response.data);
     dispatch({
@@ -191,9 +197,11 @@ export const getAddress = (ownerId) => async (dispatch) => {
 // ============= Post Request ------------------>
 export const addAddress = (user) => async (dispatch) => {
   try {
-    const res = await axios.post(`http://localhost:9090/address/add`, {
-      ...user,
-    });
+    const res = await axios.post(
+      `http://localhost:9090/address/add`,
+      user,
+      config
+    );
     // console.log(res.status);
     dispatch({
       type: ADD_ADDRESS,
@@ -206,35 +214,34 @@ export const addAddress = (user) => async (dispatch) => {
 
 // ======================== Edit Address =========================>
 
-export const editAddress =
-  (owner, addressId, updatedAddressItem) => async (dispatch) => {
-    try {
-      await axios.put(
-        `http://localhost:9090/address/edit/${owner}/${addressId}`,
-        {
-          updatedAddressItem,
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-export const activeAddress = (owner, addressId) => async (dispatch) => {
+export const editAddress = (addressId, updatedAddressItem) => async () => {
   try {
     await axios.put(
-      `http://localhost:9090/address/activeAddress/${owner}/${addressId}`
+      `http://localhost:9090/address/edit/${addressId}`,
+      updatedAddressItem,
+      config
     );
   } catch (err) {
     console.log(err);
   }
 };
 
-export const deleteAddress = (owner, addressId) => async (dispatch) => {
-  console.log(owner, addressId);
+export const activeAddress = (addressId) => async () => {
+  try {
+    await axios.put(
+      `http://localhost:9090/address/activeAddress/${addressId}`,
+      config
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteAddress = (addressId) => async (dispatch) => {
   try {
     await axios.delete(
-      `http://localhost:9090/address/delete/${owner}/${addressId}`
+      `http://localhost:9090/address/delete/${addressId}`,
+      config
     );
   } catch (err) {
     console.log(err);
@@ -246,12 +253,14 @@ export const addTocart = (product, quantity, owner, id) => async (dispatch) => {
   const cartitem = {
     product,
     quantity,
-    owner,
   };
+
   try {
-    await axios.post(`http://localhost:9090/cart/create/${id}`, {
-      ...cartitem,
-    });
+    await axios.post(
+      `http://localhost:9090/cart/create/${id}`,
+      cartitem,
+      config
+    );
   } catch (err) {
     console.log(err);
   }
@@ -259,7 +268,7 @@ export const addTocart = (product, quantity, owner, id) => async (dispatch) => {
 
 export const getCart = (owner) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:9090/cart/get/${owner}`);
+    const response = await axios.get(`http://localhost:9090/cart/get`, config);
     console.log(response);
     dispatch({
       type: GET_CART,
@@ -277,7 +286,8 @@ export const getCart = (owner) => async (dispatch) => {
 export const deleteCartItem = (owner, productId) => async (dispatch) => {
   try {
     await axios.delete(
-      `http://localhost:9090/cart/delete/${owner}/${productId}`
+      `http://localhost:9090/cart/delete/${productId}`,
+      config
     );
   } catch (err) {
     console.log(err);

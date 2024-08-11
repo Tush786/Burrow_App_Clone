@@ -31,7 +31,7 @@ import {
 function AddressPageContent({ toggleSection }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [value, setValue] = useState("1");
-  const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
+  // const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const [editCardId, setEditCardId] = useState(null);
   const [addobj, setAddobj] = useState({
     Name: "",
@@ -51,8 +51,8 @@ function AddressPageContent({ toggleSection }) {
   console.log(addressArr);
 
   useEffect(() => {
-    dispatch(getAddress(ownerId));
-  }, [ownerId, dispatch]);
+    dispatch(getAddress());
+  }, [dispatch]);
 
   const initRef = useRef();
 
@@ -168,14 +168,14 @@ function AddressPageContent({ toggleSection }) {
     };
 
     if (editCardId !== null) {
-      dispatch(editAddress(ownerId, editCardId, addressToSave)).then(() => {
-        dispatch(getAddress(ownerId));
+      dispatch(editAddress(editCardId, addressToSave)).then(() => {
+        dispatch(getAddress());
       });
     } else {
       dispatch(
-        addAddress({ owner: ownerId, addressItems: [addressToSave] })
+        addAddress({ addressItems: [addressToSave] })
       ).then(() => {
-        dispatch(getAddress(ownerId));
+        dispatch(getAddress());
       });
     }
 
@@ -207,8 +207,8 @@ function AddressPageContent({ toggleSection }) {
   };
 
   const ActiveAddressStatus = (id) => {
-    dispatch(activeAddress(ownerId, id)).then(() => {
-      dispatch(getAddress(ownerId));
+    dispatch(activeAddress(id)).then(() => {
+      dispatch(getAddress());
     });
   };
 
@@ -343,10 +343,10 @@ function AddressPageContent({ toggleSection }) {
               editCardId === address._id ? "hidden" : ""
             } ${address.ActiveAddress === true ? "bg-gray-100" : ""}`}
             key={address._id}
-            onClick={() => ActiveAddressStatus(address._id)}  // Corrected line
+            // Corrected line
           >
             <div>
-              <div className="flex gap-6 items-center">
+              <div className="flex gap-6 items-center"  onClick={() => ActiveAddressStatus(address._id)} >
                 <Radio
                   size="lg"
                   name="1"

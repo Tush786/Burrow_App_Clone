@@ -25,7 +25,6 @@ import { getAddress, addAddress, editAddress,deleteAddress } from '../redux/User
 function Address() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [value, setValue] = useState("1");
-  const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const [editCardId, setEditCardId] = useState(null);
   const [addobj, setAddobj] = useState({
     Name: "",
@@ -45,8 +44,8 @@ function Address() {
   console.log(addressArr);
 
   useEffect(() => {
-    dispatch(getAddress(ownerId));
-  }, [ownerId, dispatch]);
+    dispatch(getAddress());
+  }, [dispatch]);
 
   const initRef = useRef();
 
@@ -164,20 +163,18 @@ function Address() {
       return false;
     }
   
-
-
     const addressToSave = {
       ...addobj,
       AddressType: value === "1" ? "Home" : "Work",
     };
 
     if (editCardId !== null) {
-      dispatch(editAddress(ownerId, editCardId, addressToSave)).then(()=>{
-        dispatch(getAddress(ownerId));
+      dispatch(editAddress(editCardId, addressToSave)).then(()=>{
+        dispatch(getAddress());
       })
     } else {
-      dispatch(addAddress({ owner: ownerId, addressItems: [addressToSave] })).then(()=>{
-        dispatch(getAddress(ownerId));
+      dispatch(addAddress({ addressItems: [addressToSave] })).then(()=>{
+        dispatch(getAddress());
       })
     }
 
@@ -198,8 +195,8 @@ function Address() {
   };
 
   const handleDelete=(id,onClose)=>{
-    dispatch(deleteAddress(ownerId,id)).then(()=>{
-      dispatch(getAddress(ownerId));
+    dispatch(deleteAddress(id)).then(()=>{
+      dispatch(getAddress());
     })
     onClose();
   }

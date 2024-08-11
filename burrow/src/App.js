@@ -11,7 +11,7 @@ function App() {
   const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
    useEffect(()=>{
     dispatch(getCart(ownerId));
-    dispatch(getAddress(ownerId));
+    dispatch(getAddress());
    },[])
 
   return (
