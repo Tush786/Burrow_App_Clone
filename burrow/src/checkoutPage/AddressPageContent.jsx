@@ -2,36 +2,25 @@ import {
   Box,
   Button,
   Input,
-  Popover,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-  Portal,
+  Textarea,
   Radio,
   RadioGroup,
   Stack,
-  Textarea,
   useToast,
 } from "@chakra-ui/react";
 import React, { useRef, useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
-import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAddress,
   addAddress,
   editAddress,
-  deleteAddress,
-  activeAddress
+  activeAddress,
 } from "../redux/User/actions";
 
 function AddressPageContent({ toggleSection }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [value, setValue] = useState("1");
-  // const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const [editCardId, setEditCardId] = useState(null);
   const [addobj, setAddobj] = useState({
     Name: "",
@@ -48,13 +37,11 @@ function AddressPageContent({ toggleSection }) {
 
   const dispatch = useDispatch();
   const addressArr = useSelector((state) => state.data.addressData);
-  console.log(addressArr);
+  const toast = useToast();
 
   useEffect(() => {
     dispatch(getAddress());
   }, [dispatch]);
-
-  const initRef = useRef();
 
   const handleAddAddressClick = () => {
     setIsFormVisible(true);
@@ -77,89 +64,32 @@ function AddressPageContent({ toggleSection }) {
     setEditCardId(null);
   };
 
-  const toast = useToast();
+  const showToast = (title, description) => {
+    toast({
+      title,
+      description,
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+      position: "top-right",
+    });
+  };
+
   const handleSaveClick = () => {
     const { Name, MobileNumber, PinCode, Locality, Address, City, State } =
       addobj;
 
-    if (!Name) {
-      toast({
-        title: "Error",
-        description: "Name is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
-    }
-
-    if (!PinCode) {
-      toast({
-        title: "Error",
-        description: "Pincode is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
-    }
-    if (!Locality) {
-      toast({
-        title: "Error",
-        description: "Locality is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
-    }
-    if (!Address) {
-      toast({
-        title: "Error",
-        description: "Address is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
-    }
-    if (!State) {
-      toast({
-        title: "Error",
-        description: "State is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
-    }
-    if (!City) {
-      toast({
-        title: "Error",
-        description: "City is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
-    }
-
-    if (!MobileNumber) {
-      toast({
-        title: "Error",
-        description: "Mobile Number is required.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top-right",
-      });
-      return false;
+    if (
+      !Name ||
+      !PinCode ||
+      !Locality ||
+      !Address ||
+      !State ||
+      !City ||
+      !MobileNumber
+    ) {
+      showToast("Error", "Please fill out all required fields.");
+      return;
     }
 
     const addressToSave = {
@@ -167,17 +97,14 @@ function AddressPageContent({ toggleSection }) {
       AddressType: value === "1" ? "Home" : "Work",
     };
 
-    if (editCardId !== null) {
-      dispatch(editAddress(editCardId, addressToSave)).then(() => {
-        dispatch(getAddress());
-      });
-    } else {
-      dispatch(
-        addAddress({ addressItems: [addressToSave] })
-      ).then(() => {
-        dispatch(getAddress());
-      });
-    }
+    const action =
+      editCardId !== null
+        ? editAddress(editCardId, addressToSave)
+        : addAddress({ addressItems: [addressToSave] });
+
+    dispatch(action).then(() => {
+      dispatch(getAddress());
+    });
 
     setIsFormVisible(false);
     setEditCardId(null);
@@ -192,7 +119,6 @@ function AddressPageContent({ toggleSection }) {
     setValue(addressToEdit.AddressType === "Home" ? "1" : "2");
     setIsFormVisible(true);
     setEditCardId(id);
-    //   onClose();
   };
 
   const handleChange = (e) => {
@@ -266,7 +192,6 @@ function AddressPageContent({ toggleSection }) {
                 onChange={handleChange}
               />
             </div>
-
             <div className="flex flex-col md:flex-row gap-4 py-2">
               <Input
                 placeholder="City/District/Town"
@@ -283,7 +208,6 @@ function AddressPageContent({ toggleSection }) {
                 onChange={handleChange}
               />
             </div>
-
             <div className="flex flex-col md:flex-row gap-4 py-2">
               <Input
                 placeholder="Landmark (Optional)"
@@ -300,10 +224,8 @@ function AddressPageContent({ toggleSection }) {
                 onChange={handleChange}
               />
             </div>
-
             <div className="py-2">
               <p className="font-semibold py-2">Address Type</p>
-
               <RadioGroup
                 onChange={(value) =>
                   handleChange({ target: { name: "AddressType", value } })
@@ -316,7 +238,6 @@ function AddressPageContent({ toggleSection }) {
                 </Stack>
               </RadioGroup>
             </div>
-
             <div className="py-4 flex gap-4">
               <Button
                 colorScheme="blue"
@@ -341,18 +262,18 @@ function AddressPageContent({ toggleSection }) {
           <div
             className={`border border-gray-200 px-4 py-6 ${
               editCardId === address._id ? "hidden" : ""
-            } ${address.ActiveAddress === true ? "bg-gray-100" : ""}`}
+            } ${address.ActiveAddress ? "bg-gray-100" : ""}`}
             key={address._id}
-            // Corrected line
           >
             <div>
-              <div className="flex gap-6 items-center"  onClick={() => ActiveAddressStatus(address._id)} >
+              <div className="flex gap-6 items-center">
                 <Radio
                   size="lg"
                   name="1"
                   colorScheme="blue"
-                  isChecked={address.ActiveAddress} // This will check the radio if ActiveAddress is true
-                ></Radio>
+                  isChecked={address.ActiveAddress}
+                  onClick={() => ActiveAddressStatus(address._id)}
+                />
                 <div className="w-[100%]">
                   <div className="flex justify-between items-center mb-2">
                     <div>
@@ -364,29 +285,26 @@ function AddressPageContent({ toggleSection }) {
                         <span>{address.MobileNumber}</span>
                       </p>
                     </div>
-
                     <p
                       className={`p-2 font-semibold text-blue-600 cursor-pointer rounded-[5px] ${
-                        address.ActiveAddress === true ? "visible" : "hidden"
+                        address.ActiveAddress ? "visible" : "hidden"
                       }`}
                       onClick={() => handleEdit(address._id)}
                     >
                       EDIT
                     </p>
                   </div>
-
                   <p>
                     {address.Address}, {address.PinCode}
                   </p>
-
-                  {address.ActiveAddress ? (
+                  {address.ActiveAddress && (
                     <button
                       className="bg-orange-600 text-white text-lg font-semibold py-2 px-6 mt-4 rounded-lg hover:bg-orange-700 transition"
                       onClick={() => toggleSection("orderSummary")}
                     >
                       DELIVER HERE
                     </button>
-                  ) : null}
+                  )}
                 </div>
               </div>
             </div>

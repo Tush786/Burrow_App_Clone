@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
 
 function Carts() {
-  const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
+  // const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartData1 = useSelector((state) => state.data.cart);
@@ -15,8 +15,8 @@ function Carts() {
   const [pr, setPr] = useState(null);
 
   useEffect(() => {
-    dispatch(getCart(ownerId));
-  }, [dispatch, ownerId]);
+    dispatch(getCart());
+  }, [dispatch]);
 
   const totalPrice = useMemo(
     () =>
@@ -48,22 +48,22 @@ function Carts() {
 
   const removeData = useCallback(
     (id) => {
-      dispatch(deleteCartItem(ownerId, id)).then(() => {
-        dispatch(getCart(ownerId));
+      dispatch(deleteCartItem(id)).then(() => {
+        dispatch(getCart());
       });
     },
-    [dispatch, ownerId]
+    [dispatch]
   );
 
   const addQty = useCallback(
     (el) => {
       const { product, quantity } = el;
       const newQty = quantity + 1;
-      dispatch(addTocart(product, newQty, ownerId)).then(() => {
-        dispatch(getCart(ownerId));
+      dispatch(addTocart(product, newQty)).then(() => {
+        dispatch(getCart());
       });
     },
-    [dispatch, ownerId]
+    [dispatch]
   );
 
   const removeQty = useCallback(
@@ -71,12 +71,12 @@ function Carts() {
       const { product, quantity } = el;
       const newQty = quantity - 1;
       if (newQty > 0) {
-        dispatch(addTocart(product, newQty, ownerId)).then(() => {
-          dispatch(getCart(ownerId));
+        dispatch(addTocart(product, newQty)).then(() => {
+          dispatch(getCart());
         });
       }
     },
-    [dispatch, ownerId]
+    [dispatch]
   );
 
   return (

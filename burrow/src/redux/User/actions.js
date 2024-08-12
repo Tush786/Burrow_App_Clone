@@ -11,20 +11,19 @@ import {
   GET_CART_LENGTH,
 } from "../User/actionType";
 
-// ==========================User Action Start From here ======================>
-const token = localStorage.getItem("Token");
-const config = {
+// Create an Axios instance with the base URL
+const api = axios.create({
+  baseURL: "http://localhost:9090",
   headers: {
-    authorization: "Bearer " + token,
+    authorization: "Bearer " + localStorage.getItem("Token"),
   },
-};
+});
+
+// ==========================User Action Start From here ======================>
 
 export const addUser = (user) => async (dispatch) => {
   try {
-    const res = await axios.post(`http://localhost:9090/user/signup`, {
-      ...user,
-    });
-    // console.log(res.status);
+    const res = await api.post(`/user/signup`, user);
     dispatch({
       type: POST_USER,
       payload: res.status,
@@ -40,14 +39,8 @@ export const addUser = (user) => async (dispatch) => {
 
 // <------------ Login User ---------------------->
 export const LoginUser = (user) => async (dispatch) => {
-  console.log(user);
   try {
-    const res = await axios.post(`http://localhost:9090/user/login`, {
-      ...user,
-    });
-    console.log(res);
-    // console.log(res.data.token);
-
+    const res = await api.post(`/user/login`, user);
     const userObj = {
       userid: res.data.user._id,
       fullname: res.data.user.fullName,
@@ -75,8 +68,7 @@ export const LoginUser = (user) => async (dispatch) => {
 
 export const getUser = (_id) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:9090/user/${_id}`);
-    // console.log(res);
+    const res = await api.get(`/user/${_id}`);
     dispatch({
       type: LOGIN_USER,
       payload: { currUser: res.data[0], statuscode: res.status },
@@ -89,57 +81,23 @@ export const getUser = (_id) => async (dispatch) => {
   }
 };
 
-export const editUser = (user, id) => async (dispatch) => {
-  console.log(user, id);
+export const editUser = (user, id) => async () => {
   try {
-    await axios.patch(
-      `https://arba-backend-1-4267.onrender.com/user/editUser/${id}`,
-      {
-        ...user,
-      }
-    );
-    // console.log(resp)
-    // dispatch({
-    //   type: EDIT_USER,
-    //   payload: user,
-    // });
+    await api.patch(`/user/editUser/${id}`, user);
   } catch (err) {
     console.log(err);
   }
 };
 
-export const editAvatar = (avatar, id) => async (dispatch) => {
-  console.log(avatar, id);
+export const editAvatar = (avatar, id) => async () => {
   try {
-    await axios.patch(
-      `https://arba-backend-1-4267.onrender.com/user/avatar/${id}`,
-      avatar
-    );
-    // console.log(resp)
-    // dispatch({
-    //   type: EDIT_USER,
-    //   payload: user,
-    // });
+    await api.patch(`/user/avatar/${id}`, avatar);
   } catch (err) {
     console.log(err);
   }
 };
 
-// export const getproducts = (sort) => async (dispatch) => {
-//   try {
-//     const products = await axios.get(
-//       `http://localhost:9090/productsapi/products?page=${page}&limit=10`
-//     );
-//     // console.log(products)
-//     dispatch({
-//       type: GET_PRODUCT,
-//       payload: products.data.products,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
+// Product API Requests
 export const getproducts = (page) => async (dispatch) => {
   dispatch({ type: "PRODUCTS_LOADING" });
   try {
@@ -147,7 +105,6 @@ export const getproducts = (page) => async (dispatch) => {
       `http://localhost:9090/productsapi/products?page=${page}&limit=6`
     );
     const data = await response.json();
-    console.log(data);
     dispatch({
       type: GET_PRODUCT,
       payload: {
@@ -163,10 +120,7 @@ export const getproducts = (page) => async (dispatch) => {
 
 export const singleproduct = (id) => async (dispatch) => {
   try {
-    const products = await axios.get(
-      `http://localhost:9090/productsapi/product/${id}`
-    );
-    console.log(products);
+    const products = await api.get(`/productsapi/product/${id}`);
     dispatch({
       type: GET_SINGLEPRODUCT,
       payload: products.data,
@@ -180,11 +134,7 @@ export const singleproduct = (id) => async (dispatch) => {
 
 export const getAddress = () => async (dispatch) => {
   try {
-    const response = await axios.get(
-      `http://localhost:9090/address/get`,
-      config
-    );
-    console.log(response.data);
+    const response = await api.get(`/address/get`);
     dispatch({
       type: GET_ADDRESS,
       payload: response.data.data[0].addressItems,
@@ -197,12 +147,7 @@ export const getAddress = () => async (dispatch) => {
 // ============= Post Request ------------------>
 export const addAddress = (user) => async (dispatch) => {
   try {
-    const res = await axios.post(
-      `http://localhost:9090/address/add`,
-      user,
-      config
-    );
-    // console.log(res.status);
+    const res = await api.post(`/address/add`, user);
     dispatch({
       type: ADD_ADDRESS,
       payload: res.status,
@@ -216,11 +161,7 @@ export const addAddress = (user) => async (dispatch) => {
 
 export const editAddress = (addressId, updatedAddressItem) => async () => {
   try {
-    await axios.put(
-      `http://localhost:9090/address/edit/${addressId}`,
-      updatedAddressItem,
-      config
-    );
+    await api.put(`/address/edit/${addressId}`, updatedAddressItem);
   } catch (err) {
     console.log(err);
   }
@@ -228,10 +169,7 @@ export const editAddress = (addressId, updatedAddressItem) => async () => {
 
 export const activeAddress = (addressId) => async () => {
   try {
-    await axios.put(
-      `http://localhost:9090/address/activeAddress/${addressId}`,
-      config
-    );
+    await api.put(`/address/activeAddress/${addressId}`);
   } catch (err) {
     console.log(err);
   }
@@ -239,37 +177,29 @@ export const activeAddress = (addressId) => async () => {
 
 export const deleteAddress = (addressId) => async (dispatch) => {
   try {
-    await axios.delete(
-      `http://localhost:9090/address/delete/${addressId}`,
-      config
-    );
+    await api.delete(`/address/delete/${addressId}`);
   } catch (err) {
     console.log(err);
   }
 };
 
 // Add to cart functionality ============>
-export const addTocart = (product, quantity, owner, id) => async (dispatch) => {
+export const addTocart = (product, quantity, owner, id) => async () => {
   const cartitem = {
     product,
     quantity,
   };
 
   try {
-    await axios.post(
-      `http://localhost:9090/cart/create/${id}`,
-      cartitem,
-      config
-    );
+    await api.post(`/cart/create/${id}`, cartitem);
   } catch (err) {
     console.log(err);
   }
 };
 
-export const getCart = (owner) => async (dispatch) => {
+export const getCart = () => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:9090/cart/get`, config);
-    console.log(response);
+    const response = await api.get(`/cart/get`);
     dispatch({
       type: GET_CART,
       payload: response.data[0].orderItems,
@@ -283,12 +213,9 @@ export const getCart = (owner) => async (dispatch) => {
   }
 };
 
-export const deleteCartItem = (owner, productId) => async (dispatch) => {
+export const deleteCartItem = (productId) => async () => {
   try {
-    await axios.delete(
-      `http://localhost:9090/cart/delete/${productId}`,
-      config
-    );
+    await api.delete(`/cart/delete/${productId}`);
   } catch (err) {
     console.log(err);
   }
