@@ -1,4 +1,4 @@
-import { GET_PRODUCT, GET_SINGLEPRODUCT, LOGIN_USER,GET_ADDRESS,GET_CART,GET_CART_LENGTH } from "../User/actionType";
+import { GET_PRODUCT, GET_SINGLEPRODUCT, LOGIN_USER,GET_ADDRESS,GET_CART,GET_CART_LENGTH,GET_CART_ID, GET_ORDER_DATA} from "../User/actionType";
 
 const initialState = {
   user: {},
@@ -10,7 +10,9 @@ const initialState = {
   totalPages: 0,
   addressData:[],
   cart:[],
-  cartTotalQty:null
+  cartTotalQty:null,
+  cartID:"",
+  orderData:[]
 };
 
 export const Reducer = (state = initialState, { type, payload }) => {
@@ -31,8 +33,11 @@ export const Reducer = (state = initialState, { type, payload }) => {
     case GET_CART:
       return { ...state, cart: payload };
     case GET_CART_LENGTH:
-      console.log(payload);
       return { ...state, cartTotalQty: payload };
+    case GET_CART_ID:
+      return { ...state, cartID: payload };
+    case GET_ORDER_DATA:
+      return { ...state, orderData: payload };
     default:
       return state;
   }

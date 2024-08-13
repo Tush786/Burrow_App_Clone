@@ -1,41 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CiSearch } from "react-icons/ci";
 import Ordercard from './Ordercard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrderData } from '../../redux/User/actions';
 
 export default function Order() {
-  const products = [
-    {
-      name: "Product 1",
-      price: "$10.00",
-      date: "2024-07-20",
-      image: "https://via.placeholder.com/100"
-    },
-    {
-      name: "Product 2",
-      price: "$20.00",
-      date: "2024-07-18",
-      image: "https://via.placeholder.com/100"
-    },
-    {
-      name: "Product 3",
-      price: "$30.00",
-      date: "2024-07-15",
-      image: "https://via.placeholder.com/100"
-    },
-    {
-      name: "Product 4",
-      price: "$40.00",
-      date: "2024-07-10",
-      image: "https://via.placeholder.com/100"
-    },
-    {
-      name: "Product 5",
-      price: "$50.00",
-      date: "2024-07-05",
-      image: "https://via.placeholder.com/100"
-    }
-  ];
-  
+  const orderData = useSelector((state) => state.data.orderData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrderData());
+  }, [dispatch]);
+
   return (
     <div className="p-2">
       <div className="flex flex-col lg:flex-row gap-10">
@@ -99,9 +75,24 @@ export default function Order() {
             </button>
           </div>
           <div className='flex flex-col gap-4'>
-            {products.map((el, ind) => (
-              <Ordercard key={ind} {...el} />
-            ))}
+            {orderData && orderData.length > 0 ? (
+              orderData.map((order, ind) => (
+                <div key={order._id} className="order-item">
+                  {/* <h3 className="text-xl font-bold mb-2">Order ID: {order._id}</h3>
+                  <p className="text-lg mb-2">Order Date: {new Date(order.orderDate).toLocaleDateString()}</p>
+                  <p className="text-lg mb-4">Total Amount: ${order.totalAmount}</p> */}
+
+                  {order.products.map((product, index) => (
+                    <Ordercard
+                      key={index}
+                      {...product}
+                    />
+                  ))}
+                </div>
+              ))
+            ) : (
+              <p>No orders found.</p>
+            )}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import AddressPageContent from "./AddressPageContent";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Image } from "@chakra-ui/react";
 import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
+import RazorpaySect from "./Razorpay";
 
 function Checkout() {
   const [activeSection, setActiveSection] = useState("login");
@@ -128,42 +129,11 @@ function AddressContent({ toggleSection }) {
 }
 
 function Razorpay() {
-  const handlePayment = () => {
-    const options = {
-      key: "rzp_test_3L44n0jcIwXbJW", // Enter the Key ID generated from the Dashboard
-      amount: 20 * 100, // Amount is in currency subunits (multiply by 100 to convert INR to paise)
-      currency: "INR",
-      name: "Playo",
-      description: "Test Payment",
-      image:
-        "https://playo-website.imgix.net/company/logo1.png?auto=compress,format",
-      handler: function (response) {
-        alert("Payment ID: " + response.razorpay_payment_id);
-        alert("Order ID: " + response.razorpay_order_id);
-        alert("Signature: " + response.razorpay_signature);
-      },
-      modal: {
-        ondismiss: function () {
-          if (window.confirm("Are you sure, you want to close the form?")) {
-            console.log("Checkout form closed by the user");
-          } else {
-            console.log("Complete the Payment");
-          }
-        },
-      },
-    };
-
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
-  };
-
   return (
-    <button
-      onClick={handlePayment}
-      className="bg-indigo-600 text-white py-2 px-4 rounded"
-    >
-      Pay Now
-    </button>
+    <div>
+      <RazorpaySect/>
+    </div>
+
   );
 }
 

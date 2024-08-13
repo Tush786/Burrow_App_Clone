@@ -1,23 +1,45 @@
-import React from 'react'
+import React from "react";
 
-function Ordercard({ name, price, date, image }) {
+function Ordercard({ product, quantity, deliveredAt }) {
+  console.log(product);
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start p-4 border-t" style={{ boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" }}>
-      <div className="w-full sm:w-1/6 mb-4 sm:mb-0">
-        <img src={image} alt="productname" className="w-[100px] h-auto rounded-lg" />
-      </div>
-      <div className="w-full sm:w-2/6 sm:ml-4 mb-4 sm:mb-0">
-        <p className="font-semibold">{name}</p>
-      </div>
-      <div className="w-full sm:w-1/6 mb-4 sm:mb-0">
-        <p className="font-semibold">{price}</p>
-      </div>
-      <div className="w-full sm:w-2/6">
-        <p className="font-semibold">Delivered On: {date}</p>
-        <p className="text-gray-500">Your item has been delivered</p>
-      </div>
+    <div
+      className="p-4 bg-white rounded-lg mb-4"
+      style={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px" }}
+    >
+     
+        <div
+          className="flex flex-col sm:flex-row justify-between items-start mb-4 last:mb-0"
+        >
+          <div className="w-full sm:w-1/6 mb-4 sm:mb-0">
+            <img
+              src={product.image}
+              alt={product.productName}
+              className="w-[100px] h-auto rounded-lg"
+            />
+          </div>
+          <div className="w-full sm:w-2/6 sm:ml-4 mb-4 sm:mb-0">
+            <p className="font-semibold text-lg">{product.productName}</p>
+            <div className="flex items-center gap-2 py-2"><p>Color :  </p>   <div className="h-4 w-4" style={{ backgroundColor: product.itemcolor }}></div></div>
+          
+          </div>
+          <div className="w-full sm:w-1/6 mb-4 sm:mb-0">
+            <p className="font-semibold text-lg text-blue-500">{`$${product.sellingPrice.toFixed(2)}`}</p>
+          </div>
+          <div className="w-full sm:w-2/6">
+            <p className="font-semibold">
+              Delivered On: {new Date(deliveredAt).toLocaleDateString()}
+            </p>
+            {
+              
+              product.orderStatus==="Delivered"?  <p className="text-blue-600">Your item has been delivered</p> : <p className="text-blue-600">{product.orderStatus}</p>
+            }
+           
+          </div>
+        </div>
+    
     </div>
-  )
+  );
 }
 
-export default Ordercard
+export default Ordercard;

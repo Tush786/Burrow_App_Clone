@@ -76,7 +76,10 @@ export default function Account() {
                 key={index}
                 className={`border-b border-gray-200 pb-4 ${index === 0 ? "" : "mt-4"}`}
               >
-                <div className="flex items-center gap-4 py-4 cursor-pointer" onClick={() => setCompName(section.title)}>
+                <div
+                  className="flex items-center gap-4 py-4 cursor-pointer"
+                  onClick={() => setCompName(section.title)}
+                >
                   <section.icon className="text-xl text-indigo-600" />
                   <p className="text-xl font-semibold text-gray-700">
                     {section.title}
@@ -114,10 +117,23 @@ export default function Account() {
             <ProfileInfoComp />
           ) : compName === "My Wishlist" ? (
             <Wishlist />
-          ) :  compName === "Manage Addresses" ? (
+          ) : compName === "Manage Addresses" ? (
             <Address />
-          ) :  null
-          }
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full text-center p-6">
+              <img
+                src="https://miro.medium.com/v2/resize:fit:800/1*D4G0dWO2niImFvdyYq-C6g.jpeg"
+                alt="Coming Soon"
+                className="w-full mb-4"
+              />
+              <h2 className="text-xl font-semibold text-gray-700">
+                Feature Coming Soon!
+              </h2>
+              <p className="text-gray-500 mt-2">
+                We're working hard to bring this feature to you. Stay tuned!
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
