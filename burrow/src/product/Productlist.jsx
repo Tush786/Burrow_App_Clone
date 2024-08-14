@@ -3,6 +3,8 @@ import Productcard from './Productcard';
 import { Box, Button, Select, Skeleton, Stack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getproducts } from '../redux/User/actions';
+import { PAGES } from '../redux/User/actionType';
+import { useLocation } from 'react-router-dom';
 
 function Productlist() {
   const dispatch = useDispatch();
@@ -10,12 +12,21 @@ function Productlist() {
   const loading = useSelector((state) => state.data.loading);
   const currentPage = useSelector((state) => state.data.currentPage);
   const totalPages = useSelector((state) => state.data.totalPages);
-  const [page, setPage] = useState(1);
+  const Page = useSelector((state) => state.data.Page);
+  const [page, setPage] = useState(Page);
   const observer = useRef();
+  const location = useLocation();
+
+  // Extract search query from URL
+  const searchQuery = new URLSearchParams(location.search).get('search') || "";
 
   useEffect(() => {
-    dispatch(getproducts(page));
-  }, [dispatch, page]);
+    dispatch(getproducts(page, searchQuery)); // Fetch products based on search query
+    dispatch({
+      type: PAGES,
+      payload: page
+    });
+  }, [dispatch, page, searchQuery]);
 
   const lastProductElementRef = useCallback(node => {
     if (loading) return;

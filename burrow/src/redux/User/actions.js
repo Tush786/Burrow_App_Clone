@@ -141,10 +141,10 @@ export const editAvatar = (avatar, id) => async (dispatch) => {
 
 // ========================== Product Actions =========================>
 
-  export const getproducts = (page) => async (dispatch) => {
+  export const getproducts = (page, searchParam) => async (dispatch) => {
     dispatch({ type: "PRODUCTS_LOADING" });
     try {
-      const response = await fetch(`${BASE_URL}/productsapi/products?page=${page}&limit=6`);
+      const response = await fetch(`${BASE_URL}/productsapi/products?page=${page}&limit=6&searchParam=${searchParam}`);
       const data = await response.json();
       console.log(data);
       dispatch({
