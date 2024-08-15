@@ -37,7 +37,7 @@ const CFaLock = chakra(FaLock);
 const obj={
     email:"",
     phonenumber:"",
-      password:"",
+    password:"",
   }
   
 
@@ -235,7 +235,7 @@ const handleClick_c = () => setShowc(!showc);
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="number" placeholder="user name" name="phonenumber" onChange={(e)=>HandleChange(e)}/>
+                  <Input type="number" placeholder="Enter Phone Number" name="phonenumber" onChange={(e)=>HandleChange(e)}/>
                 </InputGroup>
               </FormControl>
               <FormControl>

@@ -8,10 +8,10 @@ import { getAddress, getCart } from './redux/User/actions'
 
 function App() {
   const dispatch=useDispatch()
-  const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
    useEffect(()=>{
-    dispatch(getCart(ownerId));
+    dispatch(getCart());
     dispatch(getAddress());
+    
    },[])
 
   return (

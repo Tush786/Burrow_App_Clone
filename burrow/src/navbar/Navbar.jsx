@@ -1,9 +1,3 @@
-
-
-
-
-// =====================================================
-
 import { Fragment, useState, useEffect } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
@@ -77,7 +71,8 @@ export default function Navbar() {
 
   const [avatarH, setAvatarH] = useState(false);
   const handleCategoryClick = (category, section, item, close) => {
-    navigate(`/${category.id}/${section.id}/${item.id}`);
+    // navigate(`/${category.id}/${section.id}/${item.id}`);
+    navigate(`/product`);
     close();
   };
 
@@ -226,7 +221,8 @@ export default function Navbar() {
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
                                   <a
-                                    href={item.href}
+                                    href={'/product'}
+                                     // href={item.href}
                                     className="-m-2 block p-2 text-gray-500"
                                   >
                                     {item.name}
@@ -371,7 +367,8 @@ export default function Navbar() {
                                             />
                                           </div>
                                           <a
-                                            href={item.href}
+                                            // href={item.href}
+                                            href={'/product'}
                                             className="mt-6 block font-medium text-gray-900"
                                           >
                                             <span
@@ -421,6 +418,7 @@ export default function Navbar() {
                                                   className="cursor-pointer hover:text-gray-800"
                                                 >
                                                   {item.name}
+                                                  
                                                 </p>
                                               </li>
                                             ))}

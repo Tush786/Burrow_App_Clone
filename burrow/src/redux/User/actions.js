@@ -10,7 +10,8 @@ import {
   GET_CART,
   GET_CART_LENGTH,
   GET_CART_ID,
-  GET_ORDER_DATA
+  GET_ORDER_DATA,
+  ORDER_COFM_STATUS
 } from "../User/actionType";
 
 // Define the base URL for Axios
@@ -146,7 +147,6 @@ export const editAvatar = (avatar, id) => async (dispatch) => {
     try {
       const response = await fetch(`${BASE_URL}/productsapi/products?page=${page}&limit=6&searchParam=${searchParam}`);
       const data = await response.json();
-      console.log(data);
       dispatch({
         type: GET_PRODUCT,
         payload: {
@@ -208,8 +208,9 @@ export const editAddress = (addressId, updatedAddressItem) => async () => {
 };
 
 export const activeAddress = (addressId) => async () => {
+
   try {
-    await axiosInstance.put(`/address/activeAddress/${addressId}`, config);
+    await axiosInstance.put(`/address/activeAddress/${addressId}`,{status:true} ,config);
   } catch (err) {
     console.log(err);
   }
@@ -241,7 +242,6 @@ export const addTocart = (product, quantity, id) => async () => {
 export const getCart = () => async (dispatch) => {
   try {
     const response = await axiosInstance.get('/cart/get', config);
-    console.log(response.data[0]._id)
     dispatch({
       type: GET_CART,
       payload: response.data[0].orderItems
@@ -267,9 +267,14 @@ export const deleteCartItem = (productId) => async () => {
   }
 };
 
-export const deleteCartItemAfterOrder = (cartID) => async () => {
+export const deleteCartItemAfterOrder = (cartID) => async (dispatch) => {
   try {
-    await axiosInstance.delete(`/cart/deletecart/${cartID}`, config);
+  const requests=  await axiosInstance.delete(`/cart/deletecart/${cartID}`, config);
+  console.log(requests.status)
+  dispatch({
+    type:ORDER_COFM_STATUS,
+    payload:requests.status
+  })
   } catch (err) {
     console.log(err);
   }
@@ -295,5 +300,24 @@ export const deleteCartItemAfterOrder = (cartID) => async () => {
     });
   } catch (error) {
     dispatch({ type: "PRODUCTS_ERROR", error });
+  }
+};
+
+export const orderStatus = (orderId,Status) => async () => {
+  const status={
+    status:Status
+  }
+  try {
+    await axiosInstance.put(`/order/update-status/${orderId}`,status, config);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const orderConfirmMail = (owner) => async () => {
+  try {
+    await axiosInstance.post(`/order/paymentSuccess/${owner}`, config);
+  } catch (err) {
+    console.log(err);
   }
 };

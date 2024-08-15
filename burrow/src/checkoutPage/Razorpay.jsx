@@ -1,63 +1,154 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addOrder, deleteCartItemAfterOrder } from "../redux/User/actions";
+import {
+  addOrder,
+  deleteCartItemAfterOrder,
+  orderConfirmMail,
+} from "../redux/User/actions";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function RazorpaySect() {
   const cartData1 = useSelector((state) => state.data.cart);
   const addressArr = useSelector((state) => state.data.addressData);
   const cartID = useSelector((state) => state.data.cartID);
-  console.log(cartID)
-  const [totalamount, setTotalamount] = useState(5000);
-  const [paymentMethod, setPaymentMethod] = useState("UPI");
+  const TotalPrice = useSelector((state) => state.data.TotalPrice);
+  const [totalPrice,setTotalPrice]=useState(TotalPrice+65)
+  const Order_Confirm_Status = useSelector(
+    (state) => state.data.Order_Confirm_Status
+  );
+  const [owner, setOwner] = useState("664eefa7e26fbe0044ccd5af");
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [notes, setNotes] = useState(
     "Please leave the package at the front door if not at home."
   );
-  console.log(cartData1);
-  const addressobj = addressArr.filter((el, ind) => {
-    return el.ActiveAddress == true;
-  });
+  const addressobj = addressArr.filter((el) => el.ActiveAddress === true);
   const [addObj, setAddObj] = useState(addressobj[0]);
   const dispatch = useDispatch();
+  const toast = useToast();
+  const navigate = useNavigate();
 
-  const handlePayment = () => {
-    // const options = {
-    //   key: "rzp_test_3L44n0jcIwXbJW",
-    //   amount: 20 * 100,
-    //   currency: "INR",
-    //   name: "Playo",
-    //   description: "Test Payment",
-    //   image:
-    //     "https://playo-website.imgix.net/company/logo1.png?auto=compress,format",
-    //   handler: function (response) {
-    //     alert("Payment ID: " + response.razorpay_payment_id);
-    //     alert("Order ID: " + response.razorpay_order_id);
-    //     alert("Signature: " + response.razorpay_signature);
-    //   },
-    //   modal: {
-    //     ondismiss: function () {
-    //       if (window.confirm("Are you sure, you want to close the form?")) {
-    //         console.log("Checkout form closed by the user");
-    //       } else {
-    //         console.log("Complete the Payment");
-    //       }
-    //     },
-    //   },
-    // };
+  const handlePayment = async () => {
+    const options = {
+      key: "rzp_test_3L44n0jcIwXbJW",
+      amount: totalPrice*85,
+      currency: "INR",
+      name: "Burrow-Clone",
+      description: "Test Payment",
+      image:
+        "https://t3.ftcdn.net/jpg/02/47/48/00/360_F_247480017_ST4hotATsrcErAja0VzdUsrrVBMIcE4u.jpg",
+      handler: async function (response) {
+        toast({
+          title: "Payment Successful",
+          description: `Payment ID: ${response.razorpay_payment_id}`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+        });
 
-    // const rzp1 = new window.Razorpay(options);
-    // rzp1.open();
+        setPaymentMethod("UPI");
+        try {
+          // Trigger the actions in sequence
+          await dispatch(
+            addOrder(cartData1, TotalPrice + 65, addObj, "UPI", notes)
+          );
+          await dispatch(deleteCartItemAfterOrder(cartID));
+          await dispatch(orderConfirmMail(owner));
 
-    dispatch(addOrder(cartData1, totalamount, addObj, paymentMethod, notes));
-    dispatch(deleteCartItemAfterOrder(cartID))
+          toast({
+            title: "Order Placed",
+            description: "Your order has been placed successfully.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+            position: "top-right",
+          });
+
+          navigate("/");
+        } catch (error) {
+          toast({
+            title: "Order Failed",
+            description: "There was an issue with placing your order.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top-right",
+          });
+        }
+      },
+      prefill: {
+        name: addObj?.name,
+        email: addObj?.email,
+        contact: addObj?.phone,
+      },
+      theme: {
+        color: "#3399cc",
+      },
+      modal: {
+        ondismiss: function () {
+          toast({
+            title: "Payment Cancelled",
+            description:
+              "You closed the payment form before completing the transaction.",
+            status: "warning",
+            duration: 3000,
+            isClosable: true,
+            position: "top-right",
+          });
+        },
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  const handleCashPayment = async () => {
+    try {
+      setPaymentMethod("COD");
+      await dispatch(addOrder(cartData1, TotalPrice+65, addObj, "COD", notes));
+      await dispatch(deleteCartItemAfterOrder(cartID));
+
+      await dispatch(orderConfirmMail(owner));
+
+      toast({
+        title: "Order Placed",
+        description: "Your order has been placed successfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+
+      navigate("/");
+    } catch (error) {
+      toast({
+        title: "Order Failed",
+        description: "There was an issue with placing your order.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
   };
 
   return (
-    <button
-      onClick={handlePayment}
-      className="bg-indigo-600 text-white py-2 px-4 rounded"
-    >
-      Pay Now
-    </button>
+    <div className="flex gap-4">
+      <button
+        onClick={handlePayment}
+        className="bg-indigo-600 text-white py-2 px-4 rounded"
+      >
+        Online Payment
+      </button>
+      <button
+        onClick={handleCashPayment}
+        className="bg-indigo-600 text-white py-2 px-4 rounded"
+      >
+        Cash On Delivery
+      </button>
+    </div>
   );
 }
 

@@ -3,20 +3,19 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
+import { TOTAL_PRICE } from "../redux/User/actionType";
 
 function Carts() {
   // const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartData1 = useSelector((state) => state.data.cart);
+  const TotalPrice = useSelector((state) => state.data.TotalPrice);
   const [val, setVal] = useState(1);
   const [condi, setCondi] = useState(false);
   const [name, setName] = useState("");
   const [pr, setPr] = useState(null);
 
-  useEffect(() => {
-    dispatch(getCart());
-  }, [dispatch]);
 
   const totalPrice = useMemo(
     () =>
@@ -28,6 +27,16 @@ function Carts() {
       ),
     [cartData1]
   );
+  
+  
+  useEffect(() => {
+    dispatch(getCart());
+    dispatch({
+      type:TOTAL_PRICE,
+      payload:totalPrice
+    })
+  }, [dispatch,totalPrice]);
+
 
   const handleValue = useCallback(() => {
     if (condi) {
@@ -209,7 +218,7 @@ function Carts() {
               <div className="flex justify-between items-center pt-5">
                 <p className="text-2xl leading-normal text-gray-800">Total</p>
                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">
-                  ${condi ? pr + 65 : totalPrice + 65}
+                  ${condi ? pr + 65 : TotalPrice + 65}
                 </p>
               </div>
               <Link to="/checkout">

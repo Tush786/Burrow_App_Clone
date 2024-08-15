@@ -10,7 +10,8 @@ import RazorpaySect from "./Razorpay";
 function Checkout() {
   const [activeSection, setActiveSection] = useState("login");
   const addressArr = useSelector((state) => state.data.addressData);
-  console.log(addressArr);
+  const TotalPrice = useSelector((state) => state.data.TotalPrice);
+  const [pr, setPr] = useState(null);
 
   const toggleSection = useCallback((section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
@@ -84,7 +85,7 @@ function Checkout() {
           <div className="flex justify-between items-center pt-5">
             <p className="text-2xl leading-normal text-gray-800">Total</p>
             <p className="text-2xl font-bold leading-normal text-right text-gray-800">
-              $500
+            ${TotalPrice===null ? pr + 65 : TotalPrice + 65}
             </p>
           </div>
         </div>
@@ -139,6 +140,7 @@ function Razorpay() {
 
 function OrderSummaryContent({ toggleSection }) {
   const cartData1 = useSelector((state) => state.data.cart);
+  const TotalPrice = useSelector((state) => state.data.TotalPrice);
   const currentDate = new Date();
   const futureDate = new Date(currentDate);
   futureDate.setDate(currentDate.getDate() + 5);
@@ -242,7 +244,7 @@ function OrderSummaryContent({ toggleSection }) {
       <div className="flex justify-between items-center">
         <p className="text-[16px] font-medium text-gray-600">Total</p>
         <p className="text-[16px] font-semibold text-gray-800">
-          ₹{cartData1.reduce((acc, el) => acc + el.product.price * el.quantity, 0)}
+        $ {TotalPrice + 65}
         </p>
       </div>
 

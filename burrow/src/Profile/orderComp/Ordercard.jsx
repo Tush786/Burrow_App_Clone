@@ -1,7 +1,16 @@
+import { Button } from "@chakra-ui/react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { getOrderData, orderStatus } from "../../redux/User/actions";
 
-function Ordercard({ product, quantity, deliveredAt }) {
-  console.log(product);
+function Ordercard({ product, quantity, deliveredAt,_id}) {
+  const dispatch=useDispatch()
+  const Handlestatus=(id,status)=>{
+   dispatch(orderStatus(id,status)).then(()=>{
+    dispatch(getOrderData())
+   })
+  }
+
   return (
     <div
       className="p-4 bg-white rounded-lg mb-4"
@@ -25,6 +34,7 @@ function Ordercard({ product, quantity, deliveredAt }) {
           </div>
           <div className="w-full sm:w-1/6 mb-4 sm:mb-0">
             <p className="font-semibold text-lg text-blue-500">{`$${product.sellingPrice.toFixed(2)}`}</p>
+           
           </div>
           <div className="w-full sm:w-2/6">
             <p className="font-semibold">
@@ -36,6 +46,10 @@ function Ordercard({ product, quantity, deliveredAt }) {
             }
            
           </div>
+
+          <div>
+              <Button  onClick={()=>Handlestatus(_id,"Cancelled")}>Cancle Order</Button>
+            </div>
         </div>
     
     </div>
