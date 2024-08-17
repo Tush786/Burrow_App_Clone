@@ -13,13 +13,25 @@ A MERN E-Commerce application .
         <h1>Home Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723910342/Landing_Page_ktblus.png" alt="Home Page" width="400" border="0">
     </div>
+    <div>
+        <h1>Login Page</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723912865/Login_Page_idkidt.png" alt="Login Page" width="400" border="0">
+    </div>
+    <div>
+        <h1>Product Page</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723912361/Product_Page_mjdl21.png" alt="Product Page" width="400" border="0">
+    </div>
+    <div>
+        <h1>Product Details Page</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723912348/Product_Details_wl6eca.png" alt="Product Details Page" width="400" border="0">
+    </div>
      
    
-   <div></div>
+   <div>
       <h1>Address Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911867/Address_Page_mwalaw.png" alt="Address Page" width="400" border="0">
       </div>
-      <div></div>
+      <div>
       <h1>Chekout Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911868/Chekout_Page-2_tfanpb.png" alt="Chekout Page" width="400" border="0">
         </div>
@@ -31,34 +43,18 @@ A MERN E-Commerce application .
       <h1>Empty Cart Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
    </div>
+      <div>
+      <h1>Empty Cart Page</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
+   </div>
+      <div>
+      <h1>Empty Cart Page</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
+   </div>
       
    
 </div>
 
-
-
-<a href="https://ibb.co/VYWD2nc"><img src="https://i.ibb.co/JjR256w/MV-H.png" alt="MV-H" border="0"></a>
-
-<h1>Term and Condition</h1>
-<a href="https://ibb.co/Xp6qTqn"><img src="https://i.ibb.co/VDbs8sF/LV-TnC.png" alt="LV-TnC" border="0"></a>
-
-<h1>Product Page</h1>
-<a href="https://ibb.co/MS7SnSN"><img src="https://i.ibb.co/F3z3637/LV-PR.png" alt="LV-PR" border="0"></a>
-<a href="https://ibb.co/7kzpzD1"><img src="https://i.ibb.co/GHJMJD5/MV-PR.png" alt="MV-PR" border="0"></a>
-
-<h1>Cart Page</h1>
-<a href="https://ibb.co/XJ4h9Dm"><img src="https://i.ibb.co/WK3bQ0S/LV-CRT.png" alt="LV-CRT" border="0"></a>
-<a href="https://ibb.co/ggQQ82x"><img src="https://i.ibb.co/Jk88T19/MV-CRT.png" alt="MV-CRT" border="0"></a>
-
-<h1>Profile Page</h1>
-<a href="https://ibb.co/RPcYh58"><img src="https://i.ibb.co/Mp7Z8Xd/Profile.png" alt="Profile" border="0"></a>
-
-<h1>Signup Page / Login</h1>
-<a href="https://ibb.co/WFhHGsX"><img src="https://i.ibb.co/RPFgY7K/Signup.png" alt="Signup" border="0"></a>
-<a href="https://ibb.co/DDGQ3WS"><img src="https://i.ibb.co/MD87qS3/LV-LG.png" alt="LV-LG" border="0"></a>
-
-<h1>Store Page</h1>
-<a href="https://ibb.co/rpQGzkY"><img src="https://i.ibb.co/FYhby62/LV-STR.png" alt="LV-STR" border="0"></a>
 
 ## Table of Contents
 
