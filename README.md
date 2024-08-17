@@ -44,12 +44,12 @@ A MERN E-Commerce application .
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
    </div>
       <div>
-      <h1>Empty Cart Page</h1>
-      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
+      <h1>Mega Menu</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723912081/Mega_Menu_a1luyf.png" alt="Mega Menu" width="400" border="0">
    </div>
       <div>
-      <h1>Empty Cart Page</h1>
-      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
+      <h1>Order History</h1>
+      <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723912082/Order_History_aptdcx.png" alt="Order History" width="400" border="0">
    </div>
       
    
