@@ -15,16 +15,22 @@ A MERN E-Commerce application .
     </div>
      
    
-   
+   <div></div>
       <h1>Address Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911867/Address_Page_mwalaw.png" alt="Address Page" width="400" border="0">
+      </div>
+      <div></div>
       <h1>Chekout Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911868/Chekout_Page-2_tfanpb.png" alt="Chekout Page" width="400" border="0">
+        </div>
+      <div>
       <h1>Cart Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911867/Chekout_Page_mgtrcr.png" alt="Cart Page" width="400" border="0">
+          </div>
+      <div>
       <h1>Empty Cart Page</h1>
       <img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723911879/Empty_Cart_wxapy1.png" alt="Cart-Empty Page" width="400" border="0">
-
+   </div>
       
    
 </div>
