@@ -9,7 +9,7 @@ A MERN E-Commerce application .
 <h2>Deployed URL</h2> https://burrow-app-clone.vercel.app/
 
 <h1>Home Page</h1>
-<a href="https://ibb.co/pQ5ScSz"><img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723910342/Landing_Page_ktblus.png" alt="Home Page" width=200 border="0"></a>
+<img src="https://res.cloudinary.com/dz2hoghhp/image/upload/v1723910342/Landing_Page_ktblus.png" alt="Home Page" width=400 border="0">
 
 <a href="https://ibb.co/VYWD2nc"><img src="https://i.ibb.co/JjR256w/MV-H.png" alt="MV-H" border="0"></a>
 
