@@ -3,6 +3,7 @@ import { Button } from "@chakra-ui/react";
 import FAQs from "./AccountFaqSection";
 import { useDispatch } from "react-redux";
 import { editEmail, editFullname, editPhoneNo } from "../../redux/User/actions";
+import Cookies from 'js-cookie';
 
 function ProfileInfoComp() {
   const [isEditable, setIsEditable] = useState(false);
@@ -22,12 +23,15 @@ function ProfileInfoComp() {
   const [editedMobileNum, setEditedMobileNum] = useState("");
 
   useEffect(() => {
-    const UserInf = localStorage.getItem("userdata");
+    // const UserInf = localStorage.getItem("userdata");
+
+    const UserInf = Cookies.get('userInfo');
+   
     if (UserInf) {
       try {
-        const parsedUser = JSON.parse(UserInf);
+        const parsedUser = UserInf ? JSON.parse(UserInf) : null;
         setUser(parsedUser);
-        setEditedFullName(parsedUser.fullname || '');
+        setEditedFullName(parsedUser.fullName || '');
         setEditedEmail(parsedUser.email || '');
         setEditedMobileNum(parsedUser.phonenumber || ''); // Ensure default value
       } catch (error) {

@@ -1,13 +1,13 @@
-import Navbar from './home/Navbar'
-import AllRoutes from './home/AllRoutes'
+// import Navbar from './home/Navbar'
+// import AllRoutes from './home/AllRoutes'
 
-function App() {
-  return (
-    <>
-      <Navbar />
-      <AllRoutes />
-    </>
-  )
-}
+// function App() {
+//   return (
+//     <>
+//       <Navbar />
+//       <AllRoutes />
+//     </>
+//   )
+// }
 
-export default App
+// export default App

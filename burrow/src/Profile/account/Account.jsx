@@ -7,12 +7,27 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import ProfileInfoComp from "./ProfileInfoComp";
 import Wishlist from "../../wishlist/Wishlist";
 import Order from "../orderComp/Order";
-import { Navigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import Address from "../../address/Address";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 export default function Account() {
   const [compName, setCompName] = useState("Profile Information");
-  console.log(compName);
+  const userInfo = Cookies.get('userInfo');
+  const userObject = userInfo ? JSON.parse(userInfo) : null;
+const dispatch=useDispatch()
+  const Navigate=useNavigate()
+    const handleLogout = async () => {
+        try {
+            // Make a request to the logout route
+            await axios.post('http://localhost:9090/user/logout');
+            Navigate('/login');
+        } catch (error) {
+            console.error("Error logging out:", error);
+        }
+      }
 
   return (
     <div className="py-4 min-h-screen">
@@ -28,13 +43,13 @@ export default function Account() {
           >
             <img
               className="w-16 h-16 rounded-full"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTY7IalweT6rzWlH1LchOCzffcQrqbdM2Vvw&s"
+              src={userObject.avatar}
               alt="profile"
             />
             <div>
               <p className="text-gray-500">Hello</p>
               <p className="text-lg font-semibold text-gray-700">
-                Tushar Sapate
+                {userObject.fullName}
               </p>
             </div>
           </div>
@@ -102,7 +117,7 @@ export default function Account() {
             ))}
             <div className="flex items-center gap-4 py-4 cursor-pointer">
               <RiLogoutCircleRLine className="text-xl text-indigo-600" />
-              <p className="text-xl font-semibold text-gray-700">LOGOUT</p>
+              <p className="text-xl font-semibold text-gray-700" onClick={handleLogout} >LOGOUT</p>
             </div>
           </div>
         </div>

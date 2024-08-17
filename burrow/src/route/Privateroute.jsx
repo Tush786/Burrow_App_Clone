@@ -1,9 +1,9 @@
 import React from "react";
-// import { AuthContext } from './AuthContextProvider';
 import { Navigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function PrivateRoute({ children }) {
-  const Token = localStorage.getItem("Token");
+  const Token = Cookies.get('token');
 
   if (!Token) {
     return <Navigate to="/login" />;

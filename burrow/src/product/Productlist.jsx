@@ -41,7 +41,7 @@ function Productlist() {
 
   return (
     <div className="">
-      <div className="flex justify-between w-[95%] m-auto">
+      {/* <div className="flex justify-between w-[90%] m-auto">
         <Box>
           <Button colorScheme='teal' variant='ghost'>Namad</Button>
           <Button colorScheme='teal' variant='ghost'>Range</Button>
@@ -58,9 +58,9 @@ function Productlist() {
             <option value="option3">Price: Low to High</option>
           </Select>
         </div>
-      </div>
-      <Box className="bg-[#ffffff] mt-2 px-10">
-        <h1 className="pb-2 text-[36px] font-[600]">Nomad</h1>
+      </div> */}
+      <Box className="bg-[#ffffff] mt-6">
+        {/* <h1 className="pb-2 text-[36px] font-[600]">Nomad</h1> */}
         <Box
           display="grid"
           gridTemplateColumns={{
@@ -69,6 +69,7 @@ function Productlist() {
             lg: "repeat(3, 1fr)",
           }}
           gap={6}
+          className='w-[90%] m-auto'
         >
           {products?.map((elem, idx) => {
             if (products.length === idx + 1) {

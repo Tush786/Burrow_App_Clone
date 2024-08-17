@@ -13,12 +13,13 @@ import {
   GET_ORDER_DATA,
   ORDER_COFM_STATUS
 } from "../User/actionType";
+import Cookies from 'js-cookie';
 
 // Define the base URL for Axios
 const BASE_URL = 'http://localhost:9090';  // Update with your actual base URL
 
 // Get token and set config for requests
-const token = localStorage.getItem("Token");
+const token = Cookies.get('token');
 const config = {
   headers: {
     authorization: "Bearer " + token,
@@ -56,16 +57,9 @@ export const LoginUser = (user) => async (dispatch) => {
   try {
     const res = await axiosInstance.post('/user/login', user);
     console.log(res);
-
-    const userObj = {
-      userid: res.data.user._id,
-      fullname: res.data.user.fullName,
-      avatar: res.data.user.avatar,
-      email: res.data.user.email,
-    };
-
-    localStorage.setItem("userdata", JSON.stringify(userObj));
-    localStorage.setItem("Token", res.data.token);
+    Cookies.set('token', res.data.token, { expires: 7 });
+    const userObject = res.data.user;
+    Cookies.set('userInfo', JSON.stringify(userObject), { expires: 7 });
 
     dispatch({
       type: LOGIN_USER,
@@ -139,20 +133,19 @@ export const editAvatar = (avatar, id) => async (dispatch) => {
     console.log(err);
   }
 };
-
 // ========================== Product Actions =========================>
 
   export const getproducts = (page, searchParam) => async (dispatch) => {
     dispatch({ type: "PRODUCTS_LOADING" });
     try {
-      const response = await fetch(`${BASE_URL}/productsapi/products?page=${page}&limit=6&searchParam=${searchParam}`);
-      const data = await response.json();
+      const data = await axiosInstance.get(`/productsapi/products?page=${page}&searchParam=${searchParam}`);
+      // console.log(data.data.products)
       dispatch({
         type: GET_PRODUCT,
         payload: {
-          products: data.products,
-          currentPage: data.currentPage,
-          totalPages: data.totalPages,
+          products: data.data.products,
+          currentPage: data.data.currentPage,
+          totalPages: data.data.totalPages,
         },
       });
     } catch (error) {
@@ -163,7 +156,6 @@ export const editAvatar = (avatar, id) => async (dispatch) => {
 export const singleproduct = (id) => async (dispatch) => {
   try {
     const products = await axiosInstance.get(`/productsapi/product/${id}`);
-    console.log(products);
     dispatch({
       type: GET_SINGLEPRODUCT,
       payload: products.data,
@@ -282,7 +274,7 @@ export const deleteCartItemAfterOrder = (cartID) => async (dispatch) => {
 
 // Order =====================>
   export const addOrder = (products, totalAmount, shippingAddress, paymentMethod, notes) => async () => {
-    const order ={products,totalAmount, shippingAddress, paymentMethod, notes}
+    const order ={products, shippingAddress,totalAmount, paymentMethod, notes}
     try {
       await axiosInstance.post(`/order/create`,order, config);
     } catch (err) {
@@ -293,7 +285,6 @@ export const deleteCartItemAfterOrder = (cartID) => async (dispatch) => {
   export const getOrderData = () => async (dispatch) => {
   try {
     const response = await axiosInstance.get('/order/get', config);
-    console.log(response.data)
     dispatch({
       type: GET_ORDER_DATA,
       payload: response.data,
@@ -316,7 +307,7 @@ export const orderStatus = (orderId,Status) => async () => {
 
 export const orderConfirmMail = (owner) => async () => {
   try {
-    await axiosInstance.post(`/order/paymentSuccess/${owner}`, config);
+    await axiosInstance.post(`/order/paymentSuccess`, config);
   } catch (err) {
     console.log(err);
   }

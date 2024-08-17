@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
+import Cookies from 'js-cookie';
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../Oauth/Firebaseauth";
 import { Link,useNavigate } from "react-router-dom";
@@ -29,6 +29,7 @@ import {
 } from "react-icons/fa";
 import { LoginUser } from "../redux/User/actions";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -103,6 +104,23 @@ const Login = () => {
   };
 
   const handleShowClick = () => setShowPassword(!showPassword);
+
+
+const checkUserAuthentication = () => {
+  const token = Cookies.get('token');
+  console.log(token)
+  if (token) {
+    // User is logged in, you can make authenticated requests
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    // User is not logged in, redirect to login page
+  }
+};
+
+// Call checkUserAuthentication when the app initializes
+useEffect(() => {
+  checkUserAuthentication();
+}, []);
 
   return (
     <div className="flex justify-center items-center gap-8 w-[90%] m-auto">

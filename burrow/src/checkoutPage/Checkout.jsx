@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Image } from "@chakra-ui/react";
 import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
 import RazorpaySect from "./Razorpay";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Checkout() {
   const [activeSection, setActiveSection] = useState("login");
@@ -95,6 +97,16 @@ function Checkout() {
 }
 
 function LoginContent({ toggleSection }) {
+  const Navigate=useNavigate()
+  const handleLogout = async () => {
+      try {
+          // Make a request to the logout route
+          await axios.post('http://localhost:9090/user/logout');
+          Navigate('/login');
+      } catch (error) {
+          console.error("Error logging out:", error);
+      }
+    }
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -104,7 +116,7 @@ function LoginContent({ toggleSection }) {
         <p>
           <span className="font-medium">Phone:</span> +91 7709499326
         </p>
-        <p className="text-blue-600 font-semibold cursor-pointer mt-2">
+        <p className="text-blue-600 font-semibold cursor-pointer mt-2" onClick={handleLogout}>
           Logout & Sign in to another account
         </p>
         <button

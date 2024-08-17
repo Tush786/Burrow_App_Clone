@@ -11,7 +11,6 @@ function App() {
    useEffect(()=>{
     dispatch(getCart());
     dispatch(getAddress());
-    
    },[])
 
   return (

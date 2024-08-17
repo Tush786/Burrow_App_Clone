@@ -30,13 +30,29 @@ const AllRoutes = () => {
             </Suspense>
           }
         />
-        <Route path='/product/:id' element={<ProductDetails />} />
+        
+        <Route
+          path='/product/:id'
+          element={
+            <PrivateRoute>
+              <ProductDetails />
+            </PrivateRoute>
+          }
+        />
         <Route path='*' element={<ErrorPage />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/Signup' element={<Signup />} />
         <Route path='Profile/order' element={<Order />} />
         <Route path='Profile/account' element={<Account />} />
-        <Route path='/checkout' element={<Checkout />} />
+        <Route
+          path='/checkout'
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
+        />
+        {/* <Route path='/checkout' element={<Checkout />} /> */}
         <Route
           path='/Seating/Loveseats/Sectional Sofas'
           element={
@@ -45,7 +61,16 @@ const AllRoutes = () => {
             </Suspense>
           }
         />
-        <Route path='/cart' element={<Carts />} />
+        {/* <Route path='/cart' element={<Carts />} /> */}
+
+        <Route
+          path='/cart'
+          element={
+            <PrivateRoute>
+             <Carts />
+            </PrivateRoute>
+          }
+        />
         <Route
           path='/Profile'
           element={
