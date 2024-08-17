@@ -7,6 +7,8 @@ A MERN E-Commerce application .
 
 
 <h2>Deployed URL</h2> https://burrow-app-clone.vercel.app/
+   <h2> Back end github url</h2>
+  - https://github.com/Tush786/Ikea-clone
 
 <div style="display: flex;">
     <div>
@@ -252,10 +254,7 @@ Inside backend folder:
 
 ## Useful Links
 
-- This project
- 
-   <h3> Back end github url</h3>
-  - https://github.com/Tush786/Ikea-clone
+
 
 - Official Docs
 
