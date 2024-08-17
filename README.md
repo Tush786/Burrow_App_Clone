@@ -79,8 +79,14 @@ A MERN E-Commerce application .
 - Logout
 - Home Page
 - Product Page
+- Product Details Page
 - Cart Page
+- Checkout Page
+- Address Page
+- Order Details Page
+- Payment Page
 - Profile Page
+- Implemented Cookies to store token
 
 ### Developer-side features
 
@@ -100,6 +106,8 @@ A MERN E-Commerce application .
 - Use of different HTTP status codes for sending responses
 - Standard pratices followed
 - Cloudinary for images upload on backend
+- Razorpay for payment integration
+- Nodemailer for forget password url and Order Summery Sent on email
 
 ## Tools and Technologies
 
@@ -115,6 +123,10 @@ A MERN E-Commerce application .
 - Mongodb
 - Firebase Authentication (Oauth)
 - Cloudinary
+- Razorpay
+- Render
+- Vercel
+- Nodemailer
 
 ## Dependencies
 
@@ -136,6 +148,9 @@ Following are the major dependencies of the project:
 - react-icon
 - Chakra ui
 - Tailwind Css
+- Nodemailer
+- cookie-parser
+- js-cookie
 
 ## Dev-dependencies
 
@@ -175,33 +190,46 @@ Following are the major dev-dependencies of the project:
 - POST     /user/login
 - GET     /user
 - PATCH    /user/editUser/:id
-- GET      /product/get
-- GET      /category/get
-- POST     /category/create
-- PATCH      /category/update/:id
-- DELETE   /category/delete/:id
-- PATCH      /api/update/:id
-- DELETE   /category/product/:id
+- POST    /product/add
+- DELETE  /product/:_id
+- GET     /products
+- GET     /product/:_id
+- PATCH   /product/update/:__id
 - PUT  /user/changepassword/:id
 - PATCH   /user/avatar/:id
-- GET   /cart/get
-- POST   /cart/create
-- DELETE   /cart/delete/:id
-   
+- GET     /cart/get
+- POST    /cart/create/:id
+- DELETE  /cart/delete/:productId
+- DELETE  /cart/deletecart/:cartId
+- GET     /address/get
+- POST    /address/add
+- PUT     /address/activeAddress/:addressId
+- PUT     /address/edit/:addressId
+- DELETE  /address/delete/:addressId
+- GET     /order/get
+- POST    /order/create
+- PUT     /order/update-status/:orderId
+- POST    /order/paymentSuccess
 </pre>
 
 ## Frontend pages
 
 <pre>
-- /                 Home Screen (Public home page for guests and private dashboard (tasks) for logged-in users)
-- /signup           Signup page
-- /login            Login page
-- /product          All product
-- /profile         Profile Page
-- /Cart            Cart Page
-- /profile         Profile Page
-
+- /                      Home Screen (Public home page for guests and private dashboard (tasks) for logged-in users)
+- /admin                 Admin Route
+- /product               All Product Page (Lazy Loaded)
+- /product/:id           Product Details Page (Private Route)
+- /login                 Login Page
+- /signup                Signup Page
+- /profile/order         Order Page (Private Route)
+- /profile/account       Account Page (Private Route)
+- /checkout              Checkout Page (Private Route)
+- /cart                  Cart Page (Private Route)
+- /profile               Profile Page (Private Route)
+- /Seating/Loveseats/Sectional Sofas   Sectional Sofas Product Page (Lazy Loaded)
+- *                      Error Page (Wildcard route for undefined paths)
 </pre>
+
 
 ## npm scripts
 
@@ -227,7 +255,7 @@ Inside backend folder:
 - This project
  
    <h3> Back end github url</h3>
-  - https://github.com/Tush786/arba-backend
+  - https://github.com/Tush786/Ikea-clone
 
 - Official Docs
 
