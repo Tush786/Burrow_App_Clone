@@ -195,7 +195,9 @@ useEffect(() => {
                       </Button>
                     </InputRightElement>
                   </InputGroup>
-                  <FormHelperText textAlign="right">
+                  <FormHelperText textAlign="right" onClick={()=>{
+                     Navigate('/Profile/forgetpassword')
+                   }}>
                     <Link>forgot password?</Link>
                   </FormHelperText>
                 </FormControl>

@@ -101,7 +101,7 @@ function LoginContent({ toggleSection }) {
   const handleLogout = async () => {
       try {
           // Make a request to the logout route
-          await axios.post('http://localhost:9090/user/logout');
+          await axios.post('https://burrow-app-database.onrender.com/user/logout');
           Navigate('/login');
       } catch (error) {
           console.error("Error logging out:", error);

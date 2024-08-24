@@ -16,7 +16,7 @@ import {
 import Cookies from 'js-cookie';
 
 // Define the base URL for Axios
-const BASE_URL = 'http://localhost:9090';  // Update with your actual base URL
+const BASE_URL = 'https://burrow-app-database.onrender.com';  // Update with your actual base URL
 
 // Get token and set config for requests
 const token = Cookies.get('token');
