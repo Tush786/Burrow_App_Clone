@@ -6,9 +6,8 @@ A MERN E-Commerce application .
 <h3>Pass : securepassword123</h3>
 
 
-<h2>Deployed URL</h2> https://burrow-app-clone.vercel.app/
-   <h2> Back end github url</h2>
-  - https://github.com/Tush786/Ikea-clone
+<h2>Deployed URL Frontend</h2> https://burrow-app-clone.vercel.app/
+<h2>Deployed URL Backend</h2> https://burrow-app-database.onrender.com/
 
 <div style="display: flex;">
     <div>
@@ -183,7 +182,7 @@ Following are the major dev-dependencies of the project:
    ```
 
 4. Go to http://localhost:3000 -- Frontend Local Server
-5. Got to http://localhost:7777 --- Backend Local Server
+5. Got to http://localhost:9090 --- Backend Local Server
 
 ## Backend API
 
