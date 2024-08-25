@@ -14,6 +14,7 @@ import Order from '../Profile/orderComp/Order';
 import Carts from '../cart/Carts';
 import Checkout from '../checkoutPage/Checkout';
 import ForgetPassword from '../Profile/forgetpassword';
+import Resetpassword from '../Profile/account/SetNewPassword';
 
 const Productpage = lazy(() => import("../product/Productpage"));
 
@@ -46,6 +47,7 @@ const AllRoutes = () => {
         <Route path='Profile/order' element={<Order />} />
         <Route path='Profile/account' element={<Account />} />
         <Route path='Profile/forgetpassword' element={<ForgetPassword />} />
+        <Route path='Profile/setnewpassword' element={<Resetpassword />} />
         <Route
           path='/checkout'
           element={
