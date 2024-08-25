@@ -30,7 +30,7 @@ function Resetpassword() {
           try {
               const token = searchParams.get("token");
               console.log(token)
-              const res = await axios.post(`https://arba-backend-2-8gqc.onrender.com/pass/resetPassword`, {token, password })
+              const res = await axios.post(`https://burrow-app-database.onrender.com/pass/resetPassword`, {token, password })
               setMessage(res.data.message);
           } catch (error) {
               setError(error.response.data.message)

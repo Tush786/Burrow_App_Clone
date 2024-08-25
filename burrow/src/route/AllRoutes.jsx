@@ -13,7 +13,7 @@ import Account from '../Profile/account/Account';
 import Order from '../Profile/orderComp/Order';
 import Carts from '../cart/Carts';
 import Checkout from '../checkoutPage/Checkout';
-import ForgetPassword from '../Profile/forgetpassword';
+import ForgetPassword from '../Profile/account/forgetpassword';
 import Resetpassword from '../Profile/account/SetNewPassword';
 
 const Productpage = lazy(() => import("../product/Productpage"));
