@@ -6,6 +6,7 @@ import {
   orderConfirmMail,
 } from "../redux/User/actions";
 import { useToast } from "@chakra-ui/react";
+import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 
 function RazorpaySect() {
@@ -17,8 +18,12 @@ function RazorpaySect() {
   const Order_Confirm_Status = useSelector(
     (state) => state.data.Order_Confirm_Status
   );
-  const [owner, setOwner] = useState("664eefa7e26fbe0044ccd5af");
+
   const [paymentMethod, setPaymentMethod] = useState("");
+  const userInfo = Cookies.get('userInfo');
+  const userObject = userInfo ? JSON.parse(userInfo) : null;
+  const [owner, setOwner] = useState(userObject._id);
+  console.log(userInfo,owner)
   const [notes, setNotes] = useState(
     "Please leave the package at the front door if not at home."
   );

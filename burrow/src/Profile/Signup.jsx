@@ -47,33 +47,6 @@ const Signup = () => {
    const provider= new GoogleAuthProvider()
   const dispatch=useDispatch()
 
-//    function HandleChange(e){
-//     setForm({...form,[e.target.name]:e.target.value});
-//    }
-
-//   async function HandleSubmit(e){
-
-//     console.log(obj)
-//     e.preventDefault();
-//     try {
-//       let resp=await axios.post(`http://localhost:9999/user/login`,{...form});
-//       console.log(resp)
-//       // if(resp.data.operator==='admin'){
-//       //   navigator('/home')
-//       // }
-//       // const obj={
-//       //   isauth.token:resp.token,
-//       //   isautho.isauth:true,
-//       // }
-
-//       // setIsautho(obj)
-//     } catch (error) {
-//       console.log(error)
-//     }
-      
-//         console.log("Form Submitted");
-//    }
-// console.log(form)
 
 const toast = useToast();
 
@@ -83,18 +56,10 @@ const [user, setUser] = useState({
   email: "",
   password: "",
   cpassword: "",
-  // avatar:""
 });
-
-// console.log(user)
 
 const HandleChange = (e) => {
   e.preventDefault();
-  // if (e.target.name === 'file') {
-  //   setUser({ ...user, [e.target.name]: e.target.files[0] });
-  // } else {
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // }
   setUser({ ...user, [e.target.name]: e.target.value });
 };
 console.log(user)

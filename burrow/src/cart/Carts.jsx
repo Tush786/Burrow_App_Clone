@@ -6,7 +6,6 @@ import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
 import { TOTAL_PRICE } from "../redux/User/actionType";
 
 function Carts() {
-  // const [ownerId, setOwnerId] = useState("664eefa7e26fbe0044ccd5af");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartData1 = useSelector((state) => state.data.cart);
@@ -27,8 +26,7 @@ function Carts() {
       ),
     [cartData1]
   );
-  
-  
+
   useEffect(() => {
     dispatch(getCart());
     dispatch({
@@ -37,14 +35,6 @@ function Carts() {
     })
   }, [dispatch,totalPrice]);
 
-
-  const handleValue = useCallback(() => {
-    if (condi) {
-      localStorage.setItem("price", pr + 65);
-    } else {
-      localStorage.setItem("price", totalPrice + 65);
-    }
-  }, [condi, pr, totalPrice]);
 
   const dataValue = useCallback(
     (el) => {
@@ -72,7 +62,7 @@ function Carts() {
         dispatch(getCart());
       });
     },
-    [dispatch]
+    [dispatch,TotalPrice]
   );
 
   const removeQty = useCallback(
@@ -85,7 +75,7 @@ function Carts() {
         });
       }
     },
-    [dispatch]
+    [dispatch,TotalPrice]
   );
 
   return (
@@ -224,7 +214,6 @@ function Carts() {
               <Link to="/checkout">
                 <button
                   className="w-full py-3 bg-indigo-600 text-white mt-5 rounded-md hover:bg-indigo-700"
-                  onClick={handleValue}
                 >
                   Checkout
                 </button>

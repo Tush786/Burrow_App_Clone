@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../Oauth/Firebaseauth";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Flex,
   Input,
@@ -47,7 +47,7 @@ const Login = () => {
   const [form, setForm] = useState(obj);
   const toast = useToast();
   const dispatch = useDispatch();
-  const Navigate=useNavigate()
+  const Navigate = useNavigate();
 
   function HandleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -82,12 +82,11 @@ const Login = () => {
       status: "success",
       duration: 3000,
       isClosable: true,
-      position:"top-right"
+      position: "top-right",
     });
 
-    Navigate('/')
+    Navigate("/");
   };
-  console.log(form);
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -104,23 +103,18 @@ const Login = () => {
   };
 
   const handleShowClick = () => setShowPassword(!showPassword);
+  const checkUserAuthentication = () => {
+    const token = Cookies.get("token");
+    console.log(token);
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else {
+    }
+  };
 
-
-const checkUserAuthentication = () => {
-  const token = Cookies.get('token');
-  console.log(token)
-  if (token) {
-    // User is logged in, you can make authenticated requests
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } else {
-    // User is not logged in, redirect to login page
-  }
-};
-
-// Call checkUserAuthentication when the app initializes
-useEffect(() => {
-  checkUserAuthentication();
-}, []);
+  useEffect(() => {
+    checkUserAuthentication();
+  }, []);
 
   return (
     <div className="flex justify-center items-center gap-8 w-[90%] m-auto">
@@ -134,12 +128,10 @@ useEffect(() => {
         flexDirection="column"
         width="100wh"
         height="100vh"
-        // backgroundColor="gray.200"
         justifyContent="center"
         alignItems="center"
       >
         <Text className="text-[48px] font-[600]">Burrow</Text>
-        {/* <Text className="text-[36px] text-justify w-[450px] py-4">Don't miss out on Memorial Day deals</Text> */}
         <Text className="text-[21px] pb-4 text-justify">
           Sign up and save up to 60% before this offer ends.
         </Text>
@@ -150,8 +142,6 @@ useEffect(() => {
           justifyContent="center"
           alignItems="center"
         >
-          {/* <Avatar bg="teal.500" /> */}
-          {/* <Heading color="teal.400">Welcome</Heading> */}
           <Box minW={{ base: "90%", md: "468px" }}>
             <form onSubmit={HandleSubmit}>
               <Stack
@@ -195,9 +185,12 @@ useEffect(() => {
                       </Button>
                     </InputRightElement>
                   </InputGroup>
-                  <FormHelperText textAlign="right" onClick={()=>{
-                     Navigate('/Profile/forgetpassword')
-                   }}>
+                  <FormHelperText
+                    textAlign="right"
+                    onClick={() => {
+                      Navigate("/Profile/forgetpassword");
+                    }}
+                  >
                     <Link>forgot password?</Link>
                   </FormHelperText>
                 </FormControl>

@@ -306,8 +306,9 @@ export const orderStatus = (orderId,Status) => async () => {
 };
 
 export const orderConfirmMail = (owner) => async () => {
+  console.log(owner)
   try {
-    await axiosInstance.post(`/order/paymentSuccess`, config);
+    await axiosInstance.post(`http://localhost:9090/orderConfirm/paymentSuccess/${owner}`);
   } catch (err) {
     console.log(err);
   }
