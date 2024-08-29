@@ -71,6 +71,7 @@ function RazorpaySect() {
           });
 
           navigate("/");
+          window.location.reload();
         } catch (error) {
           toast({
             title: "Order Failed",
@@ -127,6 +128,7 @@ function RazorpaySect() {
       });
 
       navigate("/");
+      window.location.reload();
     } catch (error) {
       toast({
         title: "Order Failed",
@@ -137,6 +139,7 @@ function RazorpaySect() {
         position: "top-right",
       });
     }
+
   };
 
   return (
