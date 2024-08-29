@@ -59,7 +59,7 @@ const Sec8 = () => {
   ];
 
   return (
-    <div className='2xl:pb-20 xl:pb-20 2xl:px-8 px-4 md:px-16 xs:pb-4 sm:pb-4'>
+    <div className='2xl:pb-20 xl:pb-20 2xl:px-14 px-4 md:px-16 xs:pb-4 sm:pb-4'>
     <div className='flex justify-center 2xl:mb-6 sm:mb-2'>
       <h2 className='font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl py-6 2xl:text-center xl:text-center text-left '>
           Shop these real-life spaces

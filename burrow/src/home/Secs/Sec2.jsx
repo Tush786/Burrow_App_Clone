@@ -36,10 +36,10 @@ const Sec2 = () => {
         </h2>
       </div>
 
-      <div className="xs:px-4 md:px-16 2xl:px-16 xl:px-16">
+      <div className="xs:px-4 md:px-16 2xl:px-[2px] xl:px-16">
         {/* Grid layout for larger screens */}
 
-        <div className="hidden md:grid md:grid-cols-3 gap-4 md:gap-5">
+        <div className="hidden  md:grid md:grid-cols-3 gap-4 md:gap-5">
           {images.map((image, index) => (
             <img
               key={index}

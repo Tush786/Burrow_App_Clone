@@ -28,7 +28,7 @@ const Sec5 = () => {
         </h2>
     </div>
   
-    <div className="xs:px-4 sm:px-4 md:px-16 2xl:px-16">
+    <div className="xs:px-4 sm:px-4 md:px-16 2xl:px-[2px]">
       {/* Grid layout for larger screens */}
       <div className="hidden md:grid md:grid-cols-4 gap-5">
         {images.map((image, index) => (

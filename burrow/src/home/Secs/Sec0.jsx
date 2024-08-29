@@ -52,7 +52,7 @@ export default function Sec0() {
         {slidesData.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="absolute top-0 left-0  md:ml-8 ml-4 md:pt-14 pt-6">
-              <h2 className="2xl:text-3xl xl:text-3xl sm:text-[24px] text-left font-mono md:w-7/12 w-11/12">
+              <h2 className="2xl:text-3xl xl:text-3xl sm:text-[24px] text-left font-mono md:w-[60%] w-[92%]">
                 {slide.title}
               </h2>
               <div className="mt-4 flex justify-start">
