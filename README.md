@@ -2,8 +2,8 @@
 
 A MERN E-Commerce application .
 <h1>Demo Email and Password For Check the Functionality</h1>
-<h3>Email : johndoe@example.com</h3>
-<h3>Pass : securepassword123</h3>
+<h3>Email : tusharsapate34@gmail.com</h3>
+<h3>Pass : Tushar@123</h3>
 
 
 <h2>Deployed URL Frontend</h2> https://burrow-app-clone.vercel.app/
