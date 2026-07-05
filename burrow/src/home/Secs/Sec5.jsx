@@ -1,24 +1,24 @@
 import React from 'react';
 
 const Sec5 = () => {
-  const images = [
-    {
-      src: 'https://media.graphassets.com/resize=w:504,fit:crop/output=format:webp/compress/hrcXqkzYRKK1JUis6mc2',
-      alt: 'Nomad img'
-    },
-    {
-      src: 'https://media.graphassets.com/resize=w:504,fit:crop/output=format:webp/compress/jHqzvSHQoyK3KptoSnpP',
-      alt: 'Feild img'
-    },
-    {
-      src: 'https://media.graphassets.com/resize=w:504,fit:crop/output=format:webp/compress/ty1QjGGMTJOCWzLcaYtP',
-      alt: 'Union img'
-    },
-    {
-      src: 'https://media.graphassets.com/resize=w:504,fit:crop/output=format:webp/compress/J5xEdXE6SSWDQLrT1wyp',
-      alt: 'Range img'
-    }
-  ];
+ const images = [
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265149/e60e2e3e683652c2ac7e56bfd22c0f9d18cc7b94-902x678_1_dbecy8.avif",
+    alt: 'Nomad img'
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/c5819f582e10bb5b2d27d5f49a77316239946a2d-1373x1026_hpny0l.avif",
+    alt: 'Feild img'
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/18289d43915bfce8b13106c47bed1bba8833024e-459x345_u3u9ye.avif",
+    alt: 'Union img'
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/c38ccc3b4d722d585ad073ea3fee7dc24e5261f0-909x682_gjmgm2.avif",
+    alt: 'Range img'
+  }
+];
 
   return (
     <div className='2xl:pb-20 xl:pb-20 px-4 md:px-16 xs:pb-4 sm:pb-4'>

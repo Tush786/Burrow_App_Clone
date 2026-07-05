@@ -38,7 +38,7 @@ const Sec10 = () => {
         </h2>
       </div>
       <div className='relative w-full h-64 md:h-[500px] lg:h-[600px]'>
-        <video
+    <video
           ref={videoRef}
           autoPlay
           playsInline
@@ -47,7 +47,7 @@ const Sec10 = () => {
           controls={false}
           className='absolute inset-0 w-full h-full object-cover'
         >
-          <source src="https://media.graphassets.com/okjMYiS3eRh9cULy7cDg" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dz2hoghhp/video/upload/v1783265169/3240fe5c299040ac8da725a65d9a8b29_kzlvro.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

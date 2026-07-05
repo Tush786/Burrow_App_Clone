@@ -14,22 +14,22 @@ const slidesData = [
   {
     title: "Meet Mambo, a new design with deep seats and a sculpted backrest",
     buttonLabel: "SHOP MAMBO",
-    imgSrc: "https://media.graphassets.com/resize=w:2304,fit:crop/output=format:webp/compress/3PNy6pUrRV1hUpKjnK0A",
+    imgSrc: "https://loremflickr.com/2304/1296/sofa,mambo,livingroom",
   },
   {
     title: "Discover Nomad, our best-selling and most-awarded modular seating",
     buttonLabel: "SHOP NOMAD",
-    imgSrc: "https://media.graphassets.com/resize=w:2304,fit:crop/output=format:webp/compress/KgmsrOumQNm6nvPTbhwK",
+    imgSrc: "https://loremflickr.com/2304/1296/sectional,modular,sofa",
   },
   {
     title: "A better suite of bedroom furniture starts with a solid frame",
     buttonLabel: "SHOP BEDROOM",
-    imgSrc: "https://media.graphassets.com/resize=w:2304,fit:crop/output=format:webp/compress/A6fHCSq9SKdPCkJY2RpA",
+    imgSrc: "https://loremflickr.com/2304/1296/bedroom,bedframe,furniture",
   },
   {
     title: "Lean into Scandinavian comfort with the Range Collection",
     buttonLabel: "SHOP RANGE",
-    imgSrc: "https://media.graphassets.com/resize=w:2304,fit:crop/output=format:webp/compress/uIF1X41RR64ILO3BtjtU",
+    imgSrc: "https://loremflickr.com/2304/1296/scandinavian,livingroom,furniture",
   },
 ];
 

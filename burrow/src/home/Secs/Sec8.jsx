@@ -10,53 +10,53 @@ import { Pagination, Navigation } from "swiper/modules";
 
 const Sec8 = () => {
   // Array of objects containing data for each slide
-  const slidesData = [
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/h13af6npSFm5c6TIRBCs",
-      alt: "Range Fabric Sectional",
-      title: "Range Fabric Sectional",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/DfgAqQl1Ss61JvUKqTTA",
-      alt: "Kettle Side Table",
-      title: "Kettle Side Table",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/clBhY2LRSWCiQHRKwDiN",
-      alt: "Nomad Velvet Sofa",
-      title: "Nomad Velvet Sofa",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/6mS98agT3q6pFlYxeJHc",
-      alt: "Nomad Leather Sofa",
-      title: "Nomad Leather Sofa",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/WEAbwsgZQ5WjVdMP0CRK",
-      alt: "Serif Credenza",
-      title: "Serif Credenza",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/DJWCPKF2QF6Gmz941nPe",
-      alt: "Serif Side Table",
-      title: "Serif Side Table",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/IlhLkl0GRnK3kvQjZibS",
-      alt: "Range Fabric Sectional",
-      title: "Range Fabric Sectional",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/p1y243YTfWgdnyeviX52",
-      alt: "Prospect Nightstand",
-      title: "Prospect Nightstand",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:864,fit:crop/output=format:webp/compress/mhOjruyvSuKoCU0C9RTu",
-      alt: "Nomad Leather Sectional",
-      title: "Nomad Leather Sectional",
-    },
-  ];
+const slidesData = [
+  {
+    src: "https://loremflickr.com/864/864/sectional,fabric,sofa",
+    alt: "Range Fabric Sectional",
+    title: "Range Fabric Sectional",
+  },
+  {
+    src: "https://loremflickr.com/864/864/sidetable,livingroom",
+    alt: "Kettle Side Table",
+    title: "Kettle Side Table",
+  },
+  {
+    src: "https://loremflickr.com/864/864/velvet,sofa,sectional",
+    alt: "Nomad Velvet Sofa",
+    title: "Nomad Velvet Sofa",
+  },
+  {
+    src: "https://loremflickr.com/864/864/leather,sofa,couch",
+    alt: "Nomad Leather Sofa",
+    title: "Nomad Leather Sofa",
+  },
+  {
+    src: "https://loremflickr.com/864/864/credenza,furniture",
+    alt: "Serif Credenza",
+    title: "Serif Credenza",
+  },
+  {
+    src: "https://loremflickr.com/864/864/sidetable,wood,furniture",
+    alt: "Serif Side Table",
+    title: "Serif Side Table",
+  },
+  {
+    src: "https://loremflickr.com/864/864/sectional,fabric,livingroom",
+    alt: "Range Fabric Sectional",
+    title: "Range Fabric Sectional",
+  },
+  {
+    src: "https://loremflickr.com/864/864/nightstand,bedroom",
+    alt: "Prospect Nightstand",
+    title: "Prospect Nightstand",
+  },
+  {
+    src: "https://loremflickr.com/864/864/leather,sectional,sofa",
+    alt: "Nomad Leather Sectional",
+    title: "Nomad Leather Sectional",
+  },
+];
 
   return (
     <div className='2xl:pb-20 xl:pb-20 2xl:px-14 px-4 md:px-16 xs:pb-4 sm:pb-4'>

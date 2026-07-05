@@ -3,19 +3,19 @@ import React from 'react';
 // Array of content for the component
 const content = [
   {
-    imgSrc: "https://media.graphassets.com/output=f:webp/output=c:true/output=t:true/NJPyKF0OS7WAk9Yr3lOX",
+    imgSrc: "https://loremflickr.com/600/600/shipping,delivery,box",
     imgAlt: "Fast & free shipping",
     title: "Fast & free shipping",
     description: "Every single order ships for free. No minimums, no tiers, no fine print whatsoever."
   },
   {
-    imgSrc: "https://media.graphassets.com/output=f:webp/output=c:true/output=t:true/bPEFQj2QSO2mlLHY2SWV",
+    imgSrc: "https://loremflickr.com/600/600/modular,furniture,moving",
     imgAlt: "Modular, easy-to-move design",
     title: "Modular, easy-to-move design",
     description: "Our innovative modular design is driven by the belief that furniture should fit this home, and the next one."
   },
   {
-    imgSrc: "https://media.graphassets.com/output=f:webp/output=c:true/output=t:true/LIvhIMY4SZyvBqFCwspI",
+    imgSrc: "https://loremflickr.com/600/600/leather,wood,craftsmanship",
     imgAlt: "Durable, premium materials",
     title: "Durable, premium materials",
     description: "We use materials like sustainably-forested wood, strengthened steel hardware, and top-grain Italian leather."

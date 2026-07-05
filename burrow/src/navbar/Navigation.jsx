@@ -7,13 +7,13 @@ export const navigation = {
                 {
                     name: 'Mambo Collection',
                     href: '/',
-                    imageSrc: 'https://media.graphassets.com/resize=w:660,fit:crop/output=format:webp/compress/TwewzdfRX6dlrCjDkEQy',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267508/da5cb4ef828aca83878604b0ae8b151b503499f9-750x750_nidxg4.avif',
                     imageAlt: 'In Stock Seating',
                 },
                 {
                     name: 'In Stock Seating',
                     href: '/',
-                    imageSrc: 'https://media.graphassets.com/resize=w:660,fit:crop/output=format:webp/compress/ch76UX2NT6eYfa7pXH9v',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267509/44a8f7e7ed0549e740c0eddaeef729e8852a11c8-750x750_s58ysr.avif',
                     imageAlt: 'In Stock Seating',
                 }
                       ],
@@ -58,13 +58,13 @@ export const navigation = {
                 {
                     name: 'Best Sellers',
                     id: '#',
-                    imageSrc: 'https://media.graphassets.com/resize=w:660,fit:crop/output=format:webp/compress/PUZFAoCRRlmXn82B5kmf',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267508/aa35f5e2850fa35f2bd14e6033212529c11f480d-1600x1600_ot7t2j.avif',
                     imageAlt: 'Best Sellers.',
                 },
                 {
                     name: 'Vesper Lounge Chairs',
                     id: '#',
-                    imageSrc: 'https://media.graphassets.com/resize=w:660,fit:crop/output=format:webp/compress/ZLCriln6QaGD0Zlt9b8Y',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267508/689c6f4455852a463a9cd80a6546d64a92fcc109-1600x1600_hp1pgz.avif',
                     imageAlt:
                         'Vesper Lounge Chairs',
                 },
@@ -103,13 +103,13 @@ export const navigation = {
                 {
                     name: 'Chorus Bed',
                     id: '#',
-                    imageSrc: 'https://media.graphassets.com/resize=w:440,fit:crop/output=format:webp/compress/SkAaO0xQdK74VXJExWUR',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267508/1b8ddaf4276f32ced00b68555b9a79152f358542-326x326_auhyvx.avif',
                     imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
                 },
                 {
                     name: 'All Bedrooms',
                     id: '#',
-                    imageSrc: 'https://media.graphassets.com/resize=w:640,fit:crop/output=format:webp/compress/TSJKhjMTHu7N0AQrjryC',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267509/ac63b0a2202ca7552a8d9bbc69e2d54cc7b2ee26-960x1200_h4lcev.avif',
                     imageAlt:
                         'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
                 },
@@ -147,13 +147,13 @@ export const navigation = {
                 {
                     name: 'Canon Collection',
                     id: '#',
-                    imageSrc: 'https://media.graphassets.com/resize=w:640,fit:crop/output=format:webp/compress/HjYZf9sjQMq93kf8OljN',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267508/1b8ddaf4276f32ced00b68555b9a79152f358542-326x326_auhyvx.avif',
                     imageAlt: 'Canon Collection',
                 },
                 {
                     name: 'Index Collections',
                     id: '#',
-                    imageSrc: 'https://media.graphassets.com/resize=w:640,fit:crop/output=format:webp/compress/WVNhxxQcR6uvi2QThhG8',
+                    imageSrc: 'https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267508/da5cb4ef828aca83878604b0ae8b151b503499f9-750x750_nidxg4.avif',
                     imageAlt:
                         'Index Collections',
                 },

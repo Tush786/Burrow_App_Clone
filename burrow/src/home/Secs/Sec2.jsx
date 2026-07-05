@@ -1,32 +1,32 @@
 import React from "react";
 
 const Sec2 = () => {
-  const images = [
-    {
-      src: "https://media.graphassets.com/resize=w:884,fit:crop/output=format:webp/compress/knVL0JgvS8WjEOWp86SA",
-      alt: "Nomad img",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:884,fit:crop/output=format:webp/compress/nGvyQWjoSmZz0b6NbbA2",
-      alt: "Range img",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:884,fit:crop/output=format:webp/compress/oYdM53vlROAeRATXkPAl",
-      alt: "Mambo img",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:884,fit:crop/output=format:webp/compress/ZmJC9LETcSOSUv6GG7R8",
-      alt: "Mambo img",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:884,fit:crop/output=format:webp/compress/Ob0gfLcyT3SnlM8isIxj",
-      alt: "Mambo img",
-    },
-    {
-      src: "https://media.graphassets.com/resize=w:884,fit:crop/output=format:webp/compress/jAx58yPIT8euFVzLgkaD",
-      alt: "Mambo img",
-    },
-  ];
+const images = [
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/612d575696fe3173c0025af09b8209b34b40530a-1373x1026_fqhzmm.avif",
+    alt: "Nomad img",
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/18289d43915bfce8b13106c47bed1bba8833024e-459x345_u3u9ye.avif",
+    alt: "Range img",
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/c38ccc3b4d722d585ad073ea3fee7dc24e5261f0-909x682_gjmgm2.avif",
+    alt: "Mambo img",
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265151/c5819f582e10bb5b2d27d5f49a77316239946a2d-1373x1026_hpny0l.avif",
+    alt: "Mambo img",
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265150/cf88f25f889dc189ed0fa8ed4a305358f5b3ccba-909x682_kt34vf.avif",
+    alt: "Mambo img",
+  },
+  {
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783265150/e60e2e3e683652c2ac7e56bfd22c0f9d18cc7b94-902x678_owhz2t.avif",
+    alt: "Mambo img",
+  },
+];
 
   return (
     <div className='2xl:pb-20 xl:pb-20 px-4 md:px-16 xs:pb-4 sm:pb-4'>
