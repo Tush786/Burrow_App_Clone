@@ -1,5 +1,5 @@
 import { Button, Image } from "@chakra-ui/react";
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
@@ -8,12 +8,8 @@ import { TOTAL_PRICE } from "../redux/User/actionType";
 function Carts() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartData1 = useSelector((state) => state.data.cart);
-  const TotalPrice = useSelector((state) => state.data.TotalPrice);
-  const [val] = useState(1);
-  const [condi, setCondi] = useState(false);
-  const [pr, setPr] = useState(null);
 
+  const cartData1 = useSelector((state) => state.data.cart);
 
   const totalPrice = useMemo(
     () =>
@@ -28,20 +24,12 @@ function Carts() {
 
   useEffect(() => {
     dispatch(getCart());
+
     dispatch({
-      type:TOTAL_PRICE,
-      payload:totalPrice
-    })
-  }, [dispatch,totalPrice]);
-
-
-  const dataValue = useCallback(
-    (el) => {
-      setPr(el.product.price * val);
-      setCondi(true);
-    },
-    [val]
-  );
+      type: TOTAL_PRICE,
+      payload: totalPrice,
+    });
+  }, [dispatch, totalPrice]);
 
   const removeData = useCallback(
     (id) => {
@@ -54,9 +42,10 @@ function Carts() {
 
   const addQty = useCallback(
     (el) => {
-      const { product, quantity } = el;
+      const { product, quantity, _id } = el;
       const newQty = quantity + 1;
-      dispatch(addTocart(product, newQty)).then(() => {
+
+      dispatch(addTocart(product, newQty, _id)).then(() => {
         dispatch(getCart());
       });
     },
@@ -67,6 +56,7 @@ function Carts() {
     (el) => {
       const { product, quantity } = el;
       const newQty = quantity - 1;
+
       if (newQty > 0) {
         dispatch(addTocart(product, newQty)).then(() => {
           dispatch(getCart());
@@ -97,20 +87,26 @@ function Carts() {
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <polyline points="15 6 9 12 15 18" />
               </svg>
-              <p className="text-[24px] font-[600] pl-2 leading-none">Back</p>
+
+              <p className="text-[24px] font-[600] pl-2 leading-none">
+                Back
+              </p>
             </div>
           </Link>
         </div>
+
         {cartData1.length === 0 ? (
           <div className="flex flex-col items-center py-4">
             <p className="text-[34px] font-[600] pb-4">Cart Empty</p>
+
             <Image src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" />
+
             <div
               onClick={() => {
                 navigate("/product");
               }}
             >
-              <button className="bg-indigo-600 px-16 py-4 text-[#fff] text-[16px]">
+              <button className="bg-indigo-600 px-16 py-4 text-white text-[16px]">
                 Shop Now
               </button>
             </div>
@@ -118,7 +114,7 @@ function Carts() {
         ) : (
           <div className="flex flex-col md:flex-col 2xl:flex-row xl:flex-row lg:flex-row mt-8 gap-8">
             <div
-              className=" w-full bg-white p-6 "
+              className="w-full bg-white p-6"
               style={{
                 boxShadow:
                   "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
@@ -128,7 +124,6 @@ function Carts() {
                 <div
                   key={el._id}
                   className="flex items-center justify-between border-b border-gray-200 py-4"
-                  onClick={() => dataValue(el)}
                 >
                   <div className="w-1/4 h-24">
                     <img
@@ -137,26 +132,36 @@ function Carts() {
                       className="w-full h-full object-center object-cover rounded-md"
                     />
                   </div>
+
                   <div className="w-3/4 pl-4">
                     <p className="text-lg font-semibold text-gray-900">
                       {el.product.title}
                     </p>
+
                     <p className="text-[20px] text-gray-600 pb-4">
                       {el.product.productName}
                     </p>
+
                     <p className="text-sm text-gray-600">
                       {el.product.category}
                     </p>
+
                     <div className="flex items-center justify-between pt-2">
                       <div className="flex gap-2">
                         <Button
                           onClick={() => removeQty(el)}
-                          className={`bg-indigo-600 font-bold text-[20px] ${el.quantity >1?"cursor-pointer":"cursor-default"}`}
+                          className={`bg-indigo-600 font-bold text-[20px] ${
+                            el.quantity > 1
+                              ? "cursor-pointer"
+                              : "cursor-default"
+                          }`}
                           disabled={el.quantity === 1}
                         >
                           -
                         </Button>
+
                         <Button>{el.quantity}</Button>
+
                         <Button
                           onClick={() => addQty(el)}
                           className="bg-indigo-600"
@@ -164,12 +169,13 @@ function Carts() {
                           +
                         </Button>
                       </div>
-                      <button
+                                            <button
                         className="text-red-500 hover:underline"
                         onClick={() => removeData(el.product._id)}
                       >
                         Remove
                       </button>
+
                       <p className="text-lg font-semibold text-gray-900">
                         ${el.quantity * el.product.sellingPrice}
                       </p>
@@ -189,26 +195,47 @@ function Carts() {
               <p className="text-4xl font-black leading-9 text-gray-800">
                 Summary
               </p>
+
               <div className="flex justify-between items-center pt-5">
-                <p className="text-base leading-none text-gray-800">Subtotal</p>
                 <p className="text-base leading-none text-gray-800">
-                  ${condi ? pr : totalPrice}
+                  Subtotal
+                </p>
+
+                <p className="text-base leading-none text-gray-800">
+                  ${totalPrice}
                 </p>
               </div>
+
               <div className="flex justify-between items-center pt-5">
-                <p className="text-base leading-none text-gray-800">Shipping</p>
-                <p className="text-base leading-none text-gray-800">$30</p>
+                <p className="text-base leading-none text-gray-800">
+                  Shipping
+                </p>
+
+                <p className="text-base leading-none text-gray-800">
+                  $30
+                </p>
               </div>
+
               <div className="flex justify-between items-center pt-5">
-                <p className="text-base leading-none text-gray-800">Tax</p>
-                <p className="text-base leading-none text-gray-800">$35</p>
+                <p className="text-base leading-none text-gray-800">
+                  Tax
+                </p>
+
+                <p className="text-base leading-none text-gray-800">
+                  $66
+                </p>
               </div>
+
               <div className="flex justify-between items-center pt-5">
-                <p className="text-2xl leading-normal text-gray-800">Total</p>
+                <p className="text-2xl leading-normal text-gray-800">
+                  Total
+                </p>
+
                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">
-                  ${condi ? pr + 65 : TotalPrice + 65}
+                  ${totalPrice + 96}
                 </p>
               </div>
+
               <Link to="/checkout">
                 <button
                   className="w-full py-3 bg-indigo-600 text-white mt-5 rounded-md hover:bg-indigo-700"

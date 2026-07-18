@@ -48,7 +48,6 @@ const HandleChange = (e) => {
   e.preventDefault();
   setUser({ ...user, [e.target.name]: e.target.value });
 };
-console.log(user)
 
 const HandleSubmit = async (e) => {
   e.preventDefault();

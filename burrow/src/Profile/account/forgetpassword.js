@@ -10,7 +10,6 @@ function ForgetPassword() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submit");
         try {
             setIsLoading(true);
             setMessage("");
@@ -19,7 +18,6 @@ function ForgetPassword() {
             const res = await axios.post(`https://burrow-app-database.onrender.com/pass/forgotPassword`, { email });
 
             setMessage(res.data.message);
-            console.log(res.data.message);
         } catch (error) {
             setError(error.response?.data?.message || "An error occurred. Please try again.");
             console.error(error);

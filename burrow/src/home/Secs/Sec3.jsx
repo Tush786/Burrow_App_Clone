@@ -3,19 +3,19 @@ import React from 'react';
 // Array of content for the component
 const content = [
   {
-    imgSrc: "https://loremflickr.com/600/600/shipping,delivery,box",
+    imgSrc: "https://cdn.sanity.io/images/gan92b2a/burrow-production/3c0934a5abbc6077876f6de5c703614c157559ac-294x294.png?auto=format&fit=max&q=75&w=294",
     imgAlt: "Fast & free shipping",
     title: "Fast & free shipping",
     description: "Every single order ships for free. No minimums, no tiers, no fine print whatsoever."
   },
   {
-    imgSrc: "https://loremflickr.com/600/600/modular,furniture,moving",
+    imgSrc: "https://cdn.sanity.io/images/gan92b2a/burrow-production/0cd3807625136fa92484f1fb07f9defd47663b6c-294x294.png?auto=format&fit=max&q=75&w=294",
     imgAlt: "Modular, easy-to-move design",
     title: "Modular, easy-to-move design",
     description: "Our innovative modular design is driven by the belief that furniture should fit this home, and the next one."
   },
   {
-    imgSrc: "https://loremflickr.com/600/600/leather,wood,craftsmanship",
+    imgSrc: "https://cdn.sanity.io/images/gan92b2a/burrow-production/e996d627bfe5a35f177fbcf9189f98509474e5ce-294x294.png?auto=format&fit=max&q=75&w=294",
     imgAlt: "Durable, premium materials",
     title: "Durable, premium materials",
     description: "We use materials like sustainably-forested wood, strengthened steel hardware, and top-grain Italian leather."

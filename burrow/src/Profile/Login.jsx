@@ -28,7 +28,7 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import { LoginUser } from "../redux/User/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -42,8 +42,6 @@ const obj = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const userPro = useSelector((state) => state.data.user);
-  console.log(userPro);
   const [form, setForm] = useState(obj);
   const toast = useToast();
   const dispatch = useDispatch();
@@ -91,7 +89,6 @@ const Login = () => {
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
-    console.log(result);
     const { displayName, email, photoURL } = result.user;
     let obj = {
       email,
@@ -100,12 +97,12 @@ const Login = () => {
       gauth: true,
     };
     dispatch(LoginUser(obj));
+    Navigate("/");
   };
 
   const handleShowClick = () => setShowPassword(!showPassword);
   const checkUserAuthentication = () => {
     const token = Cookies.get("token");
-    console.log(token);
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } else {

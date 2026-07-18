@@ -44,7 +44,6 @@ export const addUser = (user) => async (dispatch) => {
       payload: res.status,
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: RESET_USER,
       payload: err.response.status,
@@ -53,10 +52,8 @@ export const addUser = (user) => async (dispatch) => {
 };
 
 export const LoginUser = (user) => async (dispatch) => {
-  console.log(user);
   try {
     const res = await axiosInstance.post('/user/login', user);
-    console.log(res);
     Cookies.set('token', res.data.token, { expires: 7 });
     const userObject = res.data.user;
     Cookies.set('userInfo', JSON.stringify(userObject), { expires: 7 });
@@ -93,7 +90,6 @@ export const getUser = (_id) => async (dispatch) => {
 };
 
 export const editUser = (user, id) => async () => {
-  console.log(user, id);
   try {
     await axiosInstance.patch(`/user/editUser/${id}`, user);
   } catch (err) {
@@ -126,7 +122,6 @@ export const editPhoneNo = (phonenumber, id) => async () => {
 };
 
 export const editAvatar = (avatar, id) => async (dispatch) => {
-  console.log(avatar, id);
   try {
     await axiosInstance.patch(`/user/avatar/${id}`, { avatar });
   } catch (err) {
@@ -139,7 +134,6 @@ export const editAvatar = (avatar, id) => async (dispatch) => {
     dispatch({ type: "PRODUCTS_LOADING" });
     try {
       const data = await axiosInstance.get(`/productsapi/products?page=${page}&searchParam=${searchParam}`);
-      // console.log(data.data.products)
       dispatch({
         type: GET_PRODUCT,
         payload: {
@@ -262,7 +256,6 @@ export const deleteCartItem = (productId) => async () => {
 export const deleteCartItemAfterOrder = (cartID) => async (dispatch) => {
   try {
   const requests=  await axiosInstance.delete(`/cart/deletecart/${cartID}`, config);
-  console.log(requests.status)
   dispatch({
     type:ORDER_COFM_STATUS,
     payload:requests.status

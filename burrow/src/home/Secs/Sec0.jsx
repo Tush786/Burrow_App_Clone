@@ -14,22 +14,22 @@ const slidesData = [
   {
     title: "Meet Mambo, a new design with deep seats and a sculpted backrest",
     buttonLabel: "SHOP MAMBO",
-    imgSrc: "https://loremflickr.com/2304/1296/sofa,mambo,livingroom",
+    imgSrc: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784378873/ad986b10cfda1dd89eae5dd9ba11d7e727b4a9cf-3840x988_ylswwj.avif",
   },
   {
     title: "Discover Nomad, our best-selling and most-awarded modular seating",
     buttonLabel: "SHOP NOMAD",
-    imgSrc: "https://loremflickr.com/2304/1296/sectional,modular,sofa",
+    imgSrc: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784378873/879f41a39ad9be249a41526d7685f6216b1ceeb9-1200x675_v4hzq3.avif",
   },
   {
     title: "A better suite of bedroom furniture starts with a solid frame",
     buttonLabel: "SHOP BEDROOM",
-    imgSrc: "https://loremflickr.com/2304/1296/bedroom,bedframe,furniture",
+    imgSrc: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1716368874/hujx3edthjehxsaltg9u.webp",
   },
   {
     title: "Lean into Scandinavian comfort with the Range Collection",
     buttonLabel: "SHOP RANGE",
-    imgSrc: "https://loremflickr.com/2304/1296/scandinavian,livingroom,furniture",
+    imgSrc: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784378873/95af0a7e464f9657137ad1f70675210424beb16b-1664x1184_1_fhsubj.avif",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function Sec0() {
                 </button>
               </div>
             </div>
-            <img src={slide.imgSrc} className="w-full h-auto" alt={slide.title} />
+            <img src={slide.imgSrc} className="w-full h-[600px]" alt={slide.title} />
           </SwiperSlide>
         ))}
       </Swiper>

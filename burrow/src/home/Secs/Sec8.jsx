@@ -12,49 +12,44 @@ const Sec8 = () => {
   // Array of objects containing data for each slide
 const slidesData = [
   {
-    src: "https://loremflickr.com/864/864/sectional,fabric,sofa",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385582/FLRST-SL-RGPL-S4-A1-C0-SGF-LW_FA_bwgokd.webp",
     alt: "Range Fabric Sectional",
     title: "Range Fabric Sectional",
   },
   {
-    src: "https://loremflickr.com/864/864/sidetable,livingroom",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385582/FLRTB-ST-KT-WN-BZ_2a861d4f-44d4-4db3-8bd2-f575aaa4c1e7_b4yecw.webp",
     alt: "Kettle Side Table",
     title: "Kettle Side Table",
   },
   {
-    src: "https://loremflickr.com/864/864/velvet,sofa,sectional",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385582/NVSFPL-GG-2-MD-DW_yuwpm4.webp",
     alt: "Nomad Velvet Sofa",
     title: "Nomad Velvet Sofa",
   },
   {
-    src: "https://loremflickr.com/864/864/leather,sofa,couch",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385582/NLSFPL-CN-3-MD-DW_f083145f-243e-4a15-ae4d-ce91d7f27622_y8k18j.webp",
     alt: "Nomad Leather Sofa",
     title: "Nomad Leather Sofa",
   },
   {
-    src: "https://loremflickr.com/864/864/credenza,furniture",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385582/05_Prospect_Nightstand_Lifestyle_a7680c65-658a-4218-864b-b682aa715bb7_ouy4kq.webp",
     alt: "Serif Credenza",
     title: "Serif Credenza",
   },
   {
-    src: "https://loremflickr.com/864/864/sidetable,wood,furniture",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385581/FLRSR-CZ-TT-OK-Front_b7a36d7a-28f1-4f77-84fa-dd945979c638_n01wzg.webp",
     alt: "Serif Side Table",
     title: "Serif Side Table",
   },
   {
-    src: "https://loremflickr.com/864/864/sectional,fabric,livingroom",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1783267509/44a8f7e7ed0549e740c0eddaeef729e8852a11c8-750x750_s58ysr.avif",
     alt: "Range Fabric Sectional",
     title: "Range Fabric Sectional",
   },
   {
-    src: "https://loremflickr.com/864/864/nightstand,bedroom",
+    src: "https://res.cloudinary.com/dz2hoghhp/image/upload/v1784385581/FLRTB-ST-SR-WN_01_d01fc362-8380-4d7f-b880-0847c858d2ee_tkd4rb.webp",
     alt: "Prospect Nightstand",
     title: "Prospect Nightstand",
-  },
-  {
-    src: "https://loremflickr.com/864/864/leather,sectional,sofa",
-    alt: "Nomad Leather Sectional",
-    title: "Nomad Leather Sectional",
   },
 ];
 
@@ -95,7 +90,7 @@ const slidesData = [
                 <img
                   src={slide.src}
                   alt={slide.alt}
-                  className="w-full h-auto object-cover rounded-lg shadow-md"
+                  className="w-full h-[250px] object-cover rounded-lg shadow-md"
                 />
                 <p className="mt-2 font-bold text-base sm:text-lg md:text-xl 2xl:text-center xs:text-left">
                   {slide.title}

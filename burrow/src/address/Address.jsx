@@ -39,7 +39,6 @@ function Address() {
 
   const dispatch = useDispatch();
   const addressArr = useSelector((state) => state.data.addressData);
-  console.log(addressArr);
 
   useEffect(() => {
     dispatch(getAddress());

@@ -20,6 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getproducts } from "../redux/User/actions";
 import { CgProfile } from "react-icons/cg";
+import Cookies from 'js-cookie';
 import { TiShoppingCart } from "react-icons/ti";
 
 function classNames(...classes) {
@@ -78,6 +79,9 @@ export default function Navbar() {
   useEffect(() => {
     dispatch(getproducts(Page, search));
   }, [dispatch, Page, search]);
+
+  const userInfo = Cookies.get('userInfo');
+  const userObject = userInfo ? JSON.parse(userInfo) : null;
 
   return (
     <div className="bg-white">
@@ -421,12 +425,19 @@ export default function Navbar() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <div>
-                    <CgProfile
-                      className="text-blue-600 text-[30px] cursor-pointer"
-                      onClick={handleUserClick}
+                  <div onClick={handleUserClick}>
+                  {userObject ? (
+                    <img
+                      className="w-8 h-8 rounded-full"
+                      src={userObject.avatar}
+                      alt="profile"
                     />
-                  </div>
+                  ) : (
+                       <CgProfile
+                      className="text-blue-600 text-[30px] cursor-pointer"
+                    />
+                  )}
+                </div>
                 </div>
 
                 {/* Search */}
@@ -494,120 +505,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-
-
-
-
-
-// import { Fragment, useState, useEffect, useCallback } from "react";
-// import { Dialog, Transition } from "@headlessui/react";
-// import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-// import { useNavigate } from "react-router-dom";
-// import {
-//   Drawer,
-//   DrawerBody,
-//   DrawerContent,
-//   DrawerOverlay,
-//   Input,
-//   InputGroup,
-//   InputLeftElement,
-//   useDisclosure,
-// } from "@chakra-ui/react";
-// import { useDispatch } from "react-redux";
-// import { getproducts } from "../redux/User/actions";
-
-// export default function Navbar() {
-//   const [open, setOpen] = useState(false);
-//   const [search, setSearch] = useState("");
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch();
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-
-//   // Debounce function to limit search calls
-//   const debounce = (func, delay) => {
-//     let timeout;
-//     return (...args) => {
-//       clearTimeout(timeout);
-//       timeout = setTimeout(() => {
-//         func(...args);
-//       }, delay);
-//     };
-//   };
-
-//   const handleSearch = useCallback(
-//     debounce((query) => {
-//       dispatch(getproducts(1, query)); // Fetch the first page of the searched product
-//     }, 500),
-//     [dispatch]
-//   );
-
-//   const handleChange = (e) => {
-//     setSearch(e.target.value);
-//     handleSearch(e.target.value);
-//   };
-
-//   const handleKeyPress = (e) => {
-//     if (e.key === "Enter") {
-//       // Navigate to the product page and pass the search query as a URL parameter
-//       navigate(`/product?search=${search}`);
-//     }
-//   };
-
-//   return (
-//     <div className="bg-white">
-//       <Transition.Root show={open} as={Fragment}>
-//         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
-//           {/* Your Dialog content */}
-//         </Dialog>
-//       </Transition.Root>
-
-//       <header className="relative bg-white">
-//         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-//           Get free delivery on orders over $100
-//         </p>
-
-//         <nav aria-label="Top" className="mx-auto">
-//           <div className="border-b border-gray-200">
-//             <div className="flex h-16 items-center px-11">
-//               <div className="ml-auto flex items-center">
-//                 <div className="flex lg:ml-6">
-//                   <p
-//                     className="p-2 text-gray-400 items-center flex gap-4 hover:text-gray-500"
-//                     onClick={onOpen}
-//                   >
-//                     <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-//                     <span className="text-[20px]">Search</span>
-
-//                     <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
-//                       <DrawerOverlay />
-//                       <DrawerContent>
-//                         <DrawerBody>
-//                           <InputGroup>
-//                             <InputLeftElement pointerEvents="none">
-//                               <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-//                             </InputLeftElement>
-//                             <Input
-//                               type="text"
-//                               placeholder="Search"
-//                               border="none"
-//                               className="text-[20px]"
-//                               value={search}
-//                               onChange={handleChange}
-//                               onKeyPress={handleKeyPress}
-//                             />
-//                           </InputGroup>
-//                         </DrawerBody>
-//                       </DrawerContent>
-//                     </Drawer>
-//                   </p>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </nav>
-//       </header>
-//     </div>
-//   );
-// }
-

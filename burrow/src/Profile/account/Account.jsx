@@ -20,6 +20,9 @@ export default function Account() {
         try {
             // Make a request to the logout route
             await axios.post('https://burrow-app-database.onrender.com/user/logout');
+
+            Cookies.remove("token");
+            Cookies.remove("userInfo");
             Navigate('/login');
         } catch (error) {
             console.error("Error logging out:", error);

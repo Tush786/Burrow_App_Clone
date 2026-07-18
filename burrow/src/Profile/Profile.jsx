@@ -5,7 +5,6 @@ import {
   TabPanel,
   TabPanels,
   Tab,
-  ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
 import Account from "./account/Account";
@@ -15,16 +14,7 @@ import Order from "./orderComp/Order";
 function Profile() {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
- 
-  const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
-  );
-
   const { onOpen } = useDisclosure();
-  const [setOverlay] = useState(<OverlayOne />);
 
   return (
     <div className="lg:w-[80%] sm:w-[98%] md:w-[98%]  m-auto mt-4 ">
@@ -48,17 +38,10 @@ function Profile() {
             bg="blue.100"
             _selected={{ color: "green.500", bg: "green.100" }}
             onClick={() => {
-              setOverlay(<OverlayOne />);
               onOpen();
             }}
           >
             INVITE FRIENDS
-          </Tab>
-          <Tab
-            bg="blue.100"
-            _selected={{ color: "green.500", bg: "green.100" }}
-          >
-            LOG OUT
           </Tab>
         </TabList>
         <TabPanels>

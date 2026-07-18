@@ -43,7 +43,6 @@ function Resetpassword() {
 
     try {
       const token = searchParams.get("token");
-      console.log(token);
 
       const res = await axios.post(
         "https://burrow-app-database.onrender.com/pass/resetPassword",
