@@ -13,7 +13,7 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 export default function SwiperComp({imagesurl}) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [images,setImages]=useState(imagesurl)
+  const [images]=useState(imagesurl)
 
   return (
     <div className="max-w-2xl mx-auto p-4">

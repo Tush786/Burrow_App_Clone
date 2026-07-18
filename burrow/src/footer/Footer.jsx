@@ -1,23 +1,14 @@
 "use client";
 
-import { Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
-import { Button, Footer } from "flowbite-react";
-import { useState } from "react";
-import {
-  BsDribbble,
-  BsFacebook,
-  BsGithub,
-  BsInstagram,
-  BsTwitter,
-} from "react-icons/bs";
+import { Text } from "@chakra-ui/react";
+import { Footer } from "flowbite-react";
 import { MdCopyright } from "react-icons/md";
 import SubscribeSection from "./SubscribeSection";
 
 function FooterComp() {
-  const [arr, setArr] = useState();
   return (
     <>
-    <SubscribeSection/>
+      <SubscribeSection />
 
       <Footer className="bg-[#383633] text-[#fff]">
         <div className="w-full">
@@ -39,6 +30,7 @@ function FooterComp() {
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
+
             <div>
               <Footer.Title title="About" className="text-[#fff]" />
               <Footer.LinkGroup col>
@@ -62,6 +54,7 @@ function FooterComp() {
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
+
             <div>
               <Footer.Title title="Resources" className="text-[#fff]" />
               <Footer.LinkGroup col>
@@ -85,6 +78,7 @@ function FooterComp() {
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
+
             <div>
               <Footer.Title
                 title="Contact Customer Experience"
@@ -107,16 +101,17 @@ function FooterComp() {
             </div>
           </div>
 
-          <div className="w-full bg-[#383633] px-4 py-6 ">
-            {/* <Footer.Copyright href="#" by="burrow™" year={2024} /> */}
-            <span className="flex justify-start items-center text-[12px]">
+          <div className="w-full bg-[#383633] px-4 py-6">
+            <span className="flex items-center justify-start text-[12px]">
               <MdCopyright />
               burrow 2024
             </span>
+
             <Text className="text-[12px]">
               Terms-Accessibility-Sitemap-Privacy-Do not sell my personal
               information
             </Text>
+
             <Text className="text-[12px]">
               This site may collect, use and disclose personal information.
               Please refer to our Privacy Policy for more information.

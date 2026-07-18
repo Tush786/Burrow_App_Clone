@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import AllRoutes from './route/AllRoutes'
 import Navbar from './navbar/Navbar'
@@ -11,7 +11,7 @@ function App() {
    useEffect(()=>{
     dispatch(getCart());
     dispatch(getAddress());
-   },[])
+   },[getAddress,getCart,dispatch])
 
   return (
     <>

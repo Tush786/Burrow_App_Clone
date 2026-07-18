@@ -5,11 +5,8 @@ import {
   TabPanel,
   TabPanels,
   Tab,
- 
-  ModalCloseButton,
   ModalOverlay,
   useDisclosure,
-  Button,
 } from "@chakra-ui/react";
 import Account from "./account/Account";
 import Inviteform from "./Inviteform";
@@ -26,8 +23,8 @@ function Profile() {
     />
   );
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [overlay, setOverlay] = useState(<OverlayOne />);
+  const { onOpen } = useDisclosure();
+  const [setOverlay] = useState(<OverlayOne />);
 
   return (
     <div className="lg:w-[80%] sm:w-[98%] md:w-[98%]  m-auto mt-4 ">

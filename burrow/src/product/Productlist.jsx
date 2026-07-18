@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Productcard from './Productcard';
-import { Box, Button, Select, Skeleton, Stack } from '@chakra-ui/react';
+import { Box, Skeleton, Stack } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getproducts } from '../redux/User/actions';
 import { PAGES } from '../redux/User/actionType';
@@ -41,24 +41,6 @@ function Productlist() {
 
   return (
     <div className="">
-      {/* <div className="flex justify-between w-[90%] m-auto">
-        <Box>
-          <Button colorScheme='teal' variant='ghost'>Namad</Button>
-          <Button colorScheme='teal' variant='ghost'>Range</Button>
-          <Button colorScheme='teal' variant='ghost'>Mambo</Button>
-          <Button colorScheme='teal' variant='ghost'>Storage</Button>
-          <Button colorScheme='teal' variant='ghost'>Bedroom</Button>
-          <Button colorScheme='teal' variant='ghost'>Accent Chairs</Button>
-        </Box>
-        <div>
-          <Select placeholder="Select option">
-            <option value="option1">Most Popular</option>
-            <option value="option2">Most Recent</option>
-            <option value="option3">Price: High to Low</option>
-            <option value="option3">Price: Low to High</option>
-          </Select>
-        </div>
-      </div> */}
       <Box className="bg-[#ffffff] mt-6">
         {/* <h1 className="pb-2 text-[36px] font-[600]">Nomad</h1> */}
         <Box

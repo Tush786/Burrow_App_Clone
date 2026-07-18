@@ -3,7 +3,7 @@ import { FaTruck, FaBell } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 import AddressPageContent from "./AddressPageContent";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import { addTocart, deleteCartItem, getCart } from "../redux/User/actions";
 import RazorpaySect from "./Razorpay";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,6 @@ function Checkout() {
   const [activeSection, setActiveSection] = useState("login");
   const addressArr = useSelector((state) => state.data.addressData);
   const TotalPrice = useSelector((state) => state.data.TotalPrice);
-  const [pr, setPr] = useState(null);
 
   const toggleSection = useCallback((section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
@@ -87,7 +86,7 @@ function Checkout() {
           <div className="flex justify-between items-center pt-5">
             <p className="text-2xl leading-normal text-gray-800">Total</p>
             <p className="text-2xl font-bold leading-normal text-right text-gray-800">
-            ${TotalPrice===null ? pr + 65 : TotalPrice + 65}
+            ${(TotalPrice ?? 0) + 65}
             </p>
           </div>
         </div>

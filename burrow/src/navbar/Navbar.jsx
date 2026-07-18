@@ -1,37 +1,26 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useMemo } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import { deepPurple } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 import { navigation } from "./Navigation";
 import {
-  Avatar,
-  Button,
   Drawer,
   DrawerBody,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
   Input,
   InputGroup,
   InputLeftElement,
-  Menu,
-  MenuItem,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCookie, getproducts, loadUserFromCookies } from "../redux/User/actions";
-import Profile from "../Profile/Profile";
-import Login from "../Profile/Login";
+import { getproducts } from "../redux/User/actions";
 import { CgProfile } from "react-icons/cg";
 import { TiShoppingCart } from "react-icons/ti";
-import { useCallback } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -39,37 +28,18 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [openAuthModal, setOpenAuthModal] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const openUserMenu = Boolean(anchorEl);
-  const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userPro = useSelector((state) => state.data.user);
-  const Token = localStorage.getItem("Token");
   const CartQty = useSelector((state) => state.data.cartTotalQty);
   const Page = useSelector((state) => state.data.Page);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [placement, setPlacement] = useState("top");
+  const [placement] = useState("top");
   const [search,setSearch]=useState("")
 
   const handleUserClick = (event) => {
     navigate("/Profile");
   };
 
-  const handleCloseUserMenu = (event) => {
-    setAnchorEl(null);
-  };
-
-  const handleOpen = () => {
-    setOpenAuthModal(true);
-  };
-
-  const handleClose = () => {
-    setOpenAuthModal(false);
-  };
-
-  const [avatarH, setAvatarH] = useState(false);
   const handleCategoryClick = (category, section, item, close) => {
     // navigate(`/${category.id}/${section.id}/${item.id}`);
     navigate(`/product`);
@@ -86,10 +56,13 @@ export default function Navbar() {
     };
   };
 
-  const handleSearch = useCallback(debounce((query) => {
-    dispatch(getproducts(Page, query));
-  }, 500), [dispatch]);
-
+  const handleSearch = useMemo(
+    () =>
+      debounce((query) => {
+        dispatch(getproducts(Page, query));
+      }, 500),
+    [dispatch, Page]
+  );
   const handleChange = (e) => {
     setSearch(e.target.value);
     handleSearch(e.target.value);
@@ -104,7 +77,7 @@ export default function Navbar() {
 
   useEffect(() => {
     dispatch(getproducts(Page, search));
-  }, [dispatch]);
+  }, [dispatch, Page, search]);
 
   return (
     <div className="bg-white">
@@ -214,15 +187,14 @@ export default function Navbar() {
                               {section.name}
                             </p>
                             <ul
-                              role="list"
                               aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
                               className="mt-6 flex flex-col space-y-6"
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
                                   <a
-                                    href={'/product'}
-                                     // href={item.href}
+                                    href="/product"
+                                    // href={item.href}
                                     className="-m-2 block p-2 text-gray-500"
                                   >
                                     {item.name}
@@ -397,7 +369,6 @@ export default function Navbar() {
                                             {section.name}
                                           </p>
                                           <ul
-                                            role="list"
                                             aria-labelledby={`${section.name}-heading`}
                                             className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                           >

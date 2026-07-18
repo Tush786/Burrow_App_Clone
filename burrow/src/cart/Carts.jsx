@@ -10,9 +10,8 @@ function Carts() {
   const dispatch = useDispatch();
   const cartData1 = useSelector((state) => state.data.cart);
   const TotalPrice = useSelector((state) => state.data.TotalPrice);
-  const [val, setVal] = useState(1);
+  const [val] = useState(1);
   const [condi, setCondi] = useState(false);
-  const [name, setName] = useState("");
   const [pr, setPr] = useState(null);
 
 
@@ -39,7 +38,6 @@ function Carts() {
   const dataValue = useCallback(
     (el) => {
       setPr(el.product.price * val);
-      setName(el.product.title);
       setCondi(true);
     },
     [val]
@@ -62,7 +60,7 @@ function Carts() {
         dispatch(getCart());
       });
     },
-    [dispatch,TotalPrice]
+    [dispatch]
   );
 
   const removeQty = useCallback(
@@ -75,7 +73,7 @@ function Carts() {
         });
       }
     },
-    [dispatch,TotalPrice]
+    [dispatch]
   );
 
   return (

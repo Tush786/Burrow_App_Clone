@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Input,
   Textarea,
@@ -8,7 +7,7 @@ import {
   Stack,
   useToast,
 } from "@chakra-ui/react";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {

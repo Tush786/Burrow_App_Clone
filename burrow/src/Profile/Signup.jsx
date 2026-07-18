@@ -8,7 +8,6 @@ import { FaRegEyeSlash, FaRegEye, FaFacebook} from "react-icons/fa";
 
 import {
   Flex,
-  Heading,
   Input,
   Button,
   InputGroup,
@@ -16,16 +15,13 @@ import {
   InputLeftElement,
   chakra,
   Box,
-
-  Avatar,
   FormControl,
   FormHelperText,
   InputRightElement,
   useToast,
   Image,
-  Text
+  Text,
 } from "@chakra-ui/react";
-import axios from 'axios'
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { LoginUser, addUser } from "../redux/User/actions";
 import { useDispatch } from "react-redux";
@@ -34,17 +30,7 @@ import { useDispatch } from "react-redux";
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const obj={
-    email:"",
-    phonenumber:"",
-    password:"",
-  }
-  
-
 const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
-   const [form,setForm]=useState(obj)
-   const provider= new GoogleAuthProvider()
   const dispatch=useDispatch()
 
 
@@ -66,7 +52,7 @@ console.log(user)
 
 const HandleSubmit = async (e) => {
   e.preventDefault();
-  const { phonenumber, fullName, email, password, cpassword,avatar} = user;
+  const { phonenumber, fullName, email, password, cpassword } = user;
 
   if (phonenumber === "") {
     return toast({
@@ -132,7 +118,6 @@ const HandleSubmit = async (e) => {
 const signInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   const result = await signInWithPopup(auth, provider);
-  console.log(result)
   const { email, photoURL,displayName } = result.user;
   let obj = {
     email,

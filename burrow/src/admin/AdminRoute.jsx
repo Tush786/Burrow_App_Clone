@@ -3,7 +3,7 @@ import { Modal, HStack, VStack, FormControl, Button, ModalFooter, FormLabel, Inp
 import AdminPage from "./AdminPage.jsx"
 
 const AdminRoute = () => {
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn] = useState(false)
     const { onOpen, onClose } = useDisclosure()
     const [adminId, setAdminId] = useState("")
     const [passcode, setPasscode] = useState(["", "", "", ""])

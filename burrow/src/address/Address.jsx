@@ -1,12 +1,10 @@
 import {
-  Box,
   Button,
   Input,
   Popover,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
   Portal,

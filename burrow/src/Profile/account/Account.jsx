@@ -6,10 +6,8 @@ import { IoMdWallet } from "react-icons/io";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import ProfileInfoComp from "./ProfileInfoComp";
 import Wishlist from "../../wishlist/Wishlist";
-import Order from "../orderComp/Order";
 import {  useNavigate } from "react-router-dom";
 import Address from "../../address/Address";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Cookies from 'js-cookie';
 
@@ -17,7 +15,6 @@ export default function Account() {
   const [compName, setCompName] = useState("Profile Information");
   const userInfo = Cookies.get('userInfo');
   const userObject = userInfo ? JSON.parse(userInfo) : null;
-const dispatch=useDispatch()
   const Navigate=useNavigate()
     const handleLogout = async () => {
         try {
