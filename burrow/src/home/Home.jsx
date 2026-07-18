@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense } from "react";
 import Loader from "../errorHandling/Loader";
 
 const sections = [
@@ -11,7 +11,6 @@ const sections = [
 ];
 
 const Home = () => {
-  // Remove the isLoading state and useEffect since they are not needed.
   return (
     <div>
       <Suspense fallback={<Loader />}>
